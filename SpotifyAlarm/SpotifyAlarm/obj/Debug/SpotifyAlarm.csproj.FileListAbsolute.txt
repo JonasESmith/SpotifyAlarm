@@ -42,3 +42,4 @@ C:\Users\smithjon\Desktop\projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\De
 C:\Users\smithjon\Desktop\projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyAlarm.csproj.CoreCompileInputs.cache
 C:\Users\smithjon\Desktop\projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyAlarm.exe
 C:\Users\smithjon\Desktop\projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyAlarm.pdb
+C:\Users\smithjon\Desktop\projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyAlarm.csprojResolveAssemblyReference.cache

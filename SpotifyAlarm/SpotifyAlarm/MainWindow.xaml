@@ -5,11 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpotifyAlarm"
         mc:Ignorable="d"
-        Title="Spotify Alarm" Height="250" Width="500" ResizeMode="NoResize" Panel.ZIndex="1" AllowsTransparency="True" MouseDown="Window_MouseDown" WindowStyle="None">
+        Title="Spotify Alarm" Height="250" Width="500" ResizeMode="NoResize" Panel.ZIndex="1" AllowsTransparency="True" MouseDown="Window_MouseDown" WindowStyle="None" Loaded="Window_Loaded_1">
 
   <Grid>
     <TextBlock x:Name="timeLabel" TextAlignment="Center" Foreground="LightGray" HorizontalAlignment="Center" Margin="23,59,25,75" TextWrapping="Wrap" VerticalAlignment="Center" Height="116" Width="452" FontSize="72"/>
-    <TabControl HorizontalAlignment="Left" Height="1" Margin="147,129,0,0" VerticalAlignment="Top" Width="3"/>
     <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Margin="23,180,25,54" TextWrapping="Wrap" Text="No alarms currently" VerticalAlignment="Center" Width="452"/>
 
     <Grid Margin="465,3,20,232" RenderTransformOrigin="0.5,0.5" MouseDown="Grid_MouseDown">
@@ -97,6 +96,6 @@
     </Grid>
   </Grid>
   <Window.Background>
-    <SolidColorBrush Opacity="0.95" Color="#141414"/>
+    <SolidColorBrush Opacity="0.5" Color="#141414"/>
   </Window.Background>
 </Window>
