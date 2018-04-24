@@ -53,17 +53,17 @@ namespace SpotifyAlarm
         this.DragMove();
     }
 
-    private void closeButton_Click(object sender, RoutedEventArgs e)
+    private void Button_Click(object sender, RoutedEventArgs e)
     {
       System.Windows.Application.Current.Shutdown();
     }
 
-    private void minimizeButton_Click(object sender, RoutedEventArgs e)
+    private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
     {
       WindowState = WindowState.Minimized;
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
+    private void Grid_MouseDown_1(object sender, MouseButtonEventArgs e)
     {
       System.Windows.Application.Current.Shutdown();
     }

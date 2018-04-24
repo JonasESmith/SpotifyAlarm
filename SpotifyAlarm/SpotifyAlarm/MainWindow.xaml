@@ -10,11 +10,39 @@
   <Grid>
     <TextBlock x:Name="timeLabel" TextAlignment="Center" Foreground="LightGray" HorizontalAlignment="Center" Margin="23,59,25,75" TextWrapping="Wrap" VerticalAlignment="Center" Height="116" Width="452" FontSize="72"/>
     <TabControl HorizontalAlignment="Left" Height="1" Margin="147,129,0,0" VerticalAlignment="Top" Width="3"/>
-    <Button x:Name="closeButton" BorderThickness="0" Content=" " Margin="480,0,0,0" VerticalAlignment="Top" Background="#ff4000" Opacity="0.7" Height="20" Click="closeButton_Click"/>
-    <Button x:Name="minimizeButton" BorderThickness="0" Content="" Margin="459,0,21,0" VerticalAlignment="Top" Background="#373737" Opacity="0.7" Height="20" Click="minimizeButton_Click"/>
     <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Foreground="Gray" Margin="23,180,25,54" TextWrapping="Wrap" Text="No alarms currently" VerticalAlignment="Center" Width="452"/>
 
-    <Button HorizontalAlignment="Left" Focusable="False" VerticalAlignment="Top" Background="#00FFFFFF" Width="42" Height="31" BorderThickness="0" Margin="0,-3,0,0" Click="Button_Click">
+    <Grid Margin="465,3,20,232" RenderTransformOrigin="0.5,0.5" MouseDown="Grid_MouseDown">
+      <Grid.RenderTransform>
+        <TransformGroup>
+          <ScaleTransform ScaleX="-1"/>
+          <SkewTransform/>
+          <RotateTransform/>
+          <TranslateTransform/>
+        </TransformGroup>
+      </Grid.RenderTransform>
+      <Ellipse Fill="#FF6DB4EF"/>
+      <Ellipse>
+        <Ellipse.Fill>
+          <RadialGradientBrush>
+            <GradientStop Offset="0" Color="#00000000"/>
+            <GradientStop Offset="0.88" Color="#00000000"/>
+            <GradientStop Offset="1" Color="#80000000"/>
+          </RadialGradientBrush>
+        </Ellipse.Fill>
+      </Ellipse>
+      <Ellipse Margin="2">
+        <Ellipse.Fill>
+          <LinearGradientBrush>
+            <GradientStop Offset="0" Color="#50FFFFFF"/>
+            <GradientStop Offset="0.5" Color="#00FFFFFF"/>
+            <GradientStop Offset="1" Color="#50FFFFFF"/>
+          </LinearGradientBrush>
+        </Ellipse.Fill>
+      </Ellipse>
+    </Grid>
+
+    <Button x:Name="moreButton" HorizontalAlignment="Left" Focusable="False" VerticalAlignment="Top" Background="#00FFFFFF" Width="42" Height="31" BorderThickness="0" Margin="0,-3,0,0" Click="Button_Click">
       <Grid>
         <Image Source="/Images/dotsHorizontal.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
       </Grid>
@@ -38,6 +66,35 @@
         </Style>
       </Button.Style>
     </Button>
+    <Grid Margin="482,3,3,232" RenderTransformOrigin="0.5,0.5" MouseDown="Grid_MouseDown_1" >
+      <Grid.RenderTransform>
+        <TransformGroup>
+          <ScaleTransform ScaleX="-1"/>
+          <SkewTransform/>
+          <RotateTransform/>
+          <TranslateTransform/>
+        </TransformGroup>
+      </Grid.RenderTransform>
+      <Ellipse Fill="#ff4000"/>
+      <Ellipse>
+        <Ellipse.Fill>
+          <RadialGradientBrush>
+            <GradientStop Offset="0" Color="#00000000"/>
+            <GradientStop Offset="0.88" Color="#00000000"/>
+            <GradientStop Offset="1" Color="#80000000"/>
+          </RadialGradientBrush>
+        </Ellipse.Fill>
+      </Ellipse>
+      <Ellipse Margin="2">
+        <Ellipse.Fill>
+          <LinearGradientBrush>
+            <GradientStop Offset="0" Color="#50FFFFFF"/>
+            <GradientStop Offset="0.5" Color="#00FFFFFF"/>
+            <GradientStop Offset="1" Color="#50FFFFFF"/>
+          </LinearGradientBrush>
+        </Ellipse.Fill>
+      </Ellipse>
+    </Grid>
   </Grid>
   <Window.Background>
     <SolidColorBrush Opacity="0.95" Color="#141414"/>
