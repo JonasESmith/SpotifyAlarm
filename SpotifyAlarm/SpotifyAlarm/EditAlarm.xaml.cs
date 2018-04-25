@@ -83,7 +83,7 @@ namespace SpotifyAlarm
     /// <param name="e"></param>
     private void Grid_MouseDown_1(object sender, MouseButtonEventArgs e)
     {
-      this.Close()
+      this.Close();
     }
   }
 }

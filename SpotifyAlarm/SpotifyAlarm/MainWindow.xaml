@@ -50,7 +50,7 @@
       </Ellipse>
     </Grid>
 
-    <Button x:Name="moreButton" HorizontalAlignment="Left" Focusable="False" VerticalAlignment="Top" Background="#00FFFFFF" Width="42" Height="31" BorderThickness="0" Margin="0,-3,0,0" Click="Button_Click">
+    <Button x:Name="moreButton" HorizontalAlignment="Left" Focusable="False" VerticalAlignment="Top" Background="#00FFFFFF" Width="42" Height="31" BorderThickness="0" Margin="223,195,0,0" Click="Button_Click">
       <Grid>
         <Image Source="/Images/dotsHorizontal.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
       </Grid>
