@@ -12,11 +12,11 @@
         MouseDown="Window_MouseDown" 
         Loaded="Window_Loaded"
         Height="250" 
-        Width="500" 
+        Width="520" 
         ResizeMode="NoResize" 
         Panel.ZIndex="1">
   <Grid>
-    <Grid Margin="482,3,3,232" RenderTransformOrigin="0.5,0.5" MouseDown="Grid_MouseDown_1" >
+    <Grid Margin="502,3,3,232" RenderTransformOrigin="0.5,0.5" MouseDown="Grid_MouseDown_1" Loaded="Form_Loaded">
       <Grid.RenderTransform>
         <TransformGroup>
           <ScaleTransform ScaleX="-1"/>
@@ -45,10 +45,71 @@
         </Ellipse.Fill>
       </Ellipse>
     </Grid>
-    <StackPanel HorizontalAlignment="Left" Height="248" VerticalAlignment="Top" Width="160"/>
-    <StackPanel HorizontalAlignment="Left" Height="248" VerticalAlignment="Top" Width="319" Margin="160,0,0,0"/>
+    <ScrollViewer Height="248" HorizontalAlignment="Left" Name="scrollViewer1" VerticalAlignment="Top" Width="178" VerticalScrollBarVisibility="Auto">
+      <StackPanel Name="alarmPanel">
+      </StackPanel>
+    </ScrollViewer>
+    <Grid HorizontalAlignment="Left" Height="248" Margin="183,0,0,0" VerticalAlignment="Top" Width="335">
+      <Label Content="Hour" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="19,42,254,0" VerticalAlignment="Top" Width="62"/>
+      <Label Content="Minutes" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="86,42,187,0" VerticalAlignment="Top" Width="62" RenderTransformOrigin="0.5,0.5"/>
+      <ComboBox HorizontalAlignment="Left" Margin="17,73,0,0" VerticalAlignment="Top" Width="63" Opacity="0.5" MaxDropDownHeight="80" ScrollViewer.CanContentScroll="False">
+        <ComboBoxItem Background="#828282" BorderThickness="0">1</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">2</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">3</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">4</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">5</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">6</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">7</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">8</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">9</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">10</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">11</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">12</ComboBoxItem>
+      </ComboBox>
+      <ComboBox HorizontalAlignment="Left" Margin="84,73,0,0" VerticalAlignment="Top" Width="63" Opacity="0.5" MaxDropDownHeight="80" ScrollViewer.CanContentScroll="False">
+        <ComboBoxItem Background="#828282" BorderThickness="0">00</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">05</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">10</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">15</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">20</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">25</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">30</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">35</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">40</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">45</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">50</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">55</ComboBoxItem>
+      </ComboBox>
+      <ComboBox x:Name="amCombo" HorizontalAlignment="Left" Margin="151,73,0,0" VerticalAlignment="Top" Width="62" Opacity="0.5" MaxDropDownHeight="42" ScrollViewer.CanContentScroll="False">
+        <ComboBoxItem Background="#828282" BorderThickness="0">AM</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">PM</ComboBoxItem>
+      </ComboBox>
+      <TextBox x:Name="alarmName" CaretBrush="White" HorizontalAlignment="Left" BorderThickness="0" Foreground="White" Height="32" Margin="17,10,0,0" Background="Transparent" HorizontalContentAlignment="Center" TextWrapping="Wrap" Text="Select Alarm" VerticalAlignment="Top" Width="272" FontSize="18"/>
+      <CheckBox Foreground="White" Content="Repeating" HorizontalAlignment="Left" Margin="218,73,0,0" VerticalAlignment="Top" Opacity="0.7" Height="22" VerticalContentAlignment="Center" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+      <Button Content="Save" HorizontalAlignment="Left" Margin="250,220,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Background="#1c873e" Opacity="0.8" Foreground="White"/>
+      <Grid x:Name="dayGrid" HorizontalAlignment="Left" Height="53" Margin="17,102,0,0" VerticalAlignment="Top" Width="300">
+        <Label Content="Days" Foreground="White" HorizontalAlignment="Center"/>
+        <CheckBox Content="Mon" Opacity="0.6" Foreground="White" HorizontalAlignment="Left" Margin="-2,29,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Tue" Opacity="0.6" Foreground="White" HorizontalAlignment="Left" Margin="44,29,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Wed" Opacity="0.6" Foreground="White" HorizontalAlignment="Left" Margin="85,29,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Thu" Opacity="0.6" Foreground="White" HorizontalAlignment="Left" Margin="130,29,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Fri" Opacity="0.6" Foreground="White" HorizontalAlignment="Left" Margin="171,29,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Sat" Opacity="0.6" Foreground="White" HorizontalAlignment="Left" Margin="208,29,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Sun" Opacity="0.6" Foreground="White" HorizontalAlignment="Left" Margin="249,29,0,0" VerticalAlignment="Top"/>
+      </Grid>
+      <ComboBox x:Name="dayCombo" HorizontalAlignment="Left" Margin="19,131,0,0" VerticalAlignment="Top" Width="110" Opacity="0.5" MaxDropDownHeight="80" ScrollViewer.CanContentScroll="False">
+        <ComboBoxItem Background="#828282" BorderThickness="0">Monday</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">Tuesday</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">Wednsday</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">Thursday</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">Friday</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">Saturday</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">Sunday</ComboBoxItem>
+      </ComboBox>
+      <Label x:Name="dayLabel" Content="Day" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="19,100,206,0" VerticalAlignment="Top" Width="110"/>
+    </Grid>
   </Grid>
   <Window.Background>
-    <SolidColorBrush Opacity="0.5" Color="#141414"/>
+    <SolidColorBrush Opacity="0.8" Color="#141414"/>
   </Window.Background>
 </Window>

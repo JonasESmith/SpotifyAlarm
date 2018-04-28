@@ -16,8 +16,6 @@ using System.Windows.Shapes;
 
 namespace SpotifyAlarm
 {
-
-
   /// <summary>
   /// Interaction logic for Window2.xaml
   /// </summary>
@@ -27,6 +25,7 @@ namespace SpotifyAlarm
     {
       WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
       InitializeComponent();
+      dayGrid.Visibility = Visibility.Collapsed;
     }
 
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -42,10 +41,12 @@ namespace SpotifyAlarm
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
       EnableBlur();
+      amCombo.SelectedIndex = 0;
     }
 
     internal void EnableBlur()
     {
+
       var windowHelper = new WindowInteropHelper(this);
 
       var accent = new AccentPolicy();
@@ -84,6 +85,86 @@ namespace SpotifyAlarm
     private void Grid_MouseDown_1(object sender, MouseButtonEventArgs e)
     {
       this.Close();
+    }
+
+    private void Form_Loaded(object sender, RoutedEventArgs e)
+    {
+      AddAlarmButton();
+
+      // TODO : Add the first alarm to the alarmPanel to add a new alarm. 
+      BrushConverter bc = new BrushConverter();
+
+      alarmPanel.Background = (Brush)bc.ConvertFrom("#111111");
+      alarmPanel.Opacity = 0.5;
+      for (int i = 0; i <= 10; i++)
+      {
+        Button button = new Button();
+
+        button.BorderThickness = new Thickness(0);
+        button.Background      = (Brush)bc.ConvertFrom("#111111");
+        button.Foreground      = (Brush)bc.ConvertFrom("#e5e5e5");
+        button.MouseLeave     += Button_MouseLeave;
+        button.MouseEnter     += Button_MouseEnter;
+        button.Content         = "Alarm " + i.ToString();
+        button.Click          += Button_Click;
+        button.Name            = "Button" + i.ToString();
+
+        alarmPanel.Children.Add(button);
+      }
+    }
+
+    private void AddAlarmButton()
+    {
+      BrushConverter bc = new BrushConverter();
+      Button button     = new Button();
+
+      button.BorderThickness = new Thickness(0);
+      button.Background      = (Brush)bc.ConvertFrom("#1c873e");
+      button.Foreground      = (Brush)bc.ConvertFrom("#FFFFFF");
+      button.MouseLeave     += Button_MouseLeave;
+      button.MouseEnter     += Button_MouseEnter;
+      button.Content         = "Add alarm";
+      button.Click          += Button_Click;
+      button.Name            = "addAlarm";
+
+      alarmPanel.Children.Add(button);
+    }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+      Button button = sender as Button;
+
+      alarmName.Text = button.Content.ToString();
+    }
+
+    private void Button_MouseLeave(object sender, MouseEventArgs e)
+    {
+      BrushConverter bc = new BrushConverter();
+
+      Button button = sender as Button;
+      button.Foreground = (Brush)bc.ConvertFrom("#e5e5e5");
+    }
+
+    private void Button_MouseEnter(object sender, MouseEventArgs e)
+    {
+      BrushConverter bc = new BrushConverter();
+
+      Button button = sender as Button;
+      button.Foreground = (Brush)bc.ConvertFrom("#000000");
+    }
+
+    private void CheckBox_Checked(object sender, RoutedEventArgs e)
+    {
+      dayCombo.Visibility   = Visibility.Collapsed;
+      dayLabel.Visibility   = Visibility.Collapsed;
+      dayGrid.Visibility    = Visibility.Visible;
+    }
+
+    private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+    {
+      dayCombo.Visibility   = Visibility.Visible;
+      dayLabel.Visibility   = Visibility.Visible;
+      dayGrid.Visibility    = Visibility.Collapsed;
     }
   }
 }
