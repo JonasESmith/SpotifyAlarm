@@ -43,9 +43,10 @@ namespace SpotifyAlarm
 
     private void LoadAlarms(string alarms)
     {
-      string Alarms;
       int alarmCount = 0;
 
+      //Properties.Settings.Default.UserAlarms = "";
+      //Properties.Settings.Default.Save();
 
       // if UserAlarm is not empty or null
       if (!String.IsNullOrEmpty(alarms))
@@ -76,6 +77,21 @@ namespace SpotifyAlarm
       {
         return alarmList;
       }
+    }
+
+    public void SaveAlarms()
+    {
+      string alarms = "";
+
+      alarms = alarmList.Count.ToString();
+
+      for(int i = 0; i < alarmList.Count; i++)
+      {
+        alarms += "," + alarmList[i].Name + "," + alarmList[i].AlarmTime.ToString(@"hh\:mm") + "," + 
+                        alarmList[i].Days+ ","  + alarmList[i].Path;
+      }
+      Properties.Settings.Default.UserAlarms = alarms;
+      Properties.Settings.Default.Save();
     }
 
     private void SortAlarms()

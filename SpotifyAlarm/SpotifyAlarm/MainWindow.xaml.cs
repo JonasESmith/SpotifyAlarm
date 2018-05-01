@@ -71,7 +71,7 @@ namespace SpotifyAlarm
       InitializeComponent();
       EnableBlur();
       StartTimers();
-      userAlarms.Init("4, Jonas Smith, 12:20, 0, 0, Will Smith, 1:20, 0, 0, W Smith, 12:20, 0, 0, Smith, 12:20, 0, 0, ");//Properties.Settings.Default.UserAlarms); // 4, Jonas Smith, 12:20, 0, 0, Will Smith, 1:20, 0, 0, W Smith, 12:20, 0, 0, Smith, 12:20, 0, 0, 
+      userAlarms.Init(Properties.Settings.Default.UserAlarms);
     }
 
     private void StartTimers()

@@ -22,6 +22,7 @@ namespace SpotifyAlarm
   public partial class Window2 : Window
   {
     public UserAlarms userAlarms = UserAlarms.Instance;
+    public int selectedIndex;
 
     public Window2()
     {
@@ -42,6 +43,7 @@ namespace SpotifyAlarm
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
+      alarmDetailPanel.Visibility = Visibility.Collapsed;
       EnableBlur();
       amPmCombo.SelectedIndex = 0;
     }
@@ -91,6 +93,11 @@ namespace SpotifyAlarm
 
     private void Form_Loaded(object sender, RoutedEventArgs e)
     {
+      LoadButtons();
+    }
+
+    private void LoadButtons()
+    {
       AddAlarmButton();
 
       BrushConverter bc = new BrushConverter();
@@ -102,13 +109,13 @@ namespace SpotifyAlarm
         Button button = new Button();
 
         button.BorderThickness = new Thickness(0);
-        button.Background      = (Brush)bc.ConvertFrom("#111111");
-        button.Foreground      = (Brush)bc.ConvertFrom("#e5e5e5");
-        button.MouseLeave     += Button_MouseLeave;
-        button.MouseEnter     += Button_MouseEnter;
-        button.Content         = userAlarms.Alarm[i].Name.ToString();
-        button.Click          += Button_Click;
-        button.Name            = "Button" + i.ToString();
+        button.Background = (Brush)bc.ConvertFrom("#111111");
+        button.Foreground = (Brush)bc.ConvertFrom("#e5e5e5");
+        button.MouseLeave += Button_MouseLeave;
+        button.MouseEnter += Button_MouseEnter;
+        button.Content = userAlarms.Alarm[i].Name.ToString();
+        button.Click += Button_Click;
+        button.Name = "Button" + i.ToString();
 
         alarmPanel.Children.Add(button);
       }
@@ -125,17 +132,65 @@ namespace SpotifyAlarm
       button.MouseLeave     += Button_MouseLeave;
       button.MouseEnter     += Button_MouseEnter;
       button.Content         = "Add alarm";
-      button.Click          += Button_Click;
+      button.Click          += Button_Click1;
       button.Name            = "addAlarm";
 
       alarmPanel.Children.Add(button);
     }
 
+    private void Button_Click1(object sender, RoutedEventArgs e)
+    {
+      NewAlarmClick();
+    }
+
+    private void NewAlarmClick()
+    {
+      alarmDetailPanel.Visibility = Visibility.Visible;
+
+      alarmName.Text = "New alarm";
+      hourCombo.Text = "";
+      minCombo.Text = "";
+      amPmCombo.Text = "";
+      spotifyPlaylist.Text = "";
+
+      selectedIndex = userAlarms.Alarm.FindIndex(a => a.Name == alarmName.Text);
+    }
+
     private void Button_Click(object sender, RoutedEventArgs e)
     {
+
+      alarmDetailPanel.Visibility = Visibility.Visible;
+
       Button button = sender as Button;
 
       alarmName.Text = button.Content.ToString();
+
+      int index = userAlarms.Alarm.FindIndex(a => a.Name == (string)button.Content);
+
+      if(userAlarms.Alarm[index].AlarmTime.Hours > 12)
+      {
+        amPmCombo.Text = "PM";
+        int hour = Convert.ToInt32(userAlarms.Alarm[index].AlarmTime.Hours.ToString());
+        hourCombo.Text = (hour - 12).ToString();
+      }
+      else
+      {
+        hourCombo.Text = userAlarms.Alarm[index].AlarmTime.Hours.ToString();
+        amPmCombo.Text = "AM";
+      }
+
+      minCombo.Text = userAlarms.Alarm[index].AlarmTime.Minutes.ToString();
+
+      if(userAlarms.Alarm[index].Days.Count(c => c == 0) > 1)
+      {
+        repeatingCheck.IsChecked = true;
+      }
+      else
+      {
+        repeatingCheck.IsChecked = false;
+      }
+
+      selectedIndex = userAlarms.Alarm.FindIndex(a => a.Name == alarmName.Text);
     }
 
     private void Button_MouseLeave(object sender, MouseEventArgs e)
@@ -170,8 +225,6 @@ namespace SpotifyAlarm
 
     private void Button_Click_1(object sender, RoutedEventArgs e)
     {
-      string Days = "0";
-
       int TimeVar = 0;
 
       if(amPmCombo.SelectedIndex == 1)
@@ -202,7 +255,22 @@ namespace SpotifyAlarm
 
       TimeSpan time = new TimeSpan(hour + TimeVar, minute, 0);
 
-      userAlarms.AddAlarm(alarmName.Text, time, ConfigureDays(), spotifyPlaylist.Text); 
+      if (selectedIndex >= 0)
+      {
+        userAlarms.Alarm[selectedIndex].Name      = alarmName.Text;
+        userAlarms.Alarm[selectedIndex].AlarmTime = time;
+        userAlarms.Alarm[selectedIndex].Days      = ConfigureDays();
+        userAlarms.Alarm[selectedIndex].Path      = spotifyPlaylist.Text;
+      }
+      else
+      {
+      userAlarms.AddAlarm(alarmName.Text, time, ConfigureDays(), spotifyPlaylist.Text);
+      }
+
+      alarmPanel.Children.Clear();
+      LoadButtons();
+      userAlarms.SaveAlarms();
+      NewAlarmClick();
     }
 
     private string ConfigureDays()

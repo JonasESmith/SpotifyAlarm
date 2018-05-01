@@ -33,6 +33,10 @@ namespace SpotifyAlarm
       {
         return (alarmTime);
       }
+      set
+      {
+        alarmTime = value;
+      }
     }
 
     public string Days
@@ -56,6 +60,18 @@ namespace SpotifyAlarm
       set
       {
         name = value;
+      }
+    }
+
+    public string Path
+    {
+      get
+      {
+        return path;
+      }
+      set
+      {
+        path = value;
       }
     }
 

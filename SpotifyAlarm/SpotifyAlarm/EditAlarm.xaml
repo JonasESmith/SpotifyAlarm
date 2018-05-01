@@ -49,7 +49,7 @@
       <StackPanel Name="alarmPanel">
       </StackPanel>
     </ScrollViewer>
-    <Grid HorizontalAlignment="Left" Height="248" Margin="183,0,0,0" VerticalAlignment="Top" Width="335">
+    <Grid x:Name="alarmDetailPanel" HorizontalAlignment="Left" Height="248" Margin="183,0,0,0" VerticalAlignment="Top" Width="335">
       <Label Content="Hour" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="19,42,254,0" VerticalAlignment="Top" Width="62"/>
       <Label Content="Minutes" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="86,42,187,0" VerticalAlignment="Top" Width="62" RenderTransformOrigin="0.5,0.5"/>
       <ComboBox x:Name="hourCombo" HorizontalAlignment="Left" Margin="17,73,0,0" VerticalAlignment="Top" Width="63" Opacity="0.5" MaxDropDownHeight="80" ScrollViewer.CanContentScroll="False">
@@ -107,7 +107,7 @@
         <ComboBoxItem Background="#828282" BorderThickness="0">Sunday</ComboBoxItem>
       </ComboBox>
       <Label x:Name="dayLabel" Content="Day" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="109,102,116,0" VerticalAlignment="Top" Width="110"/>
-      <ComboBox x:Name="spotifyPlaylist" HorizontalAlignment="Left" Margin="19,175,0,0" VerticalAlignment="Top" Width="194" Opacity="0.5" MaxDropDownHeight="80" ScrollViewer.CanContentScroll="False">
+      <ComboBox x:Name="spotifyPlaylist" HorizontalAlignment="Left" Margin="19,175,0,0" VerticalAlignment="Top" Width="200" Opacity="0.5" MaxDropDownHeight="80" ScrollViewer.CanContentScroll="False">
         <ComboBoxItem Background="#828282" BorderThickness="0" Content="Monday"/>
         <ComboBoxItem Background="#828282" BorderThickness="0" Content="Tuesday"/>
         <ComboBoxItem Background="#828282" BorderThickness="0" Content="Wednsday"/>
