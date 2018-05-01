@@ -1,4 +1,10 @@
-﻿using System;
+﻿/// <summary>
+///   Programmer : Jonas Smith
+///   Purpose    : An alarm clock that will open spotify 
+///              :  and play the selected playlist
+/// </summary>
+
+using System;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -20,42 +26,13 @@ using System.Runtime.InteropServices;
 
 namespace SpotifyAlarm
 {
-  internal enum AccentState
-  {
-    ACCENT_DISABLED = 0,
-    ACCENT_ENABLE_GRADIENT = 1,
-    ACCENT_ENABLE_TRANSPARENTGRADIENT = 2,
-    ACCENT_ENABLE_BLURBEHIND = 3,
-    ACCENT_INVALID_STATE = 4
-  }
-
-  [StructLayout(LayoutKind.Sequential)]
-  internal struct AccentPolicy
-  {
-    public AccentState AccentState;
-    public int AccentFlags;
-    public int GradientColor;
-    public int AnimationId;
-  }
-
-  [StructLayout(LayoutKind.Sequential)]
-  internal struct WindowCompositionAttributeData
-  {
-    public WindowCompositionAttribute Attribute;
-    public IntPtr Data;
-    public int SizeOfData;
-  }
-
-  internal enum WindowCompositionAttribute
-  { WCA_ACCENT_POLICY = 19 }
-
-
   /// <summary>
   /// Interaction logic for MainWindow.xaml
   /// </summary>
   public partial class MainWindow : Window
   {
     public DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
+    public UserAlarms userAlarms = UserAlarms.Instance;
 
     [DllImport("user32.dll")]
     internal static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
@@ -94,11 +71,8 @@ namespace SpotifyAlarm
       InitializeComponent();
       EnableBlur();
       StartTimers();
-      LoadThemes();
+      userAlarms.Init("4, Jonas Smith, 12:20, 0, 0, Will Smith, 1:20, 0, 0, W Smith, 12:20, 0, 0, Smith, 12:20, 0, 0, ");//Properties.Settings.Default.UserAlarms); // 4, Jonas Smith, 12:20, 0, 0, Will Smith, 1:20, 0, 0, W Smith, 12:20, 0, 0, Smith, 12:20, 0, 0, 
     }
-
-    private void LoadThemes()
-    {   }
 
     private void StartTimers()
     {
@@ -159,4 +133,35 @@ namespace SpotifyAlarm
       EnableBlur();
     }
   }
+
+
+
+  internal enum AccentState
+  {
+    ACCENT_DISABLED = 0,
+    ACCENT_ENABLE_GRADIENT = 1,
+    ACCENT_ENABLE_TRANSPARENTGRADIENT = 2,
+    ACCENT_ENABLE_BLURBEHIND = 3,
+    ACCENT_INVALID_STATE = 4
+  }
+
+  [StructLayout(LayoutKind.Sequential)]
+  internal struct AccentPolicy
+  {
+    public AccentState AccentState;
+    public int AccentFlags;
+    public int GradientColor;
+    public int AnimationId;
+  }
+
+  [StructLayout(LayoutKind.Sequential)]
+  internal struct WindowCompositionAttributeData
+  {
+    public WindowCompositionAttribute Attribute;
+    public IntPtr Data;
+    public int SizeOfData;
+  }
+
+  internal enum WindowCompositionAttribute
+  { WCA_ACCENT_POLICY = 19 }
 }

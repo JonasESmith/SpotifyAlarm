@@ -21,6 +21,8 @@ namespace SpotifyAlarm
   /// </summary>
   public partial class Window2 : Window
   {
+    public UserAlarms userAlarms = UserAlarms.Instance;
+
     public Window2()
     {
       WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
@@ -41,7 +43,7 @@ namespace SpotifyAlarm
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
       EnableBlur();
-      amCombo.SelectedIndex = 0;
+      amPmCombo.SelectedIndex = 0;
     }
 
     internal void EnableBlur()
@@ -91,12 +93,11 @@ namespace SpotifyAlarm
     {
       AddAlarmButton();
 
-      // TODO : Add the first alarm to the alarmPanel to add a new alarm. 
       BrushConverter bc = new BrushConverter();
 
       alarmPanel.Background = (Brush)bc.ConvertFrom("#111111");
-      alarmPanel.Opacity = 0.5;
-      for (int i = 0; i <= 10; i++)
+      alarmPanel.Opacity = 0.7;
+      for (int i = 0; i < userAlarms.Alarm.Count; i++)
       {
         Button button = new Button();
 
@@ -105,7 +106,7 @@ namespace SpotifyAlarm
         button.Foreground      = (Brush)bc.ConvertFrom("#e5e5e5");
         button.MouseLeave     += Button_MouseLeave;
         button.MouseEnter     += Button_MouseEnter;
-        button.Content         = "Alarm " + i.ToString();
+        button.Content         = userAlarms.Alarm[i].Name.ToString();
         button.Click          += Button_Click;
         button.Name            = "Button" + i.ToString();
 
@@ -165,6 +166,108 @@ namespace SpotifyAlarm
       dayCombo.Visibility   = Visibility.Visible;
       dayLabel.Visibility   = Visibility.Visible;
       dayGrid.Visibility    = Visibility.Collapsed;
+    }
+
+    private void Button_Click_1(object sender, RoutedEventArgs e)
+    {
+      string Days = "0";
+
+      int TimeVar = 0;
+
+      if(amPmCombo.SelectedIndex == 1)
+      {
+        TimeVar = 12;
+      }
+
+      int hour;
+      int minute;
+
+      if (!(hourCombo.SelectedItem == null))
+      {
+        hour = Convert.ToInt32(hourCombo.Text);
+      }
+      else
+      {
+        hour = 0;
+      }
+
+      if (!(minCombo.SelectedItem == null))
+      {
+        minute = Convert.ToInt32(minCombo.Text);
+      }
+      else
+      {
+        minute = 0;
+      }
+
+      TimeSpan time = new TimeSpan(hour + TimeVar, minute, 0);
+
+      userAlarms.AddAlarm(alarmName.Text, time, ConfigureDays(), spotifyPlaylist.Text); 
+    }
+
+    private string ConfigureDays()
+    {
+      // TODO : Find correct for the alarm
+
+      string selectedDay = null;
+      string days        = null;
+
+      if(repeatingCheck.IsChecked == true)
+      {
+        if (monCheck.IsChecked == true)
+        { days += "1"; }
+        else
+        { days += "0"; }
+
+        if (tueCheck.IsChecked == true)
+        { days += "1";}
+        else
+        { days += "0";}
+
+        if (wedCheck.IsChecked == true)
+        { days += "1"; }
+        else
+        { days += "0"; }
+
+        if (thuCheck.IsChecked == true)
+        { days += "1";}
+        else
+        { days += "0"; }
+
+        if (friCheck.IsChecked == true)
+        { days += "1"; }
+        else
+        { days += "0"; }
+
+        if (satCheck.IsChecked == true)
+        { days += "1"; }
+        else
+        { days += "0"; }
+
+        if (sunCheck.IsChecked == true)
+        { days += "1"; }
+        else
+        { days += "0"; }
+      }
+      else
+      {
+        if(dayCombo.SelectedItem == null)
+        { selectedDay = DateTime.Now.DayOfWeek.ToString(); }
+        else
+        { selectedDay = dayCombo.Text; }
+
+        switch(selectedDay)
+        {
+          case "Monday":   days = "1000000"; break;
+          case "Tuesday":  days = "0100000"; break;
+          case "Wednsday": days = "0010000"; break;
+          case "Thursday": days = "0001000"; break;
+          case "Friday":   days = "0000100"; break;
+          case "Saturday": days = "0000010"; break;
+          case "Sunday":   days = "0000001"; break;
+        }
+      }
+      return days;
     }
   }
 }
