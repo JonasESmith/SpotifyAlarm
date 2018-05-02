@@ -12,6 +12,9 @@ namespace SpotifyAlarm
 
     public static List<Alarm> alarmList = new List<Alarm>();
 
+    /// <summary>
+    /// This allows for both forms to share this class
+    /// </summary>
     public static UserAlarms Instance
     {
       get

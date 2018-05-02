@@ -147,11 +147,21 @@ namespace SpotifyAlarm
     {
       alarmDetailPanel.Visibility = Visibility.Visible;
 
-      alarmName.Text = "New alarm";
-      hourCombo.Text = "";
-      minCombo.Text = "";
-      amPmCombo.Text = "";
+      alarmName.Text       = "New alarm";
+      hourCombo.Text       = "";
+      minCombo.Text        = "";
+      amPmCombo.Text       = "";
       spotifyPlaylist.Text = "";
+
+      repeatingCheck.IsChecked = false;
+
+      monCheck.IsChecked = false;
+      tueCheck.IsChecked = false;
+      wedCheck.IsChecked = false;
+      thuCheck.IsChecked = false;
+      friCheck.IsChecked = false;
+      satCheck.IsChecked = false;
+      sunCheck.IsChecked = false;
 
       selectedIndex = userAlarms.Alarm.FindIndex(a => a.Name == alarmName.Text);
     }
@@ -179,16 +189,32 @@ namespace SpotifyAlarm
         amPmCombo.Text = "AM";
       }
 
-      minCombo.Text = userAlarms.Alarm[index].AlarmTime.Minutes.ToString();
+      if(userAlarms.Alarm[index].AlarmTime.Minutes > 0) { minCombo.Text = userAlarms.Alarm[index].AlarmTime.Minutes.ToString();}
+      else                                              { minCombo.Text = "00";}
 
-      if(userAlarms.Alarm[index].Days.Count(c => c == 0) > 1)
-      {
+      int count = userAlarms.Alarm[index].Days.Count(x => x == '1');
+
+      if (count > 1) {
         repeatingCheck.IsChecked = true;
+
+        Char[] days = userAlarms.Alarm[index].Days.ToCharArray();
+
+        if (days[0] == '1')
+          monCheck.IsChecked = true;
+        if (days[1] == '1')
+          tueCheck.IsChecked = true;
+        if (days[2] == '1')
+          wedCheck.IsChecked = true;
+        if (days[3] == '1')
+          thuCheck.IsChecked = true;
+        if (days[4] == '1')
+          friCheck.IsChecked = true;
+        if (days[5] == '1')
+          satCheck.IsChecked = true;
+        if (days[6] == '1')
+          sunCheck.IsChecked = true;
       }
-      else
-      {
-        repeatingCheck.IsChecked = false;
-      }
+      else { repeatingCheck.IsChecked = false; }
 
       selectedIndex = userAlarms.Alarm.FindIndex(a => a.Name == alarmName.Text);
     }
@@ -226,103 +252,65 @@ namespace SpotifyAlarm
     private void Button_Click_1(object sender, RoutedEventArgs e)
     {
       int TimeVar = 0;
-
-      if(amPmCombo.SelectedIndex == 1)
-      {
-        TimeVar = 12;
-      }
-
       int hour;
       int minute;
 
-      if (!(hourCombo.SelectedItem == null))
-      {
-        hour = Convert.ToInt32(hourCombo.Text);
-      }
-      else
-      {
-        hour = 0;
-      }
+      if(amPmCombo.SelectedIndex == 1) { TimeVar = 12; }
 
-      if (!(minCombo.SelectedItem == null))
-      {
-        minute = Convert.ToInt32(minCombo.Text);
-      }
-      else
-      {
-        minute = 0;
-      }
+      if (!(hourCombo.SelectedItem == null)) { hour = Convert.ToInt32(hourCombo.Text); }
+      else                                   { hour = 0; }
+
+      if (!(minCombo.SelectedItem == null)) { minute = Convert.ToInt32(minCombo.Text); }
+      else                                  { minute = 0; }
 
       TimeSpan time = new TimeSpan(hour + TimeVar, minute, 0);
 
-      if (selectedIndex >= 0)
-      {
+      if (selectedIndex >= 0) {
         userAlarms.Alarm[selectedIndex].Name      = alarmName.Text;
         userAlarms.Alarm[selectedIndex].AlarmTime = time;
         userAlarms.Alarm[selectedIndex].Days      = ConfigureDays();
         userAlarms.Alarm[selectedIndex].Path      = spotifyPlaylist.Text;
       }
       else
-      {
-      userAlarms.AddAlarm(alarmName.Text, time, ConfigureDays(), spotifyPlaylist.Text);
-      }
+      { userAlarms.AddAlarm(alarmName.Text, time, ConfigureDays(), spotifyPlaylist.Text); }
 
       alarmPanel.Children.Clear();
-      LoadButtons();
       userAlarms.SaveAlarms();
+      LoadButtons();
       NewAlarmClick();
     }
 
     private string ConfigureDays()
     {
-      // TODO : Find correct for the alarm
-
       string selectedDay = null;
       string days        = null;
 
       if(repeatingCheck.IsChecked == true)
-      {
-        if (monCheck.IsChecked == true)
-        { days += "1"; }
-        else
-        { days += "0"; }
+      { if (monCheck.IsChecked == true) { days += "1"; }
+        else                            { days += "0"; }
 
-        if (tueCheck.IsChecked == true)
-        { days += "1";}
-        else
-        { days += "0";}
+        if (tueCheck.IsChecked == true) { days += "1"; }
+        else                            { days += "0"; }
 
-        if (wedCheck.IsChecked == true)
-        { days += "1"; }
-        else
-        { days += "0"; }
+        if (wedCheck.IsChecked == true) { days += "1"; }
+        else                            { days += "0"; }
 
-        if (thuCheck.IsChecked == true)
-        { days += "1";}
-        else
-        { days += "0"; }
+        if (thuCheck.IsChecked == true) { days += "1"; }
+        else                            { days += "0"; }
 
-        if (friCheck.IsChecked == true)
-        { days += "1"; }
-        else
-        { days += "0"; }
+        if (friCheck.IsChecked == true) { days += "1"; }
+        else                            { days += "0"; }
 
-        if (satCheck.IsChecked == true)
-        { days += "1"; }
-        else
-        { days += "0"; }
+        if (satCheck.IsChecked == true) { days += "1"; }
+        else                            { days += "0"; }
 
-        if (sunCheck.IsChecked == true)
-        { days += "1"; }
-        else
-        { days += "0"; }
+        if (sunCheck.IsChecked == true) { days += "1"; }
+        else                            { days += "0"; }
       }
       else
       {
-        if(dayCombo.SelectedItem == null)
-        { selectedDay = DateTime.Now.DayOfWeek.ToString(); }
-        else
-        { selectedDay = dayCombo.Text; }
+        if(dayCombo.SelectedItem == null) { selectedDay = DateTime.Now.DayOfWeek.ToString(); }
+        else                              { selectedDay = dayCombo.Text; }
 
         switch(selectedDay)
         {
