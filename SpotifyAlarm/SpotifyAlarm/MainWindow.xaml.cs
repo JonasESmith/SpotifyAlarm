@@ -33,6 +33,7 @@ namespace SpotifyAlarm
   {
     public DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
     public UserAlarms userAlarms = UserAlarms.Instance;
+    public SpotifyApi Spotify = SpotifyApi.Instance;
 
     [DllImport("user32.dll")]
     internal static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
@@ -84,6 +85,7 @@ namespace SpotifyAlarm
     private void Timer_Tick(object sender, EventArgs e)
     {
       timeLabel.Text = DateTime.Now.ToString("hh:mm:ss tt");
+      Spotify.StartSpotify();
     }
 
     /// <summary>

@@ -47,3 +47,7 @@ C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug
 C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\EditAlarm.baml
 C:\Users\smithjon\Desktop\projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\EditAlarm.g.cs
 C:\Users\smithjon\Desktop\projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\EditAlarm.baml
+C:\Users\smithjon\Desktop\projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\bin\Debug\Newtonsoft.Json.dll
+C:\Users\smithjon\Desktop\projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\bin\Debug\SpotifyAPI.dll
+C:\Users\smithjon\Desktop\projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\bin\Debug\Newtonsoft.Json.xml
+C:\Users\smithjon\Desktop\projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\bin\Debug\SpotifyAPI.xml
