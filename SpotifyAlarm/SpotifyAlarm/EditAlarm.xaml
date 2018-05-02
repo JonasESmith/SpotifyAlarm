@@ -116,6 +116,7 @@
         <ComboBoxItem Background="#828282" BorderThickness="0" Content="Saturday"/>
         <ComboBoxItem Background="#828282" BorderThickness="0" Content="Sunday"/>
       </ComboBox>
+      <Button Content="Delete" Name="delButton" HorizontalAlignment="Left" Margin="170,220,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Background="#F26419" Opacity="0.8" Foreground="White" Click="Delete_Button"/>
     </Grid>
   </Grid>
   <Window.Background>

@@ -1,18 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Threading.Tasks;
+using System.Windows.Interop;
+using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Collections.Generic;
+using System.Windows.Media.Imaging;
+using System.Runtime.InteropServices;
 
 namespace SpotifyAlarm
 {
@@ -163,12 +163,14 @@ namespace SpotifyAlarm
       satCheck.IsChecked = false;
       sunCheck.IsChecked = false;
 
+      delButton.Visibility = Visibility.Collapsed;
+
       selectedIndex = userAlarms.Alarm.FindIndex(a => a.Name == alarmName.Text);
     }
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-
+      delButton.Visibility = Visibility.Visible;
       alarmDetailPanel.Visibility = Visibility.Visible;
 
       Button button = sender as Button;
@@ -176,7 +178,7 @@ namespace SpotifyAlarm
       alarmName.Text = button.Content.ToString();
 
       int index = userAlarms.Alarm.FindIndex(a => a.Name == (string)button.Content);
-
+      
       if(userAlarms.Alarm[index].AlarmTime.Hours > 12)
       {
         amPmCombo.Text = "PM";
@@ -314,16 +316,25 @@ namespace SpotifyAlarm
 
         switch(selectedDay)
         {
-          case "Monday":   days = "1000000"; break;
-          case "Tuesday":  days = "0100000"; break;
-          case "Wednsday": days = "0010000"; break;
-          case "Thursday": days = "0001000"; break;
-          case "Friday":   days = "0000100"; break;
-          case "Saturday": days = "0000010"; break;
-          case "Sunday":   days = "0000001"; break;
+          case "Monday":    days = "1000000"; break;
+          case "Tuesday":   days = "0100000"; break;
+          case "Wednesday": days = "0010000"; break;
+          case "Thursday":  days = "0001000"; break;
+          case "Friday":    days = "0000100"; break;
+          case "Saturday":  days = "0000010"; break;
+          case "Sunday":    days = "0000001"; break;
         }
       }
       return days;
+    }
+
+    private void Delete_Button(object sender, RoutedEventArgs e)
+    {
+      userAlarms.Alarm.RemoveAt(selectedIndex);
+      alarmPanel.Children.Clear();
+      userAlarms.SaveAlarms();
+      LoadButtons();
+      NewAlarmClick();
     }
   }
 }

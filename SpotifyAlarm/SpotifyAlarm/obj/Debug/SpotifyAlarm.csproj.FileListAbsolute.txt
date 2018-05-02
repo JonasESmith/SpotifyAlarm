@@ -45,3 +45,5 @@ C:\Users\smithjon\Desktop\projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\De
 C:\Users\smithjon\Desktop\projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyAlarm.csprojResolveAssemblyReference.cache
 C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\EditAlarm.g.cs
 C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\EditAlarm.baml
+C:\Users\smithjon\Desktop\projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\EditAlarm.g.cs
+C:\Users\smithjon\Desktop\projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\EditAlarm.baml

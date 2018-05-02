@@ -106,6 +106,6 @@
     </Grid>
   </Grid>
   <Window.Background>
-    <SolidColorBrush Opacity="0.75" Color="#141414"/>
+    <SolidColorBrush Opacity="0.6" Color="#141414"/>
   </Window.Background>
 </Window>
