@@ -34,5 +34,17 @@ namespace SpotifyAlarm.Properties {
                 this["UserAlarms"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UserPath {
+            get {
+                return ((string)(this["UserPath"]));
+            }
+            set {
+                this["UserPath"] = value;
+            }
+        }
     }
 }

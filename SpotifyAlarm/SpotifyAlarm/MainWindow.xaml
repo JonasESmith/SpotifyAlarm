@@ -18,7 +18,7 @@
 
   <Grid>
     <TextBlock x:Name="timeLabel" TextAlignment="Center" Foreground="LightGray" HorizontalAlignment="Center" Margin="23,59,25,75" TextWrapping="Wrap" VerticalAlignment="Center" Height="116" Width="452" FontSize="72"/>
-    <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Foreground="LightGray" Margin="23,180,25,54" TextWrapping="Wrap" Text="No alarms currently" VerticalAlignment="Center" Width="452"/>
+    <TextBlock x:Name="alarmLabel" HorizontalAlignment="Center" TextAlignment="Center" Foreground="LightGray" Margin="23,180,25,54" TextWrapping="Wrap" Text="No alarms currently" VerticalAlignment="Center" Width="452"/>
 
     <Grid Margin="465,3,20,232" RenderTransformOrigin="0.5,0.5" MouseDown="Grid_MouseDown">
       <Grid.RenderTransform>

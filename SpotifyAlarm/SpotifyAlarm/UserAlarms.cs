@@ -11,6 +11,7 @@ namespace SpotifyAlarm
     private static UserAlarms instance;
 
     public static List<Alarm> alarmList = new List<Alarm>();
+    public Alarm currentAlarm = new Alarm();
 
     /// <summary>
     /// This allows for both forms to share this class
@@ -103,36 +104,40 @@ namespace SpotifyAlarm
       alarmList.Reverse();
     }
 
+    public Alarm CurrentAlarm
+    {
+      get
+      {
+        return currentAlarm;
+      }
+    }
+
     public void FindNextAlarm()
     {
       /// TODO : Create method to find the next upcoming alarm in the userAlarm list
       uint msToNextAlarm = 86400000;
 
-      for (int i = 1; i <= alarmList.Count; i++)
+      for (int index = 1; index <= alarmList.Count; index++)
       {
 
         uint currentTimeMs = (uint)DateTime.Now.TimeOfDay.TotalMilliseconds;
-        uint totalAlarmMs  = (uint)alarmList[i - 1].AlarmTime.TotalMilliseconds;
+        uint totalAlarmMs  = (uint)alarmList[index - 1].AlarmTime.TotalMilliseconds;
 
 
-        //if (totalAlarmMs > currentTimeMs)
-        //{
-        //  if ((totalAlarmMs - currentTimeMs) < msToNextAlarm)
-        //  {
-        //    msToNextAlarm = (totalAlarmMs - currentTimeMs);
+        if (totalAlarmMs > currentTimeMs)
+        {
+          if ((totalAlarmMs - currentTimeMs) < msToNextAlarm)
+          {
+            msToNextAlarm = (totalAlarmMs - currentTimeMs);
 
-        //    mainAlarm.Hour = alarmList[i - 1].Hour;
-        //    mainAlarm.Minute = alarmList[i - 1].Minute;
-        //    mainAlarm.Days = alarmList[i - 1].Days;
-
-        //    tooltip = "Next alarm at " + mainAlarm.Hour + ":" + mainAlarm.Minute;
-        //  }
-        //}
-        //else if (totalAlarmMs < currentTimeMs && msToNextAlarm <= 86400000)
-        //{
-        //  //msToNextAlarm +=
-        //  // I can use this for finding the time until the next alarm. 
-        //}
+            currentAlarm = alarmList[index - 1];
+          }
+        }
+        else if (totalAlarmMs < currentTimeMs && msToNextAlarm <= 86400000)
+        {
+          // msToNextAlarm +=
+          // I can use this for finding the time until the next alarm. 
+        }
       }
     }
 

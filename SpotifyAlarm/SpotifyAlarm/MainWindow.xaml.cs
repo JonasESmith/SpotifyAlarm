@@ -34,6 +34,7 @@ namespace SpotifyAlarm
     public DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
     public UserAlarms userAlarms = UserAlarms.Instance;
     public SpotifyApi Spotify = SpotifyApi.Instance;
+    public Alarm currentAlarm;
 
     [DllImport("user32.dll")]
     internal static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
@@ -73,6 +74,28 @@ namespace SpotifyAlarm
       EnableBlur();
       StartTimers();
       userAlarms.Init(Properties.Settings.Default.UserAlarms);
+      Spotify.LoadPath();
+      userAlarms.FindNextAlarm();
+      currentAlarm = userAlarms.CurrentAlarm;
+      NextAlarmLabel();
+
+      //Spotify.StartSpotify();
+    }
+
+    private void NextAlarmLabel()
+    {
+      string alarmTime = "No alarm";
+      if (userAlarms.Alarm.Count > 0 ) {
+        if(currentAlarm.AlarmTime.TotalHours > 12)
+        {
+          alarmTime = "Next alarm at " + (currentAlarm.AlarmTime.TotalHours - 12) + ":" + (currentAlarm.AlarmTime.TotalMinutes);
+        }
+        else
+        {
+          alarmTime = "Next alarm at " + (currentAlarm.AlarmTime.TotalHours) + ":" + (currentAlarm.AlarmTime.TotalMinutes);
+        }
+      }
+      alarmLabel.Text = alarmTime;
     }
 
     private void StartTimers()
@@ -85,7 +108,6 @@ namespace SpotifyAlarm
     private void Timer_Tick(object sender, EventArgs e)
     {
       timeLabel.Text = DateTime.Now.ToString("hh:mm:ss tt");
-      Spotify.StartSpotify();
     }
 
     /// <summary>
@@ -135,6 +157,7 @@ namespace SpotifyAlarm
       EnableBlur();
     }
   }
+
 
 
 
