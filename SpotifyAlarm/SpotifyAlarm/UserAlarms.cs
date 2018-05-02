@@ -49,10 +49,6 @@ namespace SpotifyAlarm
     {
       int alarmCount = 0;
 
-      //Properties.Settings.Default.UserAlarms = "";
-      //Properties.Settings.Default.Save();
-
-      // if UserAlarm is not empty or null
       if (!String.IsNullOrEmpty(alarms))
       {
 
@@ -101,7 +97,6 @@ namespace SpotifyAlarm
     private void SortAlarms()
     {
       alarmList.Sort((x, y) => x.AlarmTime.CompareTo(y.AlarmTime));
-      alarmList.Reverse();
     }
 
     public Alarm CurrentAlarm
@@ -114,6 +109,7 @@ namespace SpotifyAlarm
 
     public void FindNextAlarm()
     {
+      currentAlarm = null;
       /// TODO : Create method to find the next upcoming alarm in the userAlarm list
       uint msToNextAlarm = 86400000;
 
@@ -122,6 +118,7 @@ namespace SpotifyAlarm
 
         uint currentTimeMs = (uint)DateTime.Now.TimeOfDay.TotalMilliseconds;
         uint totalAlarmMs  = (uint)alarmList[index - 1].AlarmTime.TotalMilliseconds;
+        uint nextalarmMS = 0;
 
 
         if (totalAlarmMs > currentTimeMs)
@@ -133,10 +130,14 @@ namespace SpotifyAlarm
             currentAlarm = alarmList[index - 1];
           }
         }
-        else if (totalAlarmMs < currentTimeMs && msToNextAlarm <= 86400000)
+        else if (totalAlarmMs < currentTimeMs && msToNextAlarm <= 86400000 && currentAlarm == null)
         {
-          // msToNextAlarm +=
-          // I can use this for finding the time until the next alarm. 
+          msToNextAlarm = ((uint)(86400000 - DateTime.Now.Millisecond) + totalAlarmMs);
+          if(msToNextAlarm < nextalarmMS || nextalarmMS == 0)
+          {
+            nextalarmMS = msToNextAlarm;
+            currentAlarm = alarmList[index - 1];
+          }
         }
       }
     }

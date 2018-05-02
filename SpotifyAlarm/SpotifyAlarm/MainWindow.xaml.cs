@@ -26,15 +26,13 @@ using System.Runtime.InteropServices;
 
 namespace SpotifyAlarm
 {
-  /// <summary>
-  /// Interaction logic for MainWindow.xaml
-  /// </summary>
   public partial class MainWindow : Window
   {
     public DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
     public UserAlarms userAlarms = UserAlarms.Instance;
     public SpotifyApi Spotify = SpotifyApi.Instance;
     public Alarm currentAlarm;
+    public int alarmCount = 0;
 
     [DllImport("user32.dll")]
     internal static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
@@ -75,9 +73,6 @@ namespace SpotifyAlarm
       StartTimers();
       userAlarms.Init(Properties.Settings.Default.UserAlarms);
       Spotify.LoadPath();
-      userAlarms.FindNextAlarm();
-      currentAlarm = userAlarms.CurrentAlarm;
-      NextAlarmLabel();
 
       //Spotify.StartSpotify();
     }
@@ -88,11 +83,15 @@ namespace SpotifyAlarm
       if (userAlarms.Alarm.Count > 0 ) {
         if(currentAlarm.AlarmTime.TotalHours > 12)
         {
-          alarmTime = "Next alarm at " + (currentAlarm.AlarmTime.TotalHours - 12) + ":" + (currentAlarm.AlarmTime.TotalMinutes);
+          alarmTime = "Next alarm" + " - " + (currentAlarm.AlarmTime.Hours - 12) + ":" 
+                    + (currentAlarm.AlarmTime.Minutes.ToString("D2")) + " PM " 
+                    + "( " + currentAlarm.Name + " )";
         }
         else
         {
-          alarmTime = "Next alarm at " + (currentAlarm.AlarmTime.TotalHours) + ":" + (currentAlarm.AlarmTime.TotalMinutes);
+          alarmTime = "Next alarm" +  " - " + (currentAlarm.AlarmTime.Hours) + ":" 
+                    + (currentAlarm.AlarmTime.Minutes.ToString("D2") + " AM " 
+                    + "( " + currentAlarm.Name + " )");
         }
       }
       alarmLabel.Text = alarmTime;
@@ -108,45 +107,31 @@ namespace SpotifyAlarm
     private void Timer_Tick(object sender, EventArgs e)
     {
       timeLabel.Text = DateTime.Now.ToString("hh:mm:ss tt");
+      if(alarmCount != userAlarms.Alarm.Count)
+      {
+        currentAlarm = userAlarms.CurrentAlarm;
+        NextAlarmLabel();
+        alarmCount = userAlarms.Alarm.Count;
+      }
     }
 
-    /// <summary>
-    /// Allows entire application to be draggable
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
     {
       if (e.ChangedButton == MouseButton.Left)
         this.DragMove();
     }
 
-    /// <summary>
-    /// Open the add/edit alarm application window
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
     private void Button_Click(object sender, RoutedEventArgs e)
     {
       Window2 win2 = new Window2();
       win2.Show();
     }
 
-    /// <summary>
-    /// Minimize application
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
     private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
     {
       WindowState = WindowState.Minimized;
     }
 
-    /// <summary>
-    ///  Close application
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
     private void Grid_MouseDown_1(object sender, MouseButtonEventArgs e)
     {
       System.Windows.Application.Current.Shutdown();
