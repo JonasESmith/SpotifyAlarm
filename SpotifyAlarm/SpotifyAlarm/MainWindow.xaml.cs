@@ -113,6 +113,16 @@ namespace SpotifyAlarm
         NextAlarmLabel();
         alarmCount = userAlarms.Alarm.Count;
       }
+      if(DateTime.Now.Second % 30 == 0)
+      {
+        currentAlarm = userAlarms.CurrentAlarm;
+        NextAlarmLabel();
+      }
+
+      if (DateTime.Now.ToString("HH:mm:ss") == currentAlarm.AlarmTime.ToString(@"hh\:mm\:ss"))
+      {
+        Spotify.StartSpotify();
+      }
     }
 
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
