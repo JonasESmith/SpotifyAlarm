@@ -39,6 +39,14 @@ namespace SpotifyAlarm
       }
     }
 
+    public TimeSpan SpotifyTime
+    {
+      get
+      {
+        return (AlarmTime.Add(new TimeSpan(0, 0, -30)));
+      }
+    }
+
     public string Days
     {
       get

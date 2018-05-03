@@ -72,8 +72,8 @@ namespace SpotifyAlarm
       EnableBlur();
       StartTimers();
       userAlarms.Init(Properties.Settings.Default.UserAlarms);
-      Spotify.LoadPath();
       Spotify.AuthSpotify();
+      Spotify.LoadPath();
 
       //Spotify.StartSpotify();
     }
@@ -128,7 +128,10 @@ namespace SpotifyAlarm
       if (DateTime.Now.ToString("HH:mm:ss") == currentAlarm.AlarmTime.ToString(@"hh\:mm\:ss"))
       {
         Spotify.StartSpotify();
-        Spotify.PlaySpotify();
+      }
+      else if (DateTime.Now.ToString("HH:mm:ss") == currentAlarm.SpotifyTime.ToString(@"hh\:mm\:ss"))
+      {
+        Spotify.StartSpotify();
       }
     }
 

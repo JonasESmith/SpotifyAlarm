@@ -54,6 +54,14 @@ namespace SpotifyAlarm
 
     public void StartSpotify()
     {
+      /// https://stackoverflow.com/questions/38671641/could-not-load-file-or-assembly-newtonsoft-json-version-9-0-0-0-culture-neutr
+      /// Occasionally a problem will occur with the wrong version of newtonsoft.json
+      bool successful = _spotify.Connect();
+      if (successful)
+      {
+        _spotify.ListenForEvents = true;
+      }
+
       // TODO : Implement starting spotify based on user Spotify Path
       if (!SpotifyLocalAPI.IsSpotifyRunning())
       {
@@ -64,8 +72,9 @@ namespace SpotifyAlarm
       }
       else
       {
-        PlaySpotify();
+        _spotify.Play();
       }
+
 
       return;
     }
