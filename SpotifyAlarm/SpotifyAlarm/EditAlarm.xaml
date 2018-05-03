@@ -68,17 +68,65 @@
       </ComboBox>
       <ComboBox x:Name="minCombo" HorizontalAlignment="Left" Margin="84,73,0,0" VerticalAlignment="Top" Width="63" Opacity="0.5" MaxDropDownHeight="80" ScrollViewer.CanContentScroll="False">
         <ComboBoxItem Background="#828282" BorderThickness="0">00</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">01</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">02</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">03</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">04</ComboBoxItem>
         <ComboBoxItem Background="#828282" BorderThickness="0">05</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">06</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">07</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">08</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">09</ComboBoxItem>
         <ComboBoxItem Background="#828282" BorderThickness="0">10</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">11</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">12</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">13</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">14</ComboBoxItem>
         <ComboBoxItem Background="#828282" BorderThickness="0">15</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">16</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">17</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">18</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">19</ComboBoxItem>
         <ComboBoxItem Background="#828282" BorderThickness="0">20</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">21</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">22</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">23</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">24</ComboBoxItem>
         <ComboBoxItem Background="#828282" BorderThickness="0">25</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">26</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">27</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">28</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">29</ComboBoxItem>
         <ComboBoxItem Background="#828282" BorderThickness="0">30</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">31</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">32</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">33</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">34</ComboBoxItem>
         <ComboBoxItem Background="#828282" BorderThickness="0">35</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">36</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">37</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">38</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">39</ComboBoxItem>
         <ComboBoxItem Background="#828282" BorderThickness="0">40</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">41</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">42</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">43</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">44</ComboBoxItem>
         <ComboBoxItem Background="#828282" BorderThickness="0">45</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">46</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">47</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">48</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">49</ComboBoxItem>
         <ComboBoxItem Background="#828282" BorderThickness="0">50</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">51</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">52</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">53</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">54</ComboBoxItem>
         <ComboBoxItem Background="#828282" BorderThickness="0">55</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">56</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">57</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">58</ComboBoxItem>
+        <ComboBoxItem Background="#828282" BorderThickness="0">59</ComboBoxItem>
       </ComboBox>
       <ComboBox x:Name="amPmCombo" HorizontalAlignment="Left" Margin="151,73,0,0" VerticalAlignment="Top" Width="62" Opacity="0.5" MaxDropDownHeight="42" ScrollViewer.CanContentScroll="False">
         <ComboBoxItem Background="#828282" BorderThickness="0">AM</ComboBoxItem>

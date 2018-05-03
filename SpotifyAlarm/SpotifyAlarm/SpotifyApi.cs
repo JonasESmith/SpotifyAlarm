@@ -49,16 +49,24 @@ namespace SpotifyAlarm
       };
 
       _spotify = new SpotifyLocalAPI(_config);
+      _spotify.ListenForEvents = true;
     }
 
     public void StartSpotify()
     {
       // TODO : Implement starting spotify based on user Spotify Path
+      if (!SpotifyLocalAPI.IsSpotifyRunning())
+      {
+        ProcessStartInfo startSpotify = new ProcessStartInfo();
+        path = Properties.Settings.Default.UserPath;
+        startSpotify.FileName = path;
+        Process.Start(startSpotify);
+      }
+      else
+      {
+        PlaySpotify();
+      }
 
-      ProcessStartInfo startSpotify = new ProcessStartInfo();
-      path = Properties.Settings.Default.UserPath;
-      startSpotify.FileName = path;
-      Process.Start(startSpotify);
       return;
     }
 
@@ -68,6 +76,11 @@ namespace SpotifyAlarm
       {
         return path;
       }
+    }
+
+    public void PlaySpotify()
+    {
+      _spotify.Play();
     }
 
     public void LoadPath()

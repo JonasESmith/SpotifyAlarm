@@ -73,6 +73,7 @@ namespace SpotifyAlarm
       StartTimers();
       userAlarms.Init(Properties.Settings.Default.UserAlarms);
       Spotify.LoadPath();
+      Spotify.AuthSpotify();
 
       //Spotify.StartSpotify();
     }
@@ -106,14 +107,19 @@ namespace SpotifyAlarm
 
     private void Timer_Tick(object sender, EventArgs e)
     {
+      // updates timer element on main form
       timeLabel.Text = DateTime.Now.ToString("hh:mm:ss tt");
+
+      // finds new alarms that were added/removed
       if(alarmCount != userAlarms.Alarm.Count)
       {
         currentAlarm = userAlarms.CurrentAlarm;
         NextAlarmLabel();
         alarmCount = userAlarms.Alarm.Count;
       }
-      if(DateTime.Now.Second % 30 == 0)
+
+      //updates current alarm every 15 seconds
+      if(DateTime.Now.Second % 15 == 0)
       {
         currentAlarm = userAlarms.CurrentAlarm;
         NextAlarmLabel();
@@ -122,6 +128,7 @@ namespace SpotifyAlarm
       if (DateTime.Now.ToString("HH:mm:ss") == currentAlarm.AlarmTime.ToString(@"hh\:mm\:ss"))
       {
         Spotify.StartSpotify();
+        Spotify.PlaySpotify();
       }
     }
 
