@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Linq;
+using System.IO;
+using SpotifyAPI;
 using System.Text;
+using System.Linq;
+using System.Windows;
+using Microsoft.Win32;
+using SpotifyAPI.Local;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using SpotifyAPI;
-using SpotifyAPI.Local;
-using System.Windows;
-using System.Diagnostics;
-using System.IO;
-using Microsoft.Win32;
 
 namespace SpotifyAlarm
 {
@@ -17,6 +17,7 @@ namespace SpotifyAlarm
     private string path;
     private SpotifyLocalAPIConfig _config;
     private SpotifyLocalAPI _spotify;
+    /// TODO : Change add alarm to not spawn second form but display hidden panel. 
 
     /// <summary>
     /// The singleton pattern allows for our forms to share instances
@@ -111,25 +112,10 @@ namespace SpotifyAlarm
         {
           MessageBox.Show("Please select the Spotify.exe location");
 
-          // <Summary>
-          //     this is finding the "usual" path for spotify however it may not always work
-          // </Summary>
           string userName = Environment.UserName;
           path = "C:\\Users\\" + userName + "\\AppData\\Roaming\\Spotify";
 
           // https://stackoverflow.com/questions/4318176/dialogresult-in-wpf-application-in-c-sharp
-          // 
-          // using (var fbd = new OpenFileDialog())
-          // {
-          //   // <Summary>
-          //   //     Open file dialog at the spotify location
-          //   // </Summary>
-          //   fbd.InitialDirectory = path;
-          //   fbd.Filter = "(*.exe)|*.exe;";
-          //   DialogResult result = fbd.ShowDialog();
-          //   if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.FileName))
-          //   { path = fbd.FileName; }
-          // }
         }
         Properties.Settings.Default.UserPath = path;
         Properties.Settings.Default.Save();
