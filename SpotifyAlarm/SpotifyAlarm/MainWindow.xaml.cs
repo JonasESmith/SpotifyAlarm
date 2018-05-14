@@ -135,11 +135,11 @@ namespace SpotifyAlarm
       {
         if (DateTime.Now.ToString("HH:mm:ss") == currentAlarm.AlarmTime.ToString(@"hh\:mm\:ss"))
         {
-          Spotify.StartSpotify();
+          Spotify.StartSpotify(currentAlarm);
         }
         else if (DateTime.Now.ToString("HH:mm:ss") == currentAlarm.SpotifyTime.ToString(@"hh\:mm\:ss"))
         {
-          Spotify.StartSpotify();
+          Spotify.StartSpotify(currentAlarm);
         }
       }
     }
@@ -368,12 +368,14 @@ namespace SpotifyAlarm
 
       TimeSpan time = new TimeSpan(hour + TimeVar, minute, 0);
 
+      int index = Spotify.PlayList.FindIndex(a => a.Name == spotifyPlaylist.Text);
+
       if (selectedIndex >= 0)
       {
         userAlarms.Alarm[selectedIndex].Name = alarmName.Text;
         userAlarms.Alarm[selectedIndex].AlarmTime = time;
         userAlarms.Alarm[selectedIndex].Days = ConfigureDays();
-        userAlarms.Alarm[selectedIndex].Path = spotifyPlaylist.Text;
+        userAlarms.Alarm[selectedIndex].Path = Spotify.PlayList[index].Uri.ToString();
       }
       else
       { userAlarms.AddAlarm(alarmName.Text, time, ConfigureDays(), spotifyPlaylist.Text); }

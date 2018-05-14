@@ -124,7 +124,7 @@ namespace SpotifyAlarm
       return list;
     }
 
-    public void StartSpotify()
+    public void StartSpotify(Alarm spotiAlarm)
     {
       /// https://stackoverflow.com/questions/38671641/could-not-load-file-or-assembly-newtonsoft-json-version-9-0-0-0-culture-neutr
       /// Occasionally a problem will occur with the wrong version of newtonsoft.json
@@ -134,16 +134,33 @@ namespace SpotifyAlarm
         _spotify.ListenForEvents = true;
       }
 
-      if (!SpotifyLocalAPI.IsSpotifyRunning())
+      if (web_Spotify != null)
       {
-        ProcessStartInfo startSpotify = new ProcessStartInfo();
-        path = Properties.Settings.Default.UserPath;
-        startSpotify.FileName = path;
-        Process.Start(startSpotify);
+        if (!SpotifyLocalAPI.IsSpotifyRunning())
+        {
+          ProcessStartInfo startSpotify = new ProcessStartInfo();
+          path = Properties.Settings.Default.UserPath;
+          startSpotify.FileName = path;
+          Process.Start(startSpotify);
+        }
+        else
+        {
+          _spotify.PlayURL(spotiAlarm.Path);
+        }
       }
       else
       {
-        _spotify.Play();
+        if (!SpotifyLocalAPI.IsSpotifyRunning())
+        {
+          ProcessStartInfo startSpotify = new ProcessStartInfo();
+          path = Properties.Settings.Default.UserPath;
+          startSpotify.FileName = path;
+          Process.Start(startSpotify);
+        }
+        else
+        {
+          _spotify.Play();
+        }
       }
 
 
