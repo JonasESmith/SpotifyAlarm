@@ -226,8 +226,8 @@
         <TextBox x:Name="alarmName" CaretBrush="White" HorizontalAlignment="Left" BorderThickness="0" Foreground="White" Height="32" Margin="17,3,0,0" Background="Transparent" HorizontalContentAlignment="Center" TextWrapping="Wrap" Text="Select Alarm" VerticalAlignment="Top" Width="274" FontSize="18"/>
         <CheckBox x:Name="repeatingCheck" Foreground="White" Content="Repeating" HorizontalAlignment="Left" Margin="218,51,0,0" VerticalAlignment="Top" Opacity="0.7" Height="22" VerticalContentAlignment="Center" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
         <Button Content="Save" HorizontalAlignment="Left" Margin="235,180,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Background="#1c873e" Opacity="0.8" Foreground="White" Click="Button_Click_1"/>
-        <Grid x:Name="dayGrid" HorizontalAlignment="Left" Height="53" Margin="17,102,0,0" VerticalAlignment="Top" Width="300" Visibility="Collapsed">
-          <Label Content="Days" Foreground="White" HorizontalAlignment="Center"/>
+        <Grid x:Name="dayGrid" HorizontalAlignment="Left" Height="53" Margin="17,76,-2,0" VerticalAlignment="Top" Width="300" Visibility="Collapsed">
+          <Label Content="Days" Foreground="White" HorizontalAlignment="Center" Margin="87,0,179,0"/>
           <CheckBox Name="monCheck" Content="Mon" Opacity="0.6" Foreground="White" HorizontalAlignment="Left" Margin="-2,29,0,0" VerticalAlignment="Top"/>
           <CheckBox Name="tueCheck" Content="Tue" Opacity="0.6" Foreground="White" HorizontalAlignment="Left" Margin="44,29,0,0" VerticalAlignment="Top"/>
           <CheckBox Name="wedCheck" Content="Wed" Opacity="0.6" Foreground="White" HorizontalAlignment="Left" Margin="85,29,0,0" VerticalAlignment="Top"/>
