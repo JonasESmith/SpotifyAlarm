@@ -116,5 +116,8 @@
   <ItemGroup>
     <Resource Include="Images\dotsHorizontal.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\BackArrow.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
