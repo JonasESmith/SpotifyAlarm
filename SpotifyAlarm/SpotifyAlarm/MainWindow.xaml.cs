@@ -12,6 +12,7 @@ using System.Threading;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using SpotifyAPI.Web.Models;
 using System.Windows.Shapes;
 using System.Threading.Tasks;
 using System.Windows.Interop;
@@ -28,12 +29,12 @@ namespace SpotifyAlarm
 {
   public partial class MainWindow : Window
   {
-    public DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
-    public UserAlarms userAlarms = UserAlarms.Instance;
-    public SpotifyApi Spotify = SpotifyApi.Instance;
-    public Alarm currentAlarm;
-    public int alarmCount = 0;
-    public int selectedIndex;
+    public DispatcherTimer timer        = new System.Windows.Threading.DispatcherTimer();
+    public UserAlarms      userAlarms   = UserAlarms.Instance;
+    public SpotifyApi      Spotify      = SpotifyApi.Instance;
+    public int             alarmCount   = 0;
+    public Alarm           currentAlarm;
+    public int             selectedIndex;
 
     [DllImport("user32.dll")]
     internal static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
@@ -74,6 +75,7 @@ namespace SpotifyAlarm
       StartTimers();
       userAlarms.Init(Properties.Settings.Default.UserAlarms);
       Spotify.AuthSpotify();
+      Spotify.AuthWebApi();
       Spotify.LoadPath();
 
       //Spotify.StartSpotify();
@@ -150,6 +152,7 @@ namespace SpotifyAlarm
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
+      LoadPlaylists();
       MainFormPanel.Visibility = Visibility.Collapsed;
       EditAlarmPanel.Visibility = Visibility.Visible;
       LoadButtons();
@@ -157,13 +160,6 @@ namespace SpotifyAlarm
       //win2.Show();
     }
 
-    private void BackButton_Click(object sender, RoutedEventArgs e)
-    {
-      EditAlarmPanel.Visibility = Visibility.Collapsed;
-      MainFormPanel.Visibility = Visibility.Visible;
-      //Window2 win2 = new Window2();
-      //win2.Show();
-    }
 
     private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
     {
@@ -175,9 +171,27 @@ namespace SpotifyAlarm
       System.Windows.Application.Current.Shutdown();
     }
 
-    private void Window_Loaded_1(object sender, RoutedEventArgs e)
+    // ************************************************************ //
+    //  Edit alarm Form
+    // ************************************************************ //
+
+    private void BackButton_Click(object sender, RoutedEventArgs e)
     {
-      EnableBlur();
+      EditAlarmPanel.Visibility = Visibility.Collapsed;
+      MainFormPanel.Visibility = Visibility.Visible;
+      //Window2 win2 = new Window2();
+      //win2.Show();
+    }
+
+    private void LoadPlaylists()
+    {
+      List<SimplePlaylist> userPlaylists = new List<SimplePlaylist>();
+      userPlaylists = Spotify.PlayList;
+
+      for(int i = 0; i < userPlaylists.Count; i++)
+      {
+        spotifyPlaylist.Items.Add(userPlaylists[i].Name);
+      }
     }
 
     private void LoadButtons()
@@ -427,6 +441,8 @@ namespace SpotifyAlarm
     }
   }
 
+  #region Blur affect 
+
   internal enum AccentState
   {
     ACCENT_DISABLED = 0,
@@ -455,4 +471,5 @@ namespace SpotifyAlarm
 
   internal enum WindowCompositionAttribute
   { WCA_ACCENT_POLICY = 19 }
+  #endregion
 }

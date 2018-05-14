@@ -9,6 +9,11 @@ using SpotifyAPI.Local;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using SpotifyAPI.Web; //Base Namespace
+using SpotifyAPI.Web.Auth; //All Authentication-related classes
+using SpotifyAPI.Web.Enums; //Enums
+using SpotifyAPI.Web.Models; //Models for the JSON-responses
+using System.Net;
 
 namespace SpotifyAlarm
 {
@@ -16,7 +21,11 @@ namespace SpotifyAlarm
   {
     private string path;
     private SpotifyLocalAPIConfig _config;
+    private PrivateProfile _profile;
+    private List<SimplePlaylist> _playlists;
     private SpotifyLocalAPI _spotify;
+    private static SpotifyWebAPI web_Spotify;
+    private readonly ProxyConfig _proxyConfig = new ProxyConfig();
     /// TODO : Change add alarm to not spawn second form but display hidden panel. 
 
     /// <summary>
@@ -42,6 +51,54 @@ namespace SpotifyAlarm
       }
     }
 
+    public void AuthWebApi()
+    {
+      web_Spotify = new SpotifyWebAPI()
+      {
+        UseAuth = false, //This will disable Authentication
+    };
+
+      RunAuthentication();
+
+      // GetUserPlaylists(string UserID, Max number of playlists, default index);
+      // web_Spotify.GetUserPlaylists("1122095781", 20, 0);
+    }
+
+    private async void RunAuthentication()
+    {
+      WebAPIFactory webApiFactory = new WebAPIFactory(
+          "http://localhost",
+          8000,
+          "26d287105e31491889f3cd293d85bfea",
+          Scope.UserReadPrivate | Scope.UserReadEmail | Scope.PlaylistReadPrivate | Scope.UserLibraryRead |
+          Scope.UserReadPrivate | Scope.UserFollowRead | Scope.UserReadBirthdate | Scope.UserTopRead | Scope.PlaylistReadCollaborative |
+          Scope.UserReadRecentlyPlayed | Scope.UserReadPlaybackState | Scope.UserModifyPlaybackState,
+          _proxyConfig);
+
+      try
+      {
+        web_Spotify = await webApiFactory.GetWebApi();
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message);
+      }
+
+      if (_spotify == null)
+        return;
+
+      InitialSetup();
+    }
+
+    private async void InitialSetup()
+    {
+      _profile = await web_Spotify.GetPrivateProfileAsync();
+
+
+      _playlists = GetPlaylists();
+      //_playlists.ForEach(playlist => playlistsListBox.Items.Add(playlist.Name));
+    }
+
     public void AuthSpotify()
     {
       _config = new SpotifyLocalAPIConfig
@@ -51,6 +108,20 @@ namespace SpotifyAlarm
 
       _spotify = new SpotifyLocalAPI(_config);
       _spotify.ListenForEvents = true;
+    }
+
+    private List<SimplePlaylist> GetPlaylists()
+    {
+      Paging<SimplePlaylist> playlists = web_Spotify.GetUserPlaylists(_profile.Id);
+      List<SimplePlaylist> list = playlists.Items.ToList();
+
+      while (playlists.Next != null)
+      {
+        playlists = web_Spotify.GetUserPlaylists(_profile.Id, 20, playlists.Offset + playlists.Limit);
+        list.AddRange(playlists.Items);
+      }
+
+      return list;
     }
 
     public void StartSpotify()
@@ -63,7 +134,6 @@ namespace SpotifyAlarm
         _spotify.ListenForEvents = true;
       }
 
-      // TODO : Implement starting spotify based on user Spotify Path
       if (!SpotifyLocalAPI.IsSpotifyRunning())
       {
         ProcessStartInfo startSpotify = new ProcessStartInfo();
@@ -78,6 +148,14 @@ namespace SpotifyAlarm
 
 
       return;
+    }
+
+    public List<SimplePlaylist> PlayList
+    {
+      get
+      {
+        return _playlists;
+      }
     }
 
     public string Path
