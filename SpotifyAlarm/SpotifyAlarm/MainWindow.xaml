@@ -27,7 +27,7 @@
             <TranslateTransform/>
           </TransformGroup>
         </Grid.RenderTransform>
-        <Ellipse Fill="#FF6DB4EF"/>
+        <Ellipse Fill="#0392c6"/>
         <Ellipse>
           <Ellipse.Fill>
             <RadialGradientBrush>
