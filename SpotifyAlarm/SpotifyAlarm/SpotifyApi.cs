@@ -134,7 +134,7 @@ namespace SpotifyAlarm
         _spotify.ListenForEvents = true;
       }
 
-      if (web_Spotify != null)
+      if (web_Spotify != null || !String.IsNullOrEmpty(spotiAlarm.Path))
       {
         if (!SpotifyLocalAPI.IsSpotifyRunning())
         {
