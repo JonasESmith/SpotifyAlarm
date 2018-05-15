@@ -90,15 +90,15 @@ namespace SpotifyAlarm
         {
           if (currentAlarm.AlarmTime.TotalHours > 12)
           {
-            alarmTime = "Next alarm" + " - " + (currentAlarm.AlarmTime.Hours - 12) + ":"
+            alarmTime = (currentAlarm.AlarmTime.Hours - 12) + ":"
                       + (currentAlarm.AlarmTime.Minutes.ToString("D2")) + " PM "
-                      + "( " + currentAlarm.Name + " )";
+                      + "( " + currentAlarm.Name + " alarm )";
           }
           else
           {
-            alarmTime = "Next alarm" + " - " + (currentAlarm.AlarmTime.Hours) + ":"
+            alarmTime = (currentAlarm.AlarmTime.Hours) + ":"
                       + (currentAlarm.AlarmTime.Minutes.ToString("D2") + " AM "
-                      + "( " + currentAlarm.Name + " )");
+                      + "( " + currentAlarm.Name + " alarm )");
           }
         }
         alarmLabel.Text = alarmTime;
@@ -115,7 +115,14 @@ namespace SpotifyAlarm
     private void Timer_Tick(object sender, EventArgs e)
     {
       // updates timer element on main form
-      timeLabel.Text = DateTime.Now.ToString("hh:mm:ss tt");
+      if(MainFormPanel.Visibility == Visibility.Visible)
+      {
+        timeLabel.Text = DateTime.Now.ToString("hh:mm:ss tt");
+      }
+      else
+      {
+        editAlarmTimeLabel.Content = DateTime.Now.ToString("hh:mm:ss tt");
+      }
 
       // finds new alarms that were added/removed
       if(alarmCount != userAlarms.Alarm.Count)
@@ -181,18 +188,28 @@ namespace SpotifyAlarm
     {
       EditAlarmPanel.Visibility = Visibility.Collapsed;
       MainFormPanel.Visibility = Visibility.Visible;
+      alarmDetailPanel.Visibility = Visibility.Collapsed;
       //Window2 win2 = new Window2();
       //win2.Show();
     }
 
     private void LoadPlaylists()
     {
+      spotifyPlaylist.Items.Clear();
+
       List<SimplePlaylist> userPlaylists = new List<SimplePlaylist>();
       userPlaylists = Spotify.PlayList;
 
-      for(int i = 0; i < userPlaylists.Count; i++)
+      if (userPlaylists.Count != 0)
       {
-        spotifyPlaylist.Items.Add(userPlaylists[i].Name);
+        for (int i = 0; i < userPlaylists.Count; i++)
+        {
+          spotifyPlaylist.Items.Add(userPlaylists[i].Name);
+        }
+      }
+      else
+      {
+        spotifyPlaylist.Items.Add("Cannot find playlist's");
       }
     }
 
@@ -322,6 +339,17 @@ namespace SpotifyAlarm
       else { repeatingCheck.IsChecked = false; }
 
       selectedIndex = userAlarms.Alarm.FindIndex(a => a.Name == alarmName.Text);
+
+      int playListIndex = Spotify.PlayList.FindIndex(a => a.Uri == userAlarms.Alarm[selectedIndex].Path);
+
+      if(playListIndex > 0)
+      {
+        spotifyPlaylist.SelectedValue = Spotify.PlayList[playListIndex].Name;
+      }
+      else
+      {
+        spotifyPlaylist.SelectedValue = " ";
+      }
     }
 
     private void Button_MouseLeave(object sender, MouseEventArgs e)

@@ -136,7 +136,7 @@
           </Ellipse.Fill>
         </Ellipse>
       </Grid>
-      <ScrollViewer Height="248" HorizontalAlignment="Left" Name="scrollViewer1" VerticalAlignment="Top" Width="178" VerticalScrollBarVisibility="Auto">
+      <ScrollViewer Height="214" HorizontalAlignment="Left" Name="scrollViewer1" VerticalAlignment="Top" Width="178" VerticalScrollBarVisibility="Auto">
         <StackPanel Name="alarmPanel">
         </StackPanel>
       </ScrollViewer>
@@ -236,7 +236,7 @@
           <CheckBox Name="satCheck" Content="Sat" Opacity="0.6" Foreground="White" HorizontalAlignment="Left" Margin="208,29,0,0" VerticalAlignment="Top"/>
           <CheckBox Name="sunCheck" Content="Sun" Opacity="0.6" Foreground="White" HorizontalAlignment="Left" Margin="249,29,0,0" VerticalAlignment="Top"/>
         </Grid>
-        <ComboBox x:Name="dayCombo" HorizontalAlignment="Left" Margin="109,98,0,0" VerticalAlignment="Top" Width="110" Opacity="0.5" MaxDropDownHeight="80" ScrollViewer.CanContentScroll="False">
+        <ComboBox x:Name="dayCombo" HorizontalAlignment="Left" Margin="101,98,0,0" VerticalAlignment="Top" Width="110" Opacity="0.5" MaxDropDownHeight="80" ScrollViewer.CanContentScroll="False">
           <ComboBoxItem Background="#828282" BorderThickness="0">Monday</ComboBoxItem>
           <ComboBoxItem Background="#828282" BorderThickness="0">Tuesday</ComboBoxItem>
           <ComboBoxItem Background="#828282" BorderThickness="0">Wednsday</ComboBoxItem>
@@ -245,10 +245,11 @@
           <ComboBoxItem Background="#828282" BorderThickness="0">Saturday</ComboBoxItem>
           <ComboBoxItem Background="#828282" BorderThickness="0">Sunday</ComboBoxItem>
         </ComboBox>
-        <Label x:Name="dayLabel" Content="Day" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="64,76,141,0" VerticalAlignment="Top" Width="110"/>
-        <ComboBox x:Name="spotifyPlaylist" HorizontalAlignment="Left" Margin="19,140,0,0" VerticalAlignment="Top" Width="200" Opacity="0.5" MaxDropDownHeight="80" ScrollViewer.CanContentScroll="False">
+        <Label x:Name="dayLabel" Content="Day" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="56,76,149,0" VerticalAlignment="Top" Width="110"/>
+        <ComboBox x:Name="spotifyPlaylist" HorizontalAlignment="Left" Margin="17,140,0,0" VerticalAlignment="Top" Width="194" Opacity="0.5" MaxDropDownHeight="80" ScrollViewer.CanContentScroll="False">
         </ComboBox>
         <Button Content="Delete" Name="delButton" HorizontalAlignment="Left" Margin="155,180,0,0" VerticalAlignment="Top" Width="75" BorderThickness="0" Background="#F26419" Opacity="0.8" Foreground="White" Click="Delete_Button"/>
+        <Label x:Name="spotifyPlaylistLabel" Content="Playlist" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="6,119,248,0" VerticalAlignment="Top" Width="61"/>
       </Grid>
       <Button x:Name="BackButton" HorizontalAlignment="Left" Focusable="False" VerticalAlignment="Top" Background="#00FFFFFF" Width="42" Height="31" BorderThickness="0" Margin="456,0,0,0" Click="BackButton_Click">
         <Grid>
@@ -274,6 +275,10 @@
           </Style>
         </Button.Style>
       </Button>
+
+      <StackPanel Background="#111111" Opacity="0.7" Name="alarmStack" Margin="0,214,320,0">
+        <Label x:Name="editAlarmTimeLabel" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" FontSize="16"  Height="34" />
+      </StackPanel>
     </Grid>
   </Grid>
   <Window.Background>
