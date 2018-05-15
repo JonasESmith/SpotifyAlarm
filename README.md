@@ -12,6 +12,3 @@ Spotify alarm is an application to launch Spotify and play the selected playlist
 <p align="center">
   <img src="images/Edit.PNG" alt="icon">
 </p>
-
-<h1> My goals for SpotifyAlarm </h1>
-<p> My goals for this application was to make a simple alarm clock application that was both nice looking, powerful, and to learn from creating my first WPF application.</p>
