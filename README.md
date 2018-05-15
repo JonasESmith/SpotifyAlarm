@@ -7,10 +7,11 @@ Spotify alarm is an application to launch Spotify and play the selected playlist
 <p> </p>
 
 <h1> Features </h1>
-### Features
-  - Wake up to your favorite Spotify playlist
-  - Start/Play Spotify from lock screen
-  - (To be added) Start SpotifyAlarm on startup
+<ul>
+  <li> Wake up to your favorite Spotify playlist </li>
+  <li> Start/Play Spotify from lock screen </li>
+  <li> (To be added) Start SpotifyAlarm on startup </li>
+</ul>
 
 <h1> Appearance </h1>
 <p align="center">
