@@ -1,19 +1,15 @@
 ﻿using System;
 using System.IO;
 using SpotifyAPI;
-using System.Text;
 using System.Linq;
+using SpotifyAPI.Web;
 using System.Windows;
-using Microsoft.Win32;
 using SpotifyAPI.Local;
 using System.Diagnostics;
-using System.Threading.Tasks;
+using SpotifyAPI.Web.Auth; 
+using SpotifyAPI.Web.Enums; 
+using SpotifyAPI.Web.Models; 
 using System.Collections.Generic;
-using SpotifyAPI.Web; //Base Namespace
-using SpotifyAPI.Web.Auth; //All Authentication-related classes
-using SpotifyAPI.Web.Enums; //Enums
-using SpotifyAPI.Web.Models; //Models for the JSON-responses
-using System.Net;
 
 namespace SpotifyAlarm
 {
@@ -26,7 +22,6 @@ namespace SpotifyAlarm
     private SpotifyLocalAPI _spotify;
     private static SpotifyWebAPI web_Spotify;
     private readonly ProxyConfig _proxyConfig = new ProxyConfig();
-    /// TODO : Change add alarm to not spawn second form but display hidden panel. 
 
     /// <summary>
     /// The singleton pattern allows for our forms to share instances
@@ -34,7 +29,7 @@ namespace SpotifyAlarm
     /// Could potentally be insecure. 
     /// https://en.wikipedia.org/wiki/Singleton_pattern
     /// 
-    /// We are alos using JohnnyCrazy's Spotify Api
+    /// JohnnyCrazy's Spotify Api
     /// https://github.com/JohnnyCrazy/SpotifyAPI-NET
     /// </summary>
     private static SpotifyApi instance;
@@ -59,9 +54,6 @@ namespace SpotifyAlarm
     };
 
       RunAuthentication();
-
-      // GetUserPlaylists(string UserID, Max number of playlists, default index);
-      // web_Spotify.GetUserPlaylists("1122095781", 20, 0);
     }
 
     private async void RunAuthentication()
@@ -94,9 +86,7 @@ namespace SpotifyAlarm
     {
       _profile = await web_Spotify.GetPrivateProfileAsync();
 
-
       _playlists = GetPlaylists();
-      //_playlists.ForEach(playlist => playlistsListBox.Items.Add(playlist.Name));
     }
 
     public void AuthSpotify()

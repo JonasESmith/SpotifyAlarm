@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SpotifyAlarm
 {
@@ -12,7 +8,6 @@ namespace SpotifyAlarm
     string days;
     string path;
     TimeSpan alarmTime;
-
 
     public Alarm()
     {

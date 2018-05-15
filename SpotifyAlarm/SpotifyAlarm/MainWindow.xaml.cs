@@ -1,28 +1,19 @@
 ﻿/// <summary>
 ///   Programmer : Jonas Smith
 ///   Purpose    : An alarm clock that will open spotify 
-///              :  and play the selected playlist
+///              :  and play the users selected playlist. 
 /// </summary>
 
 using System;
 using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Threading;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using SpotifyAPI.Web.Models;
-using System.Windows.Shapes;
-using System.Threading.Tasks;
 using System.Windows.Interop;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Threading;
-using System.Windows.Navigation;
 using System.Collections.Generic;
-using System.Windows.Media.Imaging;
-using System.Windows.Media.Animation;
 using System.Runtime.InteropServices;
 
 namespace SpotifyAlarm
@@ -30,11 +21,37 @@ namespace SpotifyAlarm
   public partial class MainWindow : Window
   {
     public DispatcherTimer timer        = new System.Windows.Threading.DispatcherTimer();
-    public UserAlarms      userAlarms   = UserAlarms.Instance;
     public SpotifyApi      Spotify      = SpotifyApi.Instance;
-    public int             alarmCount   = 0;
+    public UserAlarms      userAlarms   = UserAlarms.Instance;
     public Alarm           currentAlarm;
-    public int             selectedIndex;
+
+    public int alarmCount    = 0;
+    public int selectedIndex;
+
+    public MainWindow()
+    {
+      // opens application in the center of which ever screen is selected
+      WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+
+      InitializeComponent();
+
+      // enables the opaque affect for the application
+      EnableBlur();
+
+      // starts timers for the main function of the application 
+      StartTimers();
+
+      // initialization of userAlarms
+      userAlarms.Init(Properties.Settings.Default.UserAlarms);
+
+      // running Spotify services 
+      Spotify.AuthSpotify();
+      Spotify.AuthWebApi();
+      Spotify.LoadPath();
+    }
+
+
+    #region MainForm
 
     [DllImport("user32.dll")]
     internal static extern int SetWindowCompositionAttribute(IntPtr hwnd, ref WindowCompositionAttributeData data);
@@ -65,20 +82,6 @@ namespace SpotifyAlarm
       SetWindowCompositionAttribute(windowHelper.Handle, ref data);
 
       Marshal.FreeHGlobal(accentPtr);
-    }
-
-    public MainWindow()
-    {
-      WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-      InitializeComponent();
-      EnableBlur();
-      StartTimers();
-      userAlarms.Init(Properties.Settings.Default.UserAlarms);
-      Spotify.AuthSpotify();
-      Spotify.AuthWebApi();
-      Spotify.LoadPath();
-
-      //Spotify.StartSpotify();
     }
 
     private void NextAlarmLabel()
@@ -115,7 +118,7 @@ namespace SpotifyAlarm
     private void Timer_Tick(object sender, EventArgs e)
     {
       // updates timer element on main form
-      if(MainFormPanel.Visibility == Visibility.Visible)
+      if (MainFormPanel.Visibility == Visibility.Visible)
       {
         timeLabel.Text = DateTime.Now.ToString("hh:mm:ss tt");
       }
@@ -125,7 +128,7 @@ namespace SpotifyAlarm
       }
 
       // finds new alarms that were added/removed
-      if(alarmCount != userAlarms.Alarm.Count)
+      if (alarmCount != userAlarms.Alarm.Count)
       {
         userAlarms.FindNextAlarm();
         currentAlarm = userAlarms.CurrentAlarm;
@@ -134,7 +137,7 @@ namespace SpotifyAlarm
       }
 
       //updates current alarm every 15 seconds
-      if(DateTime.Now.Second % 15 == 0)
+      if (DateTime.Now.Second % 15 == 0)
       {
         userAlarms.FindNextAlarm();
         currentAlarm = userAlarms.CurrentAlarm;
@@ -153,46 +156,71 @@ namespace SpotifyAlarm
       }
     }
 
+    /// <summary>
+    /// Allows the application to be moved without a title bar
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
     {
       if (e.ChangedButton == MouseButton.Left)
         this.DragMove();
     }
 
+    /// <summary>
+    /// Add/Edit button click
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void Button_Click(object sender, RoutedEventArgs e)
     {
       LoadPlaylists();
       MainFormPanel.Visibility = Visibility.Collapsed;
       EditAlarmPanel.Visibility = Visibility.Visible;
       LoadButtons();
-      //Window2 win2 = new Window2();
-      //win2.Show();
     }
 
-
+    /// <summary>
+    /// Minimize buttonClick
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
     {
       WindowState = WindowState.Minimized;
     }
-
+    /// <summary>
+    /// Close buttonClick
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void Grid_MouseDown_1(object sender, MouseButtonEventArgs e)
     {
       System.Windows.Application.Current.Shutdown();
     }
+#endregion
 
+
+    #region Edit Form
     // ************************************************************ //
     //  Edit alarm Form
     // ************************************************************ //
 
+    /// <summary>
+    /// Navigates back to mainForm on click 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void BackButton_Click(object sender, RoutedEventArgs e)
     {
       EditAlarmPanel.Visibility = Visibility.Collapsed;
       MainFormPanel.Visibility = Visibility.Visible;
       alarmDetailPanel.Visibility = Visibility.Collapsed;
-      //Window2 win2 = new Window2();
-      //win2.Show();
     }
 
+    /// <summary>
+    /// Load's users playlists based on data from the webservice
+    /// </summary>
     private void LoadPlaylists()
     {
       spotifyPlaylist.Items.Clear();
@@ -213,6 +241,9 @@ namespace SpotifyAlarm
       }
     }
 
+    /// <summary>
+    /// Loads all alarm buttons for navigation in the editor
+    /// </summary>
     private void LoadButtons()
     {
       alarmPanel.Children.Clear();
@@ -240,6 +271,9 @@ namespace SpotifyAlarm
       }
     }
 
+    /// <summary>
+    /// A "constant" button for adding new alarms 
+    /// </summary>
     private void AddAlarmButton()
     {
       BrushConverter bc = new BrushConverter();
@@ -251,13 +285,18 @@ namespace SpotifyAlarm
       button.MouseLeave += Button_MouseLeave;
       button.MouseEnter += Button_MouseEnter;
       button.Content = "Add alarm";
-      button.Click += Button_Click1;
+      button.Click += Add_AlarmClick;
       button.Name = "addAlarm";
 
       alarmPanel.Children.Add(button);
     }
 
-    private void Button_Click1(object sender, RoutedEventArgs e)
+    /// <summary>
+    /// Is called when a user click's on the addAlarm button constant
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Add_AlarmClick(object sender, RoutedEventArgs e)
     {
       NewAlarmClick();
     }
@@ -287,6 +326,11 @@ namespace SpotifyAlarm
       selectedIndex = userAlarms.Alarm.FindIndex(a => a.Name == alarmName.Text);
     }
 
+    /// <summary>
+    /// Loads data into alarmDetailPanel
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
     private void Alarm_Click(object sender, RoutedEventArgs e)
     {
       delButton.Visibility = Visibility.Visible;
@@ -342,7 +386,7 @@ namespace SpotifyAlarm
 
       int playListIndex = Spotify.PlayList.FindIndex(a => a.Uri == userAlarms.Alarm[selectedIndex].Path);
 
-      if(playListIndex > 0)
+      if (playListIndex > 0)
       {
         spotifyPlaylist.SelectedValue = Spotify.PlayList[playListIndex].Name;
       }
@@ -471,7 +515,12 @@ namespace SpotifyAlarm
       LoadButtons();
       NewAlarmClick();
     }
+
+#endregion
+
+
   }
+
 
   #region Blur affect 
 
@@ -504,4 +553,6 @@ namespace SpotifyAlarm
   internal enum WindowCompositionAttribute
   { WCA_ACCENT_POLICY = 19 }
   #endregion
+
+
 }
