@@ -120,6 +120,7 @@ namespace SpotifyAlarm
       // finds new alarms that were added/removed
       if(alarmCount != userAlarms.Alarm.Count)
       {
+        userAlarms.FindNextAlarm();
         currentAlarm = userAlarms.CurrentAlarm;
         NextAlarmLabel();
         alarmCount = userAlarms.Alarm.Count;
@@ -128,6 +129,7 @@ namespace SpotifyAlarm
       //updates current alarm every 15 seconds
       if(DateTime.Now.Second % 15 == 0)
       {
+        userAlarms.FindNextAlarm();
         currentAlarm = userAlarms.CurrentAlarm;
         NextAlarmLabel();
       }

@@ -34,11 +34,6 @@ namespace SpotifyAlarm
       LoadAlarms(alarms);
       SortAlarms();
       FindNextAlarm();
-      /// I will need to store
-      ///  1. Name
-      ///  2. Time
-      ///  3. Days
-      ///  4. Playlist selected
     }
 
     public UserAlarms()
@@ -115,28 +110,30 @@ namespace SpotifyAlarm
 
       for (int index = 1; index <= alarmList.Count; index++)
       {
-
-        uint currentTimeMs = (uint)DateTime.Now.TimeOfDay.TotalMilliseconds;
-        uint totalAlarmMs  = (uint)alarmList[index - 1].AlarmTime.TotalMilliseconds;
-        uint nextalarmMS = 0;
-
-
-        if (totalAlarmMs > currentTimeMs)
+        if (alarmList[index - 1].Occurs) // Alarm is occuring today?
         {
-          if ((totalAlarmMs - currentTimeMs) < msToNextAlarm)
-          {
-            msToNextAlarm = (totalAlarmMs - currentTimeMs);
+          uint currentTimeMs = (uint)DateTime.Now.TimeOfDay.TotalMilliseconds;
+          uint totalAlarmMs = (uint)alarmList[index - 1].AlarmTime.TotalMilliseconds;
+          uint nextalarmMS = 0;
 
-            currentAlarm = alarmList[index - 1];
+
+          if (totalAlarmMs > currentTimeMs)
+          {
+            if ((totalAlarmMs - currentTimeMs) < msToNextAlarm)
+            {
+              msToNextAlarm = (totalAlarmMs - currentTimeMs);
+
+              currentAlarm = alarmList[index - 1];
+            }
           }
-        }
-        else if (totalAlarmMs < currentTimeMs && msToNextAlarm <= 86400000 && currentAlarm == null)
-        {
-          msToNextAlarm = ((uint)(86400000 - DateTime.Now.Millisecond) + totalAlarmMs);
-          if(msToNextAlarm < nextalarmMS || nextalarmMS == 0)
+          else if (totalAlarmMs < currentTimeMs && msToNextAlarm <= 86400000 && currentAlarm == null)
           {
-            nextalarmMS = msToNextAlarm;
-            currentAlarm = alarmList[index - 1];
+            msToNextAlarm = ((uint)(86400000 - DateTime.Now.Millisecond) + totalAlarmMs);
+            if (msToNextAlarm < nextalarmMS || nextalarmMS == 0)
+            {
+              nextalarmMS = msToNextAlarm;
+              currentAlarm = alarmList[index - 1];
+            }
           }
         }
       }

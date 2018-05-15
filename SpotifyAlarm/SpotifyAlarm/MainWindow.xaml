@@ -140,7 +140,7 @@
         <StackPanel Name="alarmPanel">
         </StackPanel>
       </ScrollViewer>
-      <Grid x:Name="alarmDetailPanel" HorizontalAlignment="Left" Height="212" Margin="183,36,0,0" VerticalAlignment="Top" Width="315" Visibility="Visible">
+      <Grid x:Name="alarmDetailPanel" HorizontalAlignment="Left" Height="212" Margin="183,36,0,0" VerticalAlignment="Top" Width="315" Visibility="Collapsed">
         <Label Content="Hour" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="0,31,253,0" VerticalAlignment="Top" Width="62"/>
         <Label Content="Minutes" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="76,31,177,0" VerticalAlignment="Top" Width="62" RenderTransformOrigin="0.5,0.5"/>
         <ComboBox x:Name="hourCombo" HorizontalAlignment="Left" Margin="17,51,0,0" VerticalAlignment="Top" Width="63" Opacity="0.5" MaxDropDownHeight="80" ScrollViewer.CanContentScroll="False">
