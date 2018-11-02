@@ -16,7 +16,6 @@ C:\Users\Voxel\Desktop\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyA
 C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\bin\Debug\SpotifyAlarm.exe.config
 C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\bin\Debug\SpotifyAlarm.exe
 C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\bin\Debug\SpotifyAlarm.pdb
-C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyAlarm.csprojResolveAssemblyReference.cache
 C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\MainWindow.g.cs
 C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\App.g.cs
 C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyAlarm_MarkupCompile.cache
@@ -51,3 +50,5 @@ C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\bin\Debug
 C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\bin\Debug\SpotifyAPI.xml
 C:\Users\smithjon\Desktop\projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyAlarm.csprojResolveAssemblyReference.cache
+C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyAlarm.csprojAssemblyReference.cache
+C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyAlarm.csproj.CopyComplete

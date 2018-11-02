@@ -33,8 +33,10 @@ namespace SpotifyAlarm
     /// https://github.com/JohnnyCrazy/SpotifyAPI-NET
     /// </summary>
     private static SpotifyApi instance;
+        private object _clientId;
+        private string _secretId;
 
-    public static SpotifyApi Instance
+        public static SpotifyApi Instance
     {
       get
       {
@@ -48,20 +50,27 @@ namespace SpotifyAlarm
 
     public void AuthWebApi()
     {
-      web_Spotify = new SpotifyWebAPI()
-      {
-        UseAuth = false, //This will disable Authentication
-    };
+            _clientId = string.IsNullOrEmpty(_clientId)
+                ? Environment.GetEnvironmentVariable("SPOTIFY_CLIENT_ID")
+                : _clientId;
 
-      RunAuthentication();
-    }
+            _secretId = string.IsNullOrEmpty(_secretId)
+                ? Environment.GetEnvironmentVariable("SPOTIFY_SECRET_ID")
+                : _secretId;
+
+            AuthorizationCodeAuth auth =
+                                  new AuthorizationCodeAuth(_clientId, _secretId, "http://localhost:4002", "http://localhost:4002",
+                                      Scope.PlaylistReadPrivate | Scope.PlaylistReadCollaborative);
+            auth.AuthReceived += AuthOnAuthReceived;
+            auth.Start();
+            auth.OpenBrowser();
+        }
 
     private async void RunAuthentication()
     {
       WebAPIFactory webApiFactory = new WebAPIFactory(
           "http://localhost",
-          8000,
-          "26d287105e31491889f3cd293d85bfea",
+          8000,"26d287105e31491889f3cd293d85bfea",
           Scope.UserReadPrivate | Scope.UserReadEmail | Scope.PlaylistReadPrivate | Scope.UserLibraryRead |
           Scope.UserReadPrivate | Scope.UserFollowRead | Scope.UserReadBirthdate | Scope.UserTopRead | Scope.PlaylistReadCollaborative |
           Scope.UserReadRecentlyPlayed | Scope.UserReadPlaybackState | Scope.UserModifyPlaybackState,
