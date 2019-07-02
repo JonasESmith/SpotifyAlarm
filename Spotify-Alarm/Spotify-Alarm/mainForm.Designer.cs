@@ -36,13 +36,13 @@
       this.AlarmPanel = new System.Windows.Forms.Panel();
       this.alarmDataPanel = new System.Windows.Forms.Panel();
       this.comboBoxPanel = new System.Windows.Forms.Panel();
+      this.comboBoxLabel = new System.Windows.Forms.Label();
       this.playListDividerPanel = new System.Windows.Forms.Panel();
       this.downButtonPanel = new System.Windows.Forms.Panel();
       this.downLabel = new System.Windows.Forms.Label();
       this.playListLabel = new System.Windows.Forms.Label();
       this.textBox1 = new System.Windows.Forms.TextBox();
       this.alarmNameLabel = new System.Windows.Forms.Label();
-      this.comboBoxLabel = new System.Windows.Forms.Label();
       this.titleBarPanel.SuspendLayout();
       this.largeTitleBarPanel.SuspendLayout();
       this.alarmDataPanel.SuspendLayout();
@@ -140,6 +140,17 @@
       this.comboBoxPanel.Size = new System.Drawing.Size(305, 29);
       this.comboBoxPanel.TabIndex = 3;
       // 
+      // comboBoxLabel
+      // 
+      this.comboBoxLabel.AutoSize = true;
+      this.comboBoxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.comboBoxLabel.ForeColor = System.Drawing.SystemColors.ControlLight;
+      this.comboBoxLabel.Location = new System.Drawing.Point(3, 3);
+      this.comboBoxLabel.Name = "comboBoxLabel";
+      this.comboBoxLabel.Size = new System.Drawing.Size(102, 20);
+      this.comboBoxLabel.TabIndex = 2;
+      this.comboBoxLabel.Text = "select playlist";
+      // 
       // playListDividerPanel
       // 
       this.playListDividerPanel.Dock = System.Windows.Forms.DockStyle.Right;
@@ -204,17 +215,6 @@
       this.alarmNameLabel.Size = new System.Drawing.Size(146, 29);
       this.alarmNameLabel.TabIndex = 0;
       this.alarmNameLabel.Text = "Alarm Name";
-      // 
-      // comboBoxLabel
-      // 
-      this.comboBoxLabel.AutoSize = true;
-      this.comboBoxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.comboBoxLabel.ForeColor = System.Drawing.SystemColors.ControlLight;
-      this.comboBoxLabel.Location = new System.Drawing.Point(3, 3);
-      this.comboBoxLabel.Name = "comboBoxLabel";
-      this.comboBoxLabel.Size = new System.Drawing.Size(102, 20);
-      this.comboBoxLabel.TabIndex = 2;
-      this.comboBoxLabel.Text = "select playlist";
       // 
       // mainForm
       // 

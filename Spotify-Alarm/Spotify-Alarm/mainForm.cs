@@ -15,7 +15,7 @@ namespace Spotify_Alarm
   public partial class mainForm : Form
   {
 
-    public List<string> playList = new List<string>(new string[] {"THIS IS A PLAYLIST", "THIS IS Also a PLAYLIST", "THIS IS TOOO" });
+    public List<string> playList = new List<string>(new string[] {"THIS IS A PLAYLIST", "THIS IS Also a PLAYLIST", "THIS IS TOOO", "THIS IS A PLAYLIST", "THIS IS A PLAYLIST", "THIS IS A PLAYLIST", "THIS IS A PLAYLIST" });
 
     public Panel playListDropDown;
     public mainForm()
