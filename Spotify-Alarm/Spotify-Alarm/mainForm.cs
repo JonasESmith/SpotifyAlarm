@@ -82,34 +82,40 @@ namespace Spotify_Alarm
     #endregion
 
 
+    Color Green = Color.FromArgb(30, 215, 96);
     Color DarkGray = Color.FromArgb(56, 59, 63);
     Color Gray = Color.FromArgb(50, 53, 57);
+    Color LGray = Color.FromArgb(44, 47, 51);
     private void DownLabel_MouseHover(object sender, EventArgs e)
     {
+
       downButtonPanel.BackColor = Gray;
     }
 
     private void DownLabel_MouseLeave(object sender, EventArgs e)
     {
+
       downButtonPanel.BackColor = DarkGray;
     }
 
     private void DownLabel_Click(object sender, EventArgs e)
     {
+
       if (playListDropDown == null)
       {
 
         playListDropDown = SpawnDropDownList();
         playListDropDown.Visible = true;
+        downLabel.Text = "<";
       }
       else if(playListDropDown.Visible)
       {
-
+        downLabel.Text = ">";
         playListDropDown.Visible = false;
       }
       else
       {
-
+        downLabel.Text = "<";
         playListDropDown.Visible = true;
       }
 
@@ -118,6 +124,7 @@ namespace Spotify_Alarm
 
     public Panel SpawnDropDownList()
     {
+
       Panel parentPanel = new Panel();
       parentPanel.Width = comboBoxPanel.Width;
       if (playList.Count > 0)
@@ -143,6 +150,9 @@ namespace Spotify_Alarm
         playListLabel.AutoSize = false;
         playListLabel.TextAlign = ContentAlignment.MiddleLeft;
         playListLabel.Dock = DockStyle.Fill;
+        playListLabel.MouseHover += PlayListLabel_MouseHover;
+        playListLabel.MouseLeave += PlayListLabel_MouseLeave;
+        playListLabel.Click += PlayListLabel_Click;
 
         songPanel.Controls.Add(playListLabel);
 
@@ -150,6 +160,27 @@ namespace Spotify_Alarm
       }
 
       return parentPanel;
+    }
+
+    private void PlayListLabel_Click(object sender, EventArgs e)
+    {
+      Label label = sender as Label;
+      comboBoxLabel.Text = label.Text;
+      playListDropDown.Visible = false;
+    }
+
+    private void PlayListLabel_MouseLeave(object sender, EventArgs e)
+    {
+
+      Label button = sender as Label;
+      button.BackColor = LGray;
+    }
+
+    private void PlayListLabel_MouseHover(object sender, EventArgs e)
+    {
+
+      Label button = sender as Label;
+      button.BackColor = Green;
     }
   }
 }
