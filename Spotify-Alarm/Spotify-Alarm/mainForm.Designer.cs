@@ -35,6 +35,12 @@
       this.LargeTitleLabel = new System.Windows.Forms.Label();
       this.AlarmPanel = new System.Windows.Forms.Panel();
       this.alarmDataPanel = new System.Windows.Forms.Panel();
+      this.repeatingComboBoxPanel = new System.Windows.Forms.Panel();
+      this.dayComboBoxLabel = new System.Windows.Forms.Label();
+      this.repeatingDivider = new System.Windows.Forms.Panel();
+      this.panel3 = new System.Windows.Forms.Panel();
+      this.daysDropDownLabel = new System.Windows.Forms.Label();
+      this.repeatLabel = new System.Windows.Forms.Label();
       this.comboBoxPanel = new System.Windows.Forms.Panel();
       this.comboBoxLabel = new System.Windows.Forms.Label();
       this.playListDividerPanel = new System.Windows.Forms.Panel();
@@ -46,6 +52,8 @@
       this.titleBarPanel.SuspendLayout();
       this.largeTitleBarPanel.SuspendLayout();
       this.alarmDataPanel.SuspendLayout();
+      this.repeatingComboBoxPanel.SuspendLayout();
+      this.panel3.SuspendLayout();
       this.comboBoxPanel.SuspendLayout();
       this.downButtonPanel.SuspendLayout();
       this.SuspendLayout();
@@ -118,6 +126,8 @@
       // alarmDataPanel
       // 
       this.alarmDataPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+      this.alarmDataPanel.Controls.Add(this.repeatingComboBoxPanel);
+      this.alarmDataPanel.Controls.Add(this.repeatLabel);
       this.alarmDataPanel.Controls.Add(this.comboBoxPanel);
       this.alarmDataPanel.Controls.Add(this.playListLabel);
       this.alarmDataPanel.Controls.Add(this.textBox1);
@@ -127,6 +137,69 @@
       this.alarmDataPanel.Name = "alarmDataPanel";
       this.alarmDataPanel.Size = new System.Drawing.Size(839, 513);
       this.alarmDataPanel.TabIndex = 3;
+      // 
+      // repeatingComboBoxPanel
+      // 
+      this.repeatingComboBoxPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(56)))), ((int)(((byte)(60)))));
+      this.repeatingComboBoxPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.repeatingComboBoxPanel.Controls.Add(this.dayComboBoxLabel);
+      this.repeatingComboBoxPanel.Controls.Add(this.repeatingDivider);
+      this.repeatingComboBoxPanel.Controls.Add(this.panel3);
+      this.repeatingComboBoxPanel.Location = new System.Drawing.Point(380, 130);
+      this.repeatingComboBoxPanel.Name = "repeatingComboBoxPanel";
+      this.repeatingComboBoxPanel.Size = new System.Drawing.Size(305, 29);
+      this.repeatingComboBoxPanel.TabIndex = 5;
+      // 
+      // dayComboBoxLabel
+      // 
+      this.dayComboBoxLabel.AutoSize = true;
+      this.dayComboBoxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.dayComboBoxLabel.ForeColor = System.Drawing.SystemColors.ControlLight;
+      this.dayComboBoxLabel.Location = new System.Drawing.Point(-2, 3);
+      this.dayComboBoxLabel.Name = "dayComboBoxLabel";
+      this.dayComboBoxLabel.Size = new System.Drawing.Size(80, 20);
+      this.dayComboBoxLabel.TabIndex = 2;
+      this.dayComboBoxLabel.Text = "select day";
+      // 
+      // repeatingDivider
+      // 
+      this.repeatingDivider.Dock = System.Windows.Forms.DockStyle.Right;
+      this.repeatingDivider.Location = new System.Drawing.Point(274, 0);
+      this.repeatingDivider.Name = "repeatingDivider";
+      this.repeatingDivider.Size = new System.Drawing.Size(1, 27);
+      this.repeatingDivider.TabIndex = 1;
+      // 
+      // panel3
+      // 
+      this.panel3.Controls.Add(this.daysDropDownLabel);
+      this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
+      this.panel3.Location = new System.Drawing.Point(275, 0);
+      this.panel3.Name = "panel3";
+      this.panel3.Size = new System.Drawing.Size(28, 27);
+      this.panel3.TabIndex = 0;
+      // 
+      // daysDropDownLabel
+      // 
+      this.daysDropDownLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.daysDropDownLabel.ForeColor = System.Drawing.SystemColors.Info;
+      this.daysDropDownLabel.Location = new System.Drawing.Point(0, 0);
+      this.daysDropDownLabel.Name = "daysDropDownLabel";
+      this.daysDropDownLabel.Size = new System.Drawing.Size(28, 27);
+      this.daysDropDownLabel.TabIndex = 0;
+      this.daysDropDownLabel.Text = ">";
+      this.daysDropDownLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      this.daysDropDownLabel.Click += new System.EventHandler(this.DaysDropDownLabel_Click);
+      // 
+      // repeatLabel
+      // 
+      this.repeatLabel.AutoSize = true;
+      this.repeatLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.repeatLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+      this.repeatLabel.Location = new System.Drawing.Point(178, 130);
+      this.repeatLabel.Name = "repeatLabel";
+      this.repeatLabel.Size = new System.Drawing.Size(124, 29);
+      this.repeatLabel.TabIndex = 4;
+      this.repeatLabel.Text = "Repeating";
       // 
       // comboBoxPanel
       // 
@@ -145,7 +218,7 @@
       this.comboBoxLabel.AutoSize = true;
       this.comboBoxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.comboBoxLabel.ForeColor = System.Drawing.SystemColors.ControlLight;
-      this.comboBoxLabel.Location = new System.Drawing.Point(3, 3);
+      this.comboBoxLabel.Location = new System.Drawing.Point(-2, 3);
       this.comboBoxLabel.Name = "comboBoxLabel";
       this.comboBoxLabel.Size = new System.Drawing.Size(102, 20);
       this.comboBoxLabel.TabIndex = 2;
@@ -197,8 +270,8 @@
       // 
       this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(56)))), ((int)(((byte)(60)))));
       this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.textBox1.ForeColor = System.Drawing.SystemColors.Info;
+      this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.textBox1.ForeColor = System.Drawing.SystemColors.Desktop;
       this.textBox1.Location = new System.Drawing.Point(380, 32);
       this.textBox1.Multiline = true;
       this.textBox1.Name = "textBox1";
@@ -233,6 +306,9 @@
       this.largeTitleBarPanel.PerformLayout();
       this.alarmDataPanel.ResumeLayout(false);
       this.alarmDataPanel.PerformLayout();
+      this.repeatingComboBoxPanel.ResumeLayout(false);
+      this.repeatingComboBoxPanel.PerformLayout();
+      this.panel3.ResumeLayout(false);
       this.comboBoxPanel.ResumeLayout(false);
       this.comboBoxPanel.PerformLayout();
       this.downButtonPanel.ResumeLayout(false);
@@ -257,6 +333,12 @@
     private System.Windows.Forms.Label downLabel;
     private System.Windows.Forms.Panel playListDividerPanel;
     private System.Windows.Forms.Label comboBoxLabel;
+    private System.Windows.Forms.Panel repeatingComboBoxPanel;
+    private System.Windows.Forms.Label dayComboBoxLabel;
+    private System.Windows.Forms.Panel repeatingDivider;
+    private System.Windows.Forms.Panel panel3;
+    private System.Windows.Forms.Label daysDropDownLabel;
+    private System.Windows.Forms.Label repeatLabel;
   }
 }
 

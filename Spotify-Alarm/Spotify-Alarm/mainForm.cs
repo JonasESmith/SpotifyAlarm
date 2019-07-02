@@ -29,7 +29,8 @@ namespace Spotify_Alarm
 
     public void LoadFormStyles()
     {
-      playListDividerPanel.BackColor = Color.FromArgb(100, 100, 100);
+      playListDividerPanel.BackColor = LLGray;
+      repeatingDivider.BackColor     = LLGray;
     }
 
     [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -82,10 +83,11 @@ namespace Spotify_Alarm
     #endregion
 
 
-    Color Green = Color.FromArgb(30, 215, 96);
+    Color Gray     = Color.FromArgb(50, 53, 57);
+    Color Green    = Color.FromArgb(30, 215, 96);
+    Color LGray    = Color.FromArgb(44, 47, 51);
+    Color LLGray   = Color.FromArgb(100, 100, 100);
     Color DarkGray = Color.FromArgb(56, 59, 63);
-    Color Gray = Color.FromArgb(50, 53, 57);
-    Color LGray = Color.FromArgb(44, 47, 51);
     private void DownLabel_MouseHover(object sender, EventArgs e)
     {
 
@@ -107,14 +109,19 @@ namespace Spotify_Alarm
         playListDropDown = SpawnDropDownList();
         playListDropDown.Visible = true;
         downLabel.Text = "<";
+        repeatingComboBoxPanel.Visible = false;
       }
       else if(playListDropDown.Visible)
       {
+
+        repeatingComboBoxPanel.Visible = true;
         downLabel.Text = ">";
         playListDropDown.Visible = false;
       }
       else
       {
+
+        repeatingComboBoxPanel.Visible = false;
         downLabel.Text = "<";
         playListDropDown.Visible = true;
       }
@@ -164,6 +171,7 @@ namespace Spotify_Alarm
 
     private void PlayListLabel_Click(object sender, EventArgs e)
     {
+      repeatingComboBoxPanel.Visible = true;
       Label label = sender as Label;
       comboBoxLabel.Text = label.Text;
       playListDropDown.Visible = false;
@@ -181,6 +189,11 @@ namespace Spotify_Alarm
 
       Label button = sender as Label;
       button.BackColor = Green;
+    }
+
+    private void DaysDropDownLabel_Click(object sender, EventArgs e)
+    {
+
     }
   }
 }
