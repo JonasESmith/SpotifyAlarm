@@ -11,13 +11,25 @@ using System.Windows.Forms;
 
 namespace Spotify_Alarm
 {
+
   public partial class mainForm : Form
   {
+
+    public List<string> playList = new List<string>(new string[] {"THIS IS A PLAYLIST", "THIS IS Also a PLAYLIST", "THIS IS TOOO" });
+
+    public Panel playListDropDown;
     public mainForm()
     {
       InitializeComponent();
       this.FormBorderStyle = FormBorderStyle.None;
       Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 10, 10));
+
+      LoadFormStyles();
+    }
+
+    public void LoadFormStyles()
+    {
+      playListDividerPanel.BackColor = Color.FromArgb(100, 100, 100);
     }
 
     [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -68,5 +80,76 @@ namespace Spotify_Alarm
     }
 
     #endregion
+
+
+    Color DarkGray = Color.FromArgb(56, 59, 63);
+    Color Gray = Color.FromArgb(50, 53, 57);
+    private void DownLabel_MouseHover(object sender, EventArgs e)
+    {
+      downButtonPanel.BackColor = Gray;
+    }
+
+    private void DownLabel_MouseLeave(object sender, EventArgs e)
+    {
+      downButtonPanel.BackColor = DarkGray;
+    }
+
+    private void DownLabel_Click(object sender, EventArgs e)
+    {
+      if (playListDropDown == null)
+      {
+
+        playListDropDown = SpawnDropDownList();
+        playListDropDown.Visible = true;
+      }
+      else if(playListDropDown.Visible)
+      {
+
+        playListDropDown.Visible = false;
+      }
+      else
+      {
+
+        playListDropDown.Visible = true;
+      }
+
+      alarmDataPanel.Controls.Add(playListDropDown);
+    }
+
+    public Panel SpawnDropDownList()
+    {
+      Panel parentPanel = new Panel();
+      parentPanel.Width = comboBoxPanel.Width;
+      if (playList.Count > 0)
+        parentPanel.Height = comboBoxPanel.Height * playList.Count;
+      else
+        parentPanel.Height = comboBoxPanel.Height;
+      parentPanel.BorderStyle = BorderStyle.FixedSingle;
+      parentPanel.Location = new Point(
+          comboBoxPanel.Location.X,
+          comboBoxPanel.Location.Y + comboBoxPanel.Height
+          );
+
+      for(int i = 0; i < playList.Count; i++)
+      {
+        Panel songPanel = new Panel();
+        songPanel.Dock = DockStyle.Top;
+        songPanel.Width = comboBoxPanel.Width;
+        songPanel.Height = comboBoxPanel.Height;
+
+        Label playListLabel = new Label();
+        playListLabel.Text = playList[i];
+        playListLabel.ForeColor = Color.White;
+        playListLabel.AutoSize = false;
+        playListLabel.TextAlign = ContentAlignment.MiddleLeft;
+        playListLabel.Dock = DockStyle.Fill;
+
+        songPanel.Controls.Add(playListLabel);
+
+        parentPanel.Controls.Add(songPanel);
+      }
+
+      return parentPanel;
+    }
   }
 }
