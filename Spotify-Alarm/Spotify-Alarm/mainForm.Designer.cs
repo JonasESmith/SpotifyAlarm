@@ -189,6 +189,8 @@
       this.daysDropDownLabel.Text = ">";
       this.daysDropDownLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       this.daysDropDownLabel.Click += new System.EventHandler(this.DaysDropDownLabel_Click);
+      this.daysDropDownLabel.MouseLeave += new System.EventHandler(this.DownLabel_MouseLeave);
+      this.daysDropDownLabel.MouseHover += new System.EventHandler(this.DownLabel_MouseHover);
       // 
       // repeatLabel
       // 

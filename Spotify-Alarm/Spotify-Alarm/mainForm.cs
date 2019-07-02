@@ -16,8 +16,11 @@ namespace Spotify_Alarm
   {
 
     public List<string> playList = new List<string>(new string[] {"THIS IS A PLAYLIST", "THIS IS Also a PLAYLIST", "THIS IS TOOO", "THIS IS A PLAYLIST", "THIS IS A PLAYLIST", "THIS IS A PLAYLIST", "THIS IS A PLAYLIST" });
+    public List<string> dayList = new List<string>(new string[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday" ,"Saturday", "Sunday" });
+
 
     public Panel playListDropDown;
+    public Panel dayListDropDown;
     public mainForm()
     {
       InitializeComponent();
@@ -91,13 +94,15 @@ namespace Spotify_Alarm
     private void DownLabel_MouseHover(object sender, EventArgs e)
     {
 
-      downButtonPanel.BackColor = Gray;
+      Label button = sender as Label;
+      button.BackColor = Gray;
     }
 
     private void DownLabel_MouseLeave(object sender, EventArgs e)
     {
 
-      downButtonPanel.BackColor = DarkGray;
+      Label button = sender as Label;
+      button.BackColor = DarkGray;
     }
 
     private void DownLabel_Click(object sender, EventArgs e)
@@ -131,7 +136,6 @@ namespace Spotify_Alarm
 
     public Panel SpawnDropDownList()
     {
-
       Panel parentPanel = new Panel();
       parentPanel.Width = comboBoxPanel.Width;
       if (playList.Count > 0)
@@ -169,6 +173,54 @@ namespace Spotify_Alarm
       return parentPanel;
     }
 
+    public Panel SpawnDropDownList(List<string> dayList)
+    {
+      dayList.Reverse();
+
+      Panel parentPanel = new Panel();
+      parentPanel.Width = comboBoxPanel.Width;
+      if (dayList.Count > 0)
+        parentPanel.Height = comboBoxPanel.Height * dayList.Count;
+      else
+        parentPanel.Height = comboBoxPanel.Height;
+      parentPanel.BorderStyle = BorderStyle.FixedSingle;
+      parentPanel.Location = new Point(
+          repeatingComboBoxPanel.Location.X,
+          repeatingComboBoxPanel.Location.Y + comboBoxPanel.Height
+          );
+
+      for (int i = 0; i < dayList.Count; i++)
+      {
+        Panel songPanel = new Panel();
+        songPanel.Dock = DockStyle.Top;
+        songPanel.Width = comboBoxPanel.Width;
+        songPanel.Height = comboBoxPanel.Height;
+
+        Label playListLabel = new Label();
+        playListLabel.Text = dayList[i];
+        playListLabel.ForeColor = Color.White;
+        playListLabel.AutoSize = false;
+        playListLabel.TextAlign = ContentAlignment.MiddleLeft;
+        playListLabel.Dock = DockStyle.Fill;
+        playListLabel.MouseHover += PlayListLabel_MouseHover;
+        playListLabel.MouseLeave += PlayListLabel_MouseLeave;
+        playListLabel.Click += PlayListLabel_CheckBox;
+
+        songPanel.Controls.Add(playListLabel);
+
+        parentPanel.Controls.Add(songPanel);
+      }
+
+      return parentPanel;
+    }
+
+    private void PlayListLabel_CheckBox(object sender, EventArgs e)
+    {
+
+
+
+    }
+
     private void PlayListLabel_Click(object sender, EventArgs e)
     {
       repeatingComboBoxPanel.Visible = true;
@@ -194,6 +246,27 @@ namespace Spotify_Alarm
     private void DaysDropDownLabel_Click(object sender, EventArgs e)
     {
 
+      if (dayListDropDown == null)
+      {
+
+        dayListDropDown = SpawnDropDownList(dayList);
+        dayListDropDown.Visible = true;
+        daysDropDownLabel.Text = "<";
+      }
+      else if (dayListDropDown.Visible)
+      {
+
+        daysDropDownLabel.Text = ">";
+        dayListDropDown.Visible = false;
+      }
+      else
+      {
+
+        daysDropDownLabel.Text = "<";
+        dayListDropDown.Visible = true;
+      }
+
+      alarmDataPanel.Controls.Add(dayListDropDown);
     }
   }
 }
