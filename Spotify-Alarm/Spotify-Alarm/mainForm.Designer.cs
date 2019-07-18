@@ -80,6 +80,9 @@
       this.label1.TabIndex = 1;
       this.label1.Text = "-";
       this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      this.label1.Click += new System.EventHandler(this.Label1_Click);
+      this.label1.MouseLeave += new System.EventHandler(this.Label1_MouseLeave);
+      this.label1.MouseHover += new System.EventHandler(this.Label1_MouseHover);
       // 
       // closeButtonLabel
       // 
@@ -91,6 +94,8 @@
       this.closeButtonLabel.Text = "X";
       this.closeButtonLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       this.closeButtonLabel.Click += new System.EventHandler(this.CloseButtonLabel_Click);
+      this.closeButtonLabel.MouseLeave += new System.EventHandler(this.Label1_MouseLeave);
+      this.closeButtonLabel.MouseHover += new System.EventHandler(this.Label1_MouseHover);
       // 
       // largeTitleBarPanel
       // 

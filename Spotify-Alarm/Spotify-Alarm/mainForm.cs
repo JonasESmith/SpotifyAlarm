@@ -88,6 +88,7 @@ namespace Spotify_Alarm
 
     Color Gray     = Color.FromArgb(50, 53, 57);
     Color Green    = Color.FromArgb(30, 215, 96);
+    Color DGreen   = Color.FromArgb(15, 200, 80);
     Color LGray    = Color.FromArgb(44, 47, 51);
     Color LLGray   = Color.FromArgb(100, 100, 100);
     Color DarkGray = Color.FromArgb(56, 59, 63);
@@ -107,6 +108,8 @@ namespace Spotify_Alarm
 
     private void DownLabel_Click(object sender, EventArgs e)
     {
+      if(dayListDropDown != null)
+        dayListDropDown.Visible = false;
 
       if (playListDropDown == null)
       {
@@ -179,6 +182,7 @@ namespace Spotify_Alarm
 
       Panel parentPanel = new Panel();
       parentPanel.Width = comboBoxPanel.Width;
+      parentPanel.MouseLeave += ParentPanel_MouseLeave;
       if (dayList.Count > 0)
         parentPanel.Height = comboBoxPanel.Height * dayList.Count;
       else
@@ -206,13 +210,25 @@ namespace Spotify_Alarm
         playListLabel.MouseLeave += PlayListLabel_MouseLeave;
         playListLabel.Click += PlayListLabel_CheckBox;
 
-        songPanel.Controls.Add(playListLabel);
+        CheckBox checkbox = new CheckBox();
+        checkbox.Dock = DockStyle.Fill;
+        checkbox.TextAlign = ContentAlignment.MiddleLeft;
+        checkbox.AutoSize = true;
+        checkbox.Text = dayList[i];
+        checkbox.MouseHover += PlayListLabel_MouseHover;
+        checkbox.MouseLeave += PlayListLabel_MouseLeave;
+        checkbox.ForeColor = Color.White;
+
+        songPanel.Controls.Add(checkbox);
+        // songPanel.Controls.Add(playListLabel);
 
         parentPanel.Controls.Add(songPanel);
       }
 
       return parentPanel;
     }
+
+    private void ParentPanel_MouseLeave(object sender, EventArgs e) => dayListDropDown.Visible = false;
 
     private void PlayListLabel_CheckBox(object sender, EventArgs e)
     {
@@ -231,16 +247,27 @@ namespace Spotify_Alarm
 
     private void PlayListLabel_MouseLeave(object sender, EventArgs e)
     {
+      if (sender is Label) {
+        Label button = sender as Label;
+        button.BackColor = LGray;
+      }
+      else if (sender is CheckBox) {
+        CheckBox button = sender as CheckBox;
+        button.BackColor = LGray;
+      }
 
-      Label button = sender as Label;
-      button.BackColor = LGray;
     }
 
     private void PlayListLabel_MouseHover(object sender, EventArgs e)
     {
-
-      Label button = sender as Label;
-      button.BackColor = Green;
+      if(sender is Label) {
+        Label button = sender as Label;
+        button.BackColor = Green;
+      }
+      else if (sender is CheckBox) {
+        CheckBox button = sender as CheckBox;
+        button.BackColor = Green;
+      }
     }
 
     private void DaysDropDownLabel_Click(object sender, EventArgs e)
@@ -268,5 +295,21 @@ namespace Spotify_Alarm
 
       alarmDataPanel.Controls.Add(dayListDropDown);
     }
+
+    private void Label1_MouseHover(object sender, EventArgs e)
+    {
+      Label button = sender as Label;
+
+      button.BackColor = DGreen;
+    }
+
+    private void Label1_MouseLeave(object sender, EventArgs e)
+    {
+      Label button = sender as Label;
+
+      button.BackColor = Green;
+    }
+
+    private void Label1_Click(object sender, EventArgs e) => this.WindowState = FormWindowState.Minimized;
   }
 }
