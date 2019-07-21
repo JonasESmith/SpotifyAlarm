@@ -27,7 +27,6 @@ namespace Spotify_Alarm
       this.FormBorderStyle = FormBorderStyle.None;
       Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 10, 10));
       InitCheckBoxList();
-
       LoadFormStyles();
     }
 
@@ -100,14 +99,14 @@ namespace Spotify_Alarm
     private void DownLabel_MouseHover(object sender, EventArgs e)
     {
 
-      Label button = sender as Label;
+      Label button     = sender as Label;
       button.BackColor = Gray;
     }
 
     private void DownLabel_MouseLeave(object sender, EventArgs e)
     {
 
-      Label button = sender as Label;
+      Label button     = sender as Label;
       button.BackColor = DarkGray;
     }
 
@@ -116,27 +115,24 @@ namespace Spotify_Alarm
       if(dayListDropDown != null)
         dayListDropDown.Visible = false;
 
-      if (playListDropDown == null)
-      {
+      if (playListDropDown == null) {
 
-        playListDropDown = SpawnDropDownList();
-        playListDropDown.Visible = true;
-        downLabel.Text = "<";
+        playListDropDown               = SpawnDropDownList();
+        playListDropDown.Visible       = true;
+        downLabel.Text                 = "<";
         repeatingComboBoxPanel.Visible = false;
       }
-      else if(playListDropDown.Visible)
-      {
+      else if(playListDropDown.Visible) {
 
         repeatingComboBoxPanel.Visible = true;
-        downLabel.Text = ">";
-        playListDropDown.Visible = false;
+        downLabel.Text                 = ">";
+        playListDropDown.Visible       = false;
       }
-      else
-      {
+      else {
 
         repeatingComboBoxPanel.Visible = false;
-        downLabel.Text = "<";
-        playListDropDown.Visible = true;
+        downLabel.Text                 = "<";
+        playListDropDown.Visible       = true;
       }
 
       alarmDataPanel.Controls.Add(playListDropDown);
@@ -146,35 +142,37 @@ namespace Spotify_Alarm
     {
       Panel parentPanel = new Panel();
       parentPanel.Width = comboBoxPanel.Width;
+
       if (playList.Count > 0)
         parentPanel.Height = comboBoxPanel.Height * playList.Count;
       else
         parentPanel.Height = comboBoxPanel.Height;
+
       parentPanel.BorderStyle = BorderStyle.FixedSingle;
-      parentPanel.Location = new Point(
+      parentPanel.Location    = new Point(
           comboBoxPanel.Location.X,
           comboBoxPanel.Location.Y + comboBoxPanel.Height
           );
 
-      for(int i = 0; i < playList.Count; i++)
-      {
-        Panel songPanel = new Panel();
-        songPanel.Dock = DockStyle.Top;
-        songPanel.Width = comboBoxPanel.Width;
+      for(int i = 0; i < playList.Count; i++) {
+        Panel songPanel  = new Panel();
+        songPanel.Dock   = DockStyle.Top;
+        songPanel.Width  = comboBoxPanel.Width;
         songPanel.Height = comboBoxPanel.Height;
 
-        Label playListLabel = new Label();
-        playListLabel.Text = playList[i];
-        playListLabel.ForeColor = Color.White;
-        playListLabel.AutoSize = false;
-        playListLabel.TextAlign = ContentAlignment.MiddleLeft;
-        playListLabel.Dock = DockStyle.Fill;
+
+        Label playListLabel       = new Label();
+        playListLabel.Text        = playList[i];
+        playListLabel.ForeColor   = Color.White;
+        playListLabel.AutoSize    = false;
+        playListLabel.TextAlign   = ContentAlignment.MiddleLeft;
+        playListLabel.Dock        = DockStyle.Fill;
         playListLabel.MouseHover += PlayListLabel_MouseHover;
         playListLabel.MouseLeave += PlayListLabel_MouseLeave;
-        playListLabel.Click += PlayListLabel_Click;
+        playListLabel.Click      += PlayListLabel_Click;
+
 
         songPanel.Controls.Add(playListLabel);
-
         parentPanel.Controls.Add(songPanel);
       }
 
@@ -185,15 +183,17 @@ namespace Spotify_Alarm
     {
       dayList.Reverse();
 
-      Panel parentPanel = new Panel();
-      parentPanel.Width = comboBoxPanel.Width;
+      Panel parentPanel       = new Panel();
+      parentPanel.Width       = comboBoxPanel.Width;
       parentPanel.MouseLeave += ParentPanel_MouseLeave;
+
       if (dayList.Count > 0)
         parentPanel.Height = comboBoxPanel.Height * dayList.Count;
       else
         parentPanel.Height = comboBoxPanel.Height;
+
       parentPanel.BorderStyle = BorderStyle.FixedSingle;
-      parentPanel.Location = new Point(
+      parentPanel.Location    = new Point(
           repeatingComboBoxPanel.Location.X,
           repeatingComboBoxPanel.Location.Y + comboBoxPanel.Height
           );
@@ -212,12 +212,9 @@ namespace Spotify_Alarm
         checkbox.Text        = dayList[i];
         checkbox.ForeColor   = Color.White;
         checkbox.Click      += Checkbox_Click;
-
-        checkboxList[i] = checkbox;
-
+        checkboxList[i]      = checkbox;
+        
         songPanel.Controls.Add(checkbox);
-        // songPanel.Controls.Add(playListLabel);
-
         parentPanel.Controls.Add(songPanel);
       }
 
@@ -242,13 +239,6 @@ namespace Spotify_Alarm
 
     private void ParentPanel_MouseLeave(object sender, EventArgs e) => dayListDropDown.Visible = false;
 
-    private void PlayListLabel_CheckBox(object sender, EventArgs e)
-    {
-
-
-
-    }
-
     private void PlayListLabel_Click(object sender, EventArgs e)
     {
       repeatingComboBoxPanel.Visible = true;
@@ -267,7 +257,6 @@ namespace Spotify_Alarm
         CheckBox button = sender as CheckBox;
         button.BackColor = LGray;
       }
-
     }
 
     private void PlayListLabel_MouseHover(object sender, EventArgs e)
@@ -285,21 +274,18 @@ namespace Spotify_Alarm
     private void DaysDropDownLabel_Click(object sender, EventArgs e)
     {
 
-      if (dayListDropDown == null)
-      {
+      if (dayListDropDown == null) {
 
         dayListDropDown = SpawnDayListDropDown(dayList);
         dayListDropDown.Visible = true;
         daysDropDownLabel.Text = "<";
       }
-      else if (dayListDropDown.Visible)
-      {
+      else if (dayListDropDown.Visible) {
 
         daysDropDownLabel.Text = ">";
         dayListDropDown.Visible = false;
       }
-      else
-      {
+      else {
 
         daysDropDownLabel.Text = "<";
         dayListDropDown.Visible = true;
@@ -310,15 +296,13 @@ namespace Spotify_Alarm
 
     private void Label1_MouseHover(object sender, EventArgs e)
     {
-      Label button = sender as Label;
-
+      Label button     = sender as Label;
       button.BackColor = DGreen;
     }
 
     private void Label1_MouseLeave(object sender, EventArgs e)
     {
-      Label button = sender as Label;
-
+      Label button     = sender as Label;
       button.BackColor = Green;
     }
 
