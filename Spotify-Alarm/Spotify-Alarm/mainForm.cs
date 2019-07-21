@@ -1,6 +1,6 @@
 ﻿/// Programmer : Jonas Smith
 /// Purpose    : This is a newer form for the spotify-Alarm application I have created.
-/// 
+/// Notes      : This is a tiny change to test if the commit has come through
 
 
 using System;
