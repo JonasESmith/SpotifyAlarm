@@ -14,9 +14,9 @@ namespace Spotify_Alarm
 
   public partial class mainForm : Form
   {
-
-    public List<string> playList = new List<string>(new string[] {"THIS IS A PLAYLIST", "THIS IS Also a PLAYLIST", "THIS IS TOOO", "THIS IS A PLAYLIST", "THIS IS A PLAYLIST", "THIS IS A PLAYLIST", "THIS IS A PLAYLIST" });
-    public List<string> dayList = new List<string>(new string[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday" ,"Saturday", "Sunday" });
+    public List<CheckBox> checkboxList = new List<CheckBox>();
+    public List<string>   playList     = new List<string>(new string[] {"THIS IS A PLAYLIST", "THIS IS Also a PLAYLIST", "THIS IS TOOO", "THIS IS A PLAYLIST", "THIS IS A PLAYLIST", "THIS IS A PLAYLIST", "THIS IS A PLAYLIST" });
+    public List<string>   dayList      = new List<string>(new string[] {"Everyday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" ,"Saturday", "Sunday" });
 
 
     public Panel playListDropDown;
@@ -26,6 +26,7 @@ namespace Spotify_Alarm
       InitializeComponent();
       this.FormBorderStyle = FormBorderStyle.None;
       Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 10, 10));
+      InitCheckBoxList();
 
       LoadFormStyles();
     }
@@ -35,6 +36,8 @@ namespace Spotify_Alarm
       playListDividerPanel.BackColor = LLGray;
       repeatingDivider.BackColor     = LLGray;
     }
+
+    public void InitCheckBoxList() { for (int i = 0; i < dayList.Count; i++) checkboxList.Add(new CheckBox()); }
 
     [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
     private static extern IntPtr CreateRoundRectRgn
@@ -92,6 +95,8 @@ namespace Spotify_Alarm
     Color LGray    = Color.FromArgb(44, 47, 51);
     Color LLGray   = Color.FromArgb(100, 100, 100);
     Color DarkGray = Color.FromArgb(56, 59, 63);
+    Color White    = Color.White;
+    Color Black    = Color.Black;
     private void DownLabel_MouseHover(object sender, EventArgs e)
     {
 
@@ -176,7 +181,7 @@ namespace Spotify_Alarm
       return parentPanel;
     }
 
-    public Panel SpawnDropDownList(List<string> dayList)
+    public Panel SpawnDayListDropDown(List<string> dayList)
     {
       dayList.Reverse();
 
@@ -195,29 +200,20 @@ namespace Spotify_Alarm
 
       for (int i = 0; i < dayList.Count; i++)
       {
-        Panel songPanel = new Panel();
-        songPanel.Dock = DockStyle.Top;
-        songPanel.Width = comboBoxPanel.Width;
+        Panel songPanel  = new Panel();
+        songPanel.Dock   = DockStyle.Top;
+        songPanel.Width  = comboBoxPanel.Width;
         songPanel.Height = comboBoxPanel.Height;
 
-        Label playListLabel = new Label();
-        playListLabel.Text = dayList[i];
-        playListLabel.ForeColor = Color.White;
-        playListLabel.AutoSize = false;
-        playListLabel.TextAlign = ContentAlignment.MiddleLeft;
-        playListLabel.Dock = DockStyle.Fill;
-        playListLabel.MouseHover += PlayListLabel_MouseHover;
-        playListLabel.MouseLeave += PlayListLabel_MouseLeave;
-        playListLabel.Click += PlayListLabel_CheckBox;
+        CheckBox checkbox    = new CheckBox();
+        checkbox.Dock        = DockStyle.Fill;
+        checkbox.TextAlign   = ContentAlignment.MiddleLeft;
+        checkbox.AutoSize    = true;
+        checkbox.Text        = dayList[i];
+        checkbox.ForeColor   = Color.White;
+        checkbox.Click      += Checkbox_Click;
 
-        CheckBox checkbox = new CheckBox();
-        checkbox.Dock = DockStyle.Fill;
-        checkbox.TextAlign = ContentAlignment.MiddleLeft;
-        checkbox.AutoSize = true;
-        checkbox.Text = dayList[i];
-        checkbox.MouseHover += PlayListLabel_MouseHover;
-        checkbox.MouseLeave += PlayListLabel_MouseLeave;
-        checkbox.ForeColor = Color.White;
+        checkboxList[i] = checkbox;
 
         songPanel.Controls.Add(checkbox);
         // songPanel.Controls.Add(playListLabel);
@@ -226,6 +222,22 @@ namespace Spotify_Alarm
       }
 
       return parentPanel;
+    }
+
+    private void Checkbox_Click(object sender, EventArgs e)
+    {
+      CheckBox check = sender as CheckBox;
+
+      if (check.Checked) {
+        check.Checked   = true;
+        check.BackColor = Green;
+        check.ForeColor = Black;
+      }
+      else {
+        check.Checked   = false;
+        check.BackColor = LGray;
+        check.ForeColor = White;
+      }
     }
 
     private void ParentPanel_MouseLeave(object sender, EventArgs e) => dayListDropDown.Visible = false;
@@ -276,7 +288,7 @@ namespace Spotify_Alarm
       if (dayListDropDown == null)
       {
 
-        dayListDropDown = SpawnDropDownList(dayList);
+        dayListDropDown = SpawnDayListDropDown(dayList);
         dayListDropDown.Visible = true;
         daysDropDownLabel.Text = "<";
       }

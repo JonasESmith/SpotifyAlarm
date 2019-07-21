@@ -157,14 +157,16 @@
       // 
       // dayComboBoxLabel
       // 
-      this.dayComboBoxLabel.AutoSize = true;
+      this.dayComboBoxLabel.Dock = System.Windows.Forms.DockStyle.Left;
       this.dayComboBoxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.dayComboBoxLabel.ForeColor = System.Drawing.SystemColors.ControlLight;
-      this.dayComboBoxLabel.Location = new System.Drawing.Point(-2, 3);
+      this.dayComboBoxLabel.Location = new System.Drawing.Point(0, 0);
       this.dayComboBoxLabel.Name = "dayComboBoxLabel";
-      this.dayComboBoxLabel.Size = new System.Drawing.Size(80, 20);
+      this.dayComboBoxLabel.Size = new System.Drawing.Size(270, 27);
       this.dayComboBoxLabel.TabIndex = 2;
       this.dayComboBoxLabel.Text = "select day";
+      this.dayComboBoxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.dayComboBoxLabel.Click += new System.EventHandler(this.DaysDropDownLabel_Click);
       // 
       // repeatingDivider
       // 
@@ -222,14 +224,16 @@
       // 
       // comboBoxLabel
       // 
-      this.comboBoxLabel.AutoSize = true;
+      this.comboBoxLabel.Dock = System.Windows.Forms.DockStyle.Left;
       this.comboBoxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.comboBoxLabel.ForeColor = System.Drawing.SystemColors.ControlLight;
-      this.comboBoxLabel.Location = new System.Drawing.Point(-2, 3);
+      this.comboBoxLabel.Location = new System.Drawing.Point(0, 0);
       this.comboBoxLabel.Name = "comboBoxLabel";
-      this.comboBoxLabel.Size = new System.Drawing.Size(102, 20);
+      this.comboBoxLabel.Size = new System.Drawing.Size(270, 27);
       this.comboBoxLabel.TabIndex = 2;
       this.comboBoxLabel.Text = "select playlist";
+      this.comboBoxLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.comboBoxLabel.Click += new System.EventHandler(this.DownLabel_Click);
       // 
       // playListDividerPanel
       // 
@@ -314,10 +318,8 @@
       this.alarmDataPanel.ResumeLayout(false);
       this.alarmDataPanel.PerformLayout();
       this.repeatingComboBoxPanel.ResumeLayout(false);
-      this.repeatingComboBoxPanel.PerformLayout();
       this.panel3.ResumeLayout(false);
       this.comboBoxPanel.ResumeLayout(false);
-      this.comboBoxPanel.PerformLayout();
       this.downButtonPanel.ResumeLayout(false);
       this.ResumeLayout(false);
 
