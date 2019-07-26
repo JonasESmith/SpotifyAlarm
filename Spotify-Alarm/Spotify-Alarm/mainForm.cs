@@ -15,17 +15,21 @@ namespace Spotify_Alarm
   public partial class mainForm : Form
   {
     public List<CheckBox> checkboxList = new List<CheckBox>();
-    public List<string>   playList     = new List<string>(new string[] {"THIS IS A PLAYLIST", "THIS IS Also a PLAYLIST", "THIS IS TOOO", "THIS IS A PLAYLIST", "THIS IS A PLAYLIST", "THIS IS A PLAYLIST", "THIS IS A PLAYLIST" });
+    public List<string>   playList     = new List<string>(new string[] {"none", "so this doesn't work yet :)" });
     public List<string>   dayList      = new List<string>(new string[] {"Everyday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" ,"Saturday", "Sunday" });
 
 
     public Panel playListDropDown;
     public Panel dayListDropDown;
+    public Panel hourListDropDown;
+    public Panel minuteListDropDown;
+
+    bool _isNew = true;
     public mainForm()
     {
       InitializeComponent();
-      this.FormBorderStyle = FormBorderStyle.None;
-      Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 10, 10));
+      this.FormBorderStyle  =  FormBorderStyle.None;
+      Region                =  System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 10, 10));
       InitCheckBoxList();
       LoadFormStyles();
     }
@@ -34,6 +38,8 @@ namespace Spotify_Alarm
     {
       playListDividerPanel.BackColor = LLGray;
       repeatingDivider.BackColor     = LLGray;
+      panel2.BackColor               = LLGray;
+      panel5.BackColor               = LLGray;
     }
 
     public void InitCheckBoxList() { for (int i = 0; i < dayList.Count; i++) checkboxList.Add(new CheckBox()); }
@@ -88,12 +94,12 @@ namespace Spotify_Alarm
     #endregion
 
 
-    Color Gray     = Color.FromArgb(50, 53, 57);
-    Color Green    = Color.FromArgb(30, 215, 96);
-    Color DGreen   = Color.FromArgb(15, 200, 80);
-    Color LGray    = Color.FromArgb(44, 47, 51);
-    Color LLGray   = Color.FromArgb(100, 100, 100);
-    Color DarkGray = Color.FromArgb(56, 59, 63);
+    Color Gray     = Color.FromArgb( 50,  53,  57  );
+    Color Green    = Color.FromArgb( 30,  215, 96  );
+    Color DGreen   = Color.FromArgb( 15,  200, 80  );
+    Color LGray    = Color.FromArgb( 44,  47,  51  );
+    Color LLGray   = Color.FromArgb( 100, 100, 100 );
+    Color DarkGray = Color.FromArgb( 56,  59,  63  );
     Color White    = Color.White;
     Color Black    = Color.Black;
     private void DownLabel_MouseHover(object sender, EventArgs e)
@@ -245,6 +251,11 @@ namespace Spotify_Alarm
       Label label = sender as Label;
       comboBoxLabel.Text = label.Text;
       playListDropDown.Visible = false;
+
+      //if(playListDropDown.Height > repeatingComboBoxPanel.Height * 3)
+      //{
+      //  hourComboBoxPanel.Visible = false;
+      //}
     }
 
     private void PlayListLabel_MouseLeave(object sender, EventArgs e)
@@ -279,16 +290,24 @@ namespace Spotify_Alarm
         dayListDropDown = SpawnDayListDropDown(dayList);
         dayListDropDown.Visible = true;
         daysDropDownLabel.Text = "<";
+
+        hourComboBoxPanel.Visible = false;
+        MinuteComboBox.Visible = false;
       }
       else if (dayListDropDown.Visible) {
 
         daysDropDownLabel.Text = ">";
         dayListDropDown.Visible = false;
+
+        hourComboBoxPanel.Visible = true;
+        MinuteComboBox.Visible = true;
       }
       else {
-
         daysDropDownLabel.Text = "<";
         dayListDropDown.Visible = true;
+
+        MinuteComboBox.Visible = false;
+        hourComboBoxPanel.Visible = false;
       }
 
       alarmDataPanel.Controls.Add(dayListDropDown);
@@ -307,5 +326,169 @@ namespace Spotify_Alarm
     }
 
     private void Label1_Click(object sender, EventArgs e) => this.WindowState = FormWindowState.Minimized;
+
+    private void Label3_Click(object sender, EventArgs e)
+    {
+      if (hourListDropDown == null)
+      {
+
+        hourListDropDown = SpawnHourListDropDown();
+        hourListDropDown.Visible = true;
+        hourDropDownLabel.Text = "<";
+      }
+      else if (hourListDropDown.Visible)
+      {
+
+        hourDropDownLabel.Text = ">";
+        hourListDropDown.Visible = false;
+      }
+      else
+      {
+
+        hourDropDownLabel.Text = "<";
+        hourListDropDown.Visible = true;
+      }
+
+      alarmDataPanel.Controls.Add(hourListDropDown);
+
+    }
+
+    public Panel SpawnHourListDropDown()
+    {
+      int numHours = 24; // dug
+
+      Panel parentPanel = new Panel();
+      parentPanel.Width = hourComboBoxPanel.Width;
+      parentPanel.MouseLeave += ParentPanel_MouseLeave;
+
+      if (dayList.Count > 0)
+        parentPanel.Height = hourComboBoxPanel.Height * 6;
+      else
+        parentPanel.Height = hourComboBoxPanel.Height;
+
+      parentPanel.BorderStyle = BorderStyle.FixedSingle;
+      parentPanel.Location = new Point(
+          hourComboBoxPanel.Location.X,
+          hourComboBoxPanel.Location.Y + hourComboBoxPanel.Height
+          );
+
+      parentPanel.AutoScroll = true;
+      for (int i = numHours; i > 0; i--)
+      {
+        Panel songPanel    = new Panel();
+        songPanel.Dock     = DockStyle.Top;
+        songPanel.Width    = hourComboBoxPanel.Width;
+        songPanel.Height   = hourComboBoxPanel.Height;
+
+        Button button                    = new Button();
+        button.FlatStyle                 = FlatStyle.Flat;
+        button.FlatAppearance.BorderSize = 0;
+        button.Dock                      = DockStyle.Fill;
+        button.TextAlign                 = ContentAlignment.MiddleLeft;
+        button.AutoSize                  = true;
+        button.ForeColor                 = SystemColors.ControlLight;
+        button.Text                      = string.Format("{0,3}",i);
+        button.Font                      = new Font("Microsoft Sans Serif", 10, FontStyle.Bold);
+        button.Click                    += Checkbox_Click1;
+
+        songPanel.Controls.Add(button);
+        parentPanel.Controls.Add(songPanel);
+      }
+
+      return parentPanel;
+    }
+
+
+    private void Checkbox_Click1(object sender, EventArgs e)
+    {
+      Button button = sender as Button;
+
+      hourLabel.Text = button.Text;
+
+      hourDropDownLabel.Text = ">";
+      hourListDropDown.Visible = false;
+    }
+
+    private void MinuteDropDown_Click(object sender, EventArgs e)
+    {
+      if (minuteListDropDown == null)
+      {
+
+        minuteListDropDown = SpawnMinuteListDropDown();
+        minuteListDropDown.Visible = true;
+        minuteDropDown.Text = "<";
+      }
+      else if (minuteListDropDown.Visible)
+      {
+
+        minuteDropDown.Text = ">";
+        minuteListDropDown.Visible = false;
+      }
+      else
+      {
+
+        minuteDropDown.Text = "<";
+        minuteListDropDown.Visible = true;
+      }
+
+      alarmDataPanel.Controls.Add(minuteListDropDown);
+
+    }
+
+
+    public Panel SpawnMinuteListDropDown()
+    {
+      int numMinutes = 60; // dug
+
+      Panel parentPanel = new Panel();
+      parentPanel.Width = MinuteComboBox.Width;
+      parentPanel.MouseLeave += ParentPanel_MouseLeave;
+
+      if (dayList.Count > 0)
+        parentPanel.Height = MinuteComboBox.Height * 6;
+      else
+        parentPanel.Height = MinuteComboBox.Height;
+
+      parentPanel.BorderStyle = BorderStyle.FixedSingle;
+      parentPanel.Location = new Point(
+          MinuteComboBox.Location.X,
+          MinuteComboBox.Location.Y + MinuteComboBox.Height
+          );
+
+      parentPanel.AutoScroll = true;
+      for (int i = numMinutes; i > 0; i--)
+      {
+        Panel songPanel = new Panel();
+        songPanel.Dock = DockStyle.Top;
+        songPanel.Width = MinuteComboBox.Width;
+        songPanel.Height = MinuteComboBox.Height;
+
+        Button button = new Button();
+        button.FlatStyle = FlatStyle.Flat;
+        button.FlatAppearance.BorderSize = 0;
+        button.Dock = DockStyle.Fill;
+        button.TextAlign = ContentAlignment.MiddleLeft;
+        button.AutoSize = true;
+        button.ForeColor = SystemColors.ControlLight;
+        button.Text = string.Format("{0,3}", i.ToString("D2"));
+        button.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Bold);
+        button.Click += HourButton_Click; ;
+
+        songPanel.Controls.Add(button);
+        parentPanel.Controls.Add(songPanel);
+      }
+
+      return parentPanel;
+    }
+
+    private void HourButton_Click(object sender, EventArgs e)
+    {
+      Button button = sender as Button;
+
+      minuteDisplayLabel.Text = button.Text;
+
+      minuteDropDown.Text = ">";
+      minuteListDropDown.Visible = false;
+    }
   }
 }

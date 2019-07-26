@@ -35,6 +35,16 @@
       this.LargeTitleLabel = new System.Windows.Forms.Label();
       this.AlarmPanel = new System.Windows.Forms.Panel();
       this.alarmDataPanel = new System.Windows.Forms.Panel();
+      this.MinuteComboBox = new System.Windows.Forms.Panel();
+      this.minuteDisplayLabel = new System.Windows.Forms.Label();
+      this.panel5 = new System.Windows.Forms.Panel();
+      this.panel6 = new System.Windows.Forms.Panel();
+      this.minuteDropDown = new System.Windows.Forms.Label();
+      this.hourComboBoxPanel = new System.Windows.Forms.Panel();
+      this.hourLabel = new System.Windows.Forms.Label();
+      this.panel2 = new System.Windows.Forms.Panel();
+      this.panel4 = new System.Windows.Forms.Panel();
+      this.hourDropDownLabel = new System.Windows.Forms.Label();
       this.repeatingComboBoxPanel = new System.Windows.Forms.Panel();
       this.dayComboBoxLabel = new System.Windows.Forms.Label();
       this.repeatingDivider = new System.Windows.Forms.Panel();
@@ -52,6 +62,10 @@
       this.titleBarPanel.SuspendLayout();
       this.largeTitleBarPanel.SuspendLayout();
       this.alarmDataPanel.SuspendLayout();
+      this.MinuteComboBox.SuspendLayout();
+      this.panel6.SuspendLayout();
+      this.hourComboBoxPanel.SuspendLayout();
+      this.panel4.SuspendLayout();
       this.repeatingComboBoxPanel.SuspendLayout();
       this.panel3.SuspendLayout();
       this.comboBoxPanel.SuspendLayout();
@@ -131,6 +145,8 @@
       // alarmDataPanel
       // 
       this.alarmDataPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+      this.alarmDataPanel.Controls.Add(this.MinuteComboBox);
+      this.alarmDataPanel.Controls.Add(this.hourComboBoxPanel);
       this.alarmDataPanel.Controls.Add(this.repeatingComboBoxPanel);
       this.alarmDataPanel.Controls.Add(this.repeatLabel);
       this.alarmDataPanel.Controls.Add(this.comboBoxPanel);
@@ -143,6 +159,114 @@
       this.alarmDataPanel.Size = new System.Drawing.Size(839, 513);
       this.alarmDataPanel.TabIndex = 3;
       // 
+      // MinuteComboBox
+      // 
+      this.MinuteComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(56)))), ((int)(((byte)(60)))));
+      this.MinuteComboBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.MinuteComboBox.Controls.Add(this.minuteDisplayLabel);
+      this.MinuteComboBox.Controls.Add(this.panel5);
+      this.MinuteComboBox.Controls.Add(this.panel6);
+      this.MinuteComboBox.Location = new System.Drawing.Point(534, 178);
+      this.MinuteComboBox.Name = "MinuteComboBox";
+      this.MinuteComboBox.Size = new System.Drawing.Size(140, 29);
+      this.MinuteComboBox.TabIndex = 7;
+      // 
+      // minuteDisplayLabel
+      // 
+      this.minuteDisplayLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.minuteDisplayLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.minuteDisplayLabel.ForeColor = System.Drawing.SystemColors.ControlLight;
+      this.minuteDisplayLabel.Location = new System.Drawing.Point(0, 0);
+      this.minuteDisplayLabel.Name = "minuteDisplayLabel";
+      this.minuteDisplayLabel.Size = new System.Drawing.Size(109, 27);
+      this.minuteDisplayLabel.TabIndex = 2;
+      this.minuteDisplayLabel.Text = "minutes";
+      this.minuteDisplayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.minuteDisplayLabel.Click += new System.EventHandler(this.MinuteDropDown_Click);
+      // 
+      // panel5
+      // 
+      this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
+      this.panel5.Location = new System.Drawing.Point(109, 0);
+      this.panel5.Name = "panel5";
+      this.panel5.Size = new System.Drawing.Size(1, 27);
+      this.panel5.TabIndex = 1;
+      // 
+      // panel6
+      // 
+      this.panel6.Controls.Add(this.minuteDropDown);
+      this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
+      this.panel6.Location = new System.Drawing.Point(110, 0);
+      this.panel6.Name = "panel6";
+      this.panel6.Size = new System.Drawing.Size(28, 27);
+      this.panel6.TabIndex = 0;
+      // 
+      // minuteDropDown
+      // 
+      this.minuteDropDown.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.minuteDropDown.ForeColor = System.Drawing.SystemColors.Info;
+      this.minuteDropDown.Location = new System.Drawing.Point(0, 0);
+      this.minuteDropDown.Name = "minuteDropDown";
+      this.minuteDropDown.Size = new System.Drawing.Size(28, 27);
+      this.minuteDropDown.TabIndex = 0;
+      this.minuteDropDown.Text = ">";
+      this.minuteDropDown.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      this.minuteDropDown.Click += new System.EventHandler(this.MinuteDropDown_Click);
+      // 
+      // hourComboBoxPanel
+      // 
+      this.hourComboBoxPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(56)))), ((int)(((byte)(60)))));
+      this.hourComboBoxPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.hourComboBoxPanel.Controls.Add(this.hourLabel);
+      this.hourComboBoxPanel.Controls.Add(this.panel2);
+      this.hourComboBoxPanel.Controls.Add(this.panel4);
+      this.hourComboBoxPanel.Location = new System.Drawing.Point(369, 178);
+      this.hourComboBoxPanel.Name = "hourComboBoxPanel";
+      this.hourComboBoxPanel.Size = new System.Drawing.Size(148, 29);
+      this.hourComboBoxPanel.TabIndex = 6;
+      // 
+      // hourLabel
+      // 
+      this.hourLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.hourLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.hourLabel.ForeColor = System.Drawing.SystemColors.ControlLight;
+      this.hourLabel.Location = new System.Drawing.Point(0, 0);
+      this.hourLabel.Name = "hourLabel";
+      this.hourLabel.Size = new System.Drawing.Size(117, 27);
+      this.hourLabel.TabIndex = 2;
+      this.hourLabel.Text = "hour";
+      this.hourLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      this.hourLabel.Click += new System.EventHandler(this.Label3_Click);
+      // 
+      // panel2
+      // 
+      this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
+      this.panel2.Location = new System.Drawing.Point(117, 0);
+      this.panel2.Name = "panel2";
+      this.panel2.Size = new System.Drawing.Size(1, 27);
+      this.panel2.TabIndex = 1;
+      // 
+      // panel4
+      // 
+      this.panel4.Controls.Add(this.hourDropDownLabel);
+      this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
+      this.panel4.Location = new System.Drawing.Point(118, 0);
+      this.panel4.Name = "panel4";
+      this.panel4.Size = new System.Drawing.Size(28, 27);
+      this.panel4.TabIndex = 0;
+      // 
+      // hourDropDownLabel
+      // 
+      this.hourDropDownLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.hourDropDownLabel.ForeColor = System.Drawing.SystemColors.Info;
+      this.hourDropDownLabel.Location = new System.Drawing.Point(0, 0);
+      this.hourDropDownLabel.Name = "hourDropDownLabel";
+      this.hourDropDownLabel.Size = new System.Drawing.Size(28, 27);
+      this.hourDropDownLabel.TabIndex = 0;
+      this.hourDropDownLabel.Text = ">";
+      this.hourDropDownLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      this.hourDropDownLabel.Click += new System.EventHandler(this.Label3_Click);
+      // 
       // repeatingComboBoxPanel
       // 
       this.repeatingComboBoxPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(56)))), ((int)(((byte)(60)))));
@@ -150,7 +274,7 @@
       this.repeatingComboBoxPanel.Controls.Add(this.dayComboBoxLabel);
       this.repeatingComboBoxPanel.Controls.Add(this.repeatingDivider);
       this.repeatingComboBoxPanel.Controls.Add(this.panel3);
-      this.repeatingComboBoxPanel.Location = new System.Drawing.Point(380, 130);
+      this.repeatingComboBoxPanel.Location = new System.Drawing.Point(369, 130);
       this.repeatingComboBoxPanel.Name = "repeatingComboBoxPanel";
       this.repeatingComboBoxPanel.Size = new System.Drawing.Size(305, 29);
       this.repeatingComboBoxPanel.TabIndex = 5;
@@ -204,7 +328,7 @@
       this.repeatLabel.AutoSize = true;
       this.repeatLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.repeatLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-      this.repeatLabel.Location = new System.Drawing.Point(178, 130);
+      this.repeatLabel.Location = new System.Drawing.Point(167, 130);
       this.repeatLabel.Name = "repeatLabel";
       this.repeatLabel.Size = new System.Drawing.Size(124, 29);
       this.repeatLabel.TabIndex = 4;
@@ -217,7 +341,7 @@
       this.comboBoxPanel.Controls.Add(this.comboBoxLabel);
       this.comboBoxPanel.Controls.Add(this.playListDividerPanel);
       this.comboBoxPanel.Controls.Add(this.downButtonPanel);
-      this.comboBoxPanel.Location = new System.Drawing.Point(380, 81);
+      this.comboBoxPanel.Location = new System.Drawing.Point(369, 81);
       this.comboBoxPanel.Name = "comboBoxPanel";
       this.comboBoxPanel.Size = new System.Drawing.Size(305, 29);
       this.comboBoxPanel.TabIndex = 3;
@@ -271,7 +395,7 @@
       this.playListLabel.AutoSize = true;
       this.playListLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.playListLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-      this.playListLabel.Location = new System.Drawing.Point(178, 81);
+      this.playListLabel.Location = new System.Drawing.Point(167, 81);
       this.playListLabel.Name = "playListLabel";
       this.playListLabel.Size = new System.Drawing.Size(89, 29);
       this.playListLabel.TabIndex = 2;
@@ -282,8 +406,8 @@
       this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(56)))), ((int)(((byte)(60)))));
       this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
       this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.textBox1.ForeColor = System.Drawing.SystemColors.Desktop;
-      this.textBox1.Location = new System.Drawing.Point(380, 32);
+      this.textBox1.ForeColor = System.Drawing.SystemColors.ControlLight;
+      this.textBox1.Location = new System.Drawing.Point(369, 32);
       this.textBox1.Multiline = true;
       this.textBox1.Name = "textBox1";
       this.textBox1.Size = new System.Drawing.Size(305, 29);
@@ -294,7 +418,7 @@
       this.alarmNameLabel.AutoSize = true;
       this.alarmNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.alarmNameLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-      this.alarmNameLabel.Location = new System.Drawing.Point(178, 32);
+      this.alarmNameLabel.Location = new System.Drawing.Point(167, 32);
       this.alarmNameLabel.Name = "alarmNameLabel";
       this.alarmNameLabel.Size = new System.Drawing.Size(146, 29);
       this.alarmNameLabel.TabIndex = 0;
@@ -317,6 +441,10 @@
       this.largeTitleBarPanel.PerformLayout();
       this.alarmDataPanel.ResumeLayout(false);
       this.alarmDataPanel.PerformLayout();
+      this.MinuteComboBox.ResumeLayout(false);
+      this.panel6.ResumeLayout(false);
+      this.hourComboBoxPanel.ResumeLayout(false);
+      this.panel4.ResumeLayout(false);
       this.repeatingComboBoxPanel.ResumeLayout(false);
       this.panel3.ResumeLayout(false);
       this.comboBoxPanel.ResumeLayout(false);
@@ -348,6 +476,16 @@
     private System.Windows.Forms.Panel panel3;
     private System.Windows.Forms.Label daysDropDownLabel;
     private System.Windows.Forms.Label repeatLabel;
+    private System.Windows.Forms.Panel hourComboBoxPanel;
+    private System.Windows.Forms.Label hourLabel;
+    private System.Windows.Forms.Panel panel2;
+    private System.Windows.Forms.Panel panel4;
+    private System.Windows.Forms.Label hourDropDownLabel;
+    private System.Windows.Forms.Panel MinuteComboBox;
+    private System.Windows.Forms.Label minuteDisplayLabel;
+    private System.Windows.Forms.Panel panel5;
+    private System.Windows.Forms.Panel panel6;
+    private System.Windows.Forms.Label minuteDropDown;
   }
 }
 
