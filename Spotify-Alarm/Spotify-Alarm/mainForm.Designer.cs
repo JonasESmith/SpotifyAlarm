@@ -57,8 +57,10 @@
       this.downButtonPanel = new System.Windows.Forms.Panel();
       this.downLabel = new System.Windows.Forms.Label();
       this.playListLabel = new System.Windows.Forms.Label();
-      this.textBox1 = new System.Windows.Forms.TextBox();
+      this.alarmNameTextBox = new System.Windows.Forms.TextBox();
       this.alarmNameLabel = new System.Windows.Forms.Label();
+      this.addAlarmButton = new System.Windows.Forms.Button();
+      this.enabledCheckbox = new System.Windows.Forms.CheckBox();
       this.titleBarPanel.SuspendLayout();
       this.largeTitleBarPanel.SuspendLayout();
       this.alarmDataPanel.SuspendLayout();
@@ -145,13 +147,15 @@
       // alarmDataPanel
       // 
       this.alarmDataPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+      this.alarmDataPanel.Controls.Add(this.enabledCheckbox);
+      this.alarmDataPanel.Controls.Add(this.addAlarmButton);
       this.alarmDataPanel.Controls.Add(this.MinuteComboBox);
       this.alarmDataPanel.Controls.Add(this.hourComboBoxPanel);
       this.alarmDataPanel.Controls.Add(this.repeatingComboBoxPanel);
       this.alarmDataPanel.Controls.Add(this.repeatLabel);
       this.alarmDataPanel.Controls.Add(this.comboBoxPanel);
       this.alarmDataPanel.Controls.Add(this.playListLabel);
-      this.alarmDataPanel.Controls.Add(this.textBox1);
+      this.alarmDataPanel.Controls.Add(this.alarmNameTextBox);
       this.alarmDataPanel.Controls.Add(this.alarmNameLabel);
       this.alarmDataPanel.Dock = System.Windows.Forms.DockStyle.Fill;
       this.alarmDataPanel.Location = new System.Drawing.Point(230, 101);
@@ -166,7 +170,7 @@
       this.MinuteComboBox.Controls.Add(this.minuteDisplayLabel);
       this.MinuteComboBox.Controls.Add(this.panel5);
       this.MinuteComboBox.Controls.Add(this.panel6);
-      this.MinuteComboBox.Location = new System.Drawing.Point(534, 178);
+      this.MinuteComboBox.Location = new System.Drawing.Point(535, 242);
       this.MinuteComboBox.Name = "MinuteComboBox";
       this.MinuteComboBox.Size = new System.Drawing.Size(140, 29);
       this.MinuteComboBox.TabIndex = 7;
@@ -220,7 +224,7 @@
       this.hourComboBoxPanel.Controls.Add(this.hourLabel);
       this.hourComboBoxPanel.Controls.Add(this.panel2);
       this.hourComboBoxPanel.Controls.Add(this.panel4);
-      this.hourComboBoxPanel.Location = new System.Drawing.Point(369, 178);
+      this.hourComboBoxPanel.Location = new System.Drawing.Point(370, 242);
       this.hourComboBoxPanel.Name = "hourComboBoxPanel";
       this.hourComboBoxPanel.Size = new System.Drawing.Size(148, 29);
       this.hourComboBoxPanel.TabIndex = 6;
@@ -274,7 +278,7 @@
       this.repeatingComboBoxPanel.Controls.Add(this.dayComboBoxLabel);
       this.repeatingComboBoxPanel.Controls.Add(this.repeatingDivider);
       this.repeatingComboBoxPanel.Controls.Add(this.panel3);
-      this.repeatingComboBoxPanel.Location = new System.Drawing.Point(369, 130);
+      this.repeatingComboBoxPanel.Location = new System.Drawing.Point(370, 194);
       this.repeatingComboBoxPanel.Name = "repeatingComboBoxPanel";
       this.repeatingComboBoxPanel.Size = new System.Drawing.Size(305, 29);
       this.repeatingComboBoxPanel.TabIndex = 5;
@@ -328,7 +332,7 @@
       this.repeatLabel.AutoSize = true;
       this.repeatLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.repeatLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-      this.repeatLabel.Location = new System.Drawing.Point(167, 130);
+      this.repeatLabel.Location = new System.Drawing.Point(168, 194);
       this.repeatLabel.Name = "repeatLabel";
       this.repeatLabel.Size = new System.Drawing.Size(124, 29);
       this.repeatLabel.TabIndex = 4;
@@ -341,7 +345,7 @@
       this.comboBoxPanel.Controls.Add(this.comboBoxLabel);
       this.comboBoxPanel.Controls.Add(this.playListDividerPanel);
       this.comboBoxPanel.Controls.Add(this.downButtonPanel);
-      this.comboBoxPanel.Location = new System.Drawing.Point(369, 81);
+      this.comboBoxPanel.Location = new System.Drawing.Point(370, 145);
       this.comboBoxPanel.Name = "comboBoxPanel";
       this.comboBoxPanel.Size = new System.Drawing.Size(305, 29);
       this.comboBoxPanel.TabIndex = 3;
@@ -395,34 +399,58 @@
       this.playListLabel.AutoSize = true;
       this.playListLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.playListLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-      this.playListLabel.Location = new System.Drawing.Point(167, 81);
+      this.playListLabel.Location = new System.Drawing.Point(168, 145);
       this.playListLabel.Name = "playListLabel";
       this.playListLabel.Size = new System.Drawing.Size(89, 29);
       this.playListLabel.TabIndex = 2;
       this.playListLabel.Text = "Playlist";
       // 
-      // textBox1
+      // alarmNameTextBox
       // 
-      this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(56)))), ((int)(((byte)(60)))));
-      this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.textBox1.ForeColor = System.Drawing.SystemColors.ControlLight;
-      this.textBox1.Location = new System.Drawing.Point(369, 32);
-      this.textBox1.Multiline = true;
-      this.textBox1.Name = "textBox1";
-      this.textBox1.Size = new System.Drawing.Size(305, 29);
-      this.textBox1.TabIndex = 1;
+      this.alarmNameTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(53)))), ((int)(((byte)(56)))), ((int)(((byte)(60)))));
+      this.alarmNameTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.alarmNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.alarmNameTextBox.ForeColor = System.Drawing.SystemColors.ControlLight;
+      this.alarmNameTextBox.Location = new System.Drawing.Point(370, 96);
+      this.alarmNameTextBox.Multiline = true;
+      this.alarmNameTextBox.Name = "alarmNameTextBox";
+      this.alarmNameTextBox.Size = new System.Drawing.Size(305, 29);
+      this.alarmNameTextBox.TabIndex = 1;
       // 
       // alarmNameLabel
       // 
       this.alarmNameLabel.AutoSize = true;
       this.alarmNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.alarmNameLabel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-      this.alarmNameLabel.Location = new System.Drawing.Point(167, 32);
+      this.alarmNameLabel.Location = new System.Drawing.Point(168, 96);
       this.alarmNameLabel.Name = "alarmNameLabel";
       this.alarmNameLabel.Size = new System.Drawing.Size(146, 29);
       this.alarmNameLabel.TabIndex = 0;
       this.alarmNameLabel.Text = "Alarm Name";
+      // 
+      // addAlarmButton
+      // 
+      this.addAlarmButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(215)))), ((int)(((byte)(96)))));
+      this.addAlarmButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.addAlarmButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+      this.addAlarmButton.Location = new System.Drawing.Point(535, 334);
+      this.addAlarmButton.Name = "addAlarmButton";
+      this.addAlarmButton.Size = new System.Drawing.Size(140, 29);
+      this.addAlarmButton.TabIndex = 8;
+      this.addAlarmButton.Text = "Add Alarm";
+      this.addAlarmButton.UseVisualStyleBackColor = false;
+      this.addAlarmButton.Click += new System.EventHandler(this.AddAlarmButton_Click);
+      // 
+      // enabledCheckbox
+      // 
+      this.enabledCheckbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.enabledCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
+      this.enabledCheckbox.Location = new System.Drawing.Point(370, 335);
+      this.enabledCheckbox.Name = "enabledCheckbox";
+      this.enabledCheckbox.Size = new System.Drawing.Size(147, 29);
+      this.enabledCheckbox.TabIndex = 9;
+      this.enabledCheckbox.Text = "enabled";
+      this.enabledCheckbox.UseVisualStyleBackColor = true;
       // 
       // mainForm
       // 
@@ -462,7 +490,7 @@
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.Panel AlarmPanel;
     private System.Windows.Forms.Panel alarmDataPanel;
-    private System.Windows.Forms.TextBox textBox1;
+    private System.Windows.Forms.TextBox alarmNameTextBox;
     private System.Windows.Forms.Label alarmNameLabel;
     private System.Windows.Forms.Label playListLabel;
     private System.Windows.Forms.Panel comboBoxPanel;
@@ -486,6 +514,8 @@
     private System.Windows.Forms.Panel panel5;
     private System.Windows.Forms.Panel panel6;
     private System.Windows.Forms.Label minuteDropDown;
+    private System.Windows.Forms.Button addAlarmButton;
+    private System.Windows.Forms.CheckBox enabledCheckbox;
   }
 }
 
