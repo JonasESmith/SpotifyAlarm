@@ -52,3 +52,10 @@ C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\bin\Debug
 C:\Users\smithjon\Desktop\projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyAlarm.csprojResolveAssemblyReference.cache
 C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyAlarm.csprojAssemblyReference.cache
 C:\Users\Voxel\Desktop\Projects\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyAlarm.csproj.CopyComplete
+C:\Users\Jonas\Desktop\gitProj\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyAlarm.csprojAssemblyReference.cache
+C:\Users\Jonas\Desktop\gitProj\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\MainWindow.g.cs
+C:\Users\Jonas\Desktop\gitProj\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\App.g.cs
+C:\Users\Jonas\Desktop\gitProj\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyAlarm_MarkupCompile.cache
+C:\Users\Jonas\Desktop\gitProj\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyAlarm_MarkupCompile.lref
+C:\Users\Jonas\Desktop\gitProj\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyAlarm.exe
+C:\Users\Jonas\Desktop\gitProj\SpotifyAlarm\SpotifyAlarm\SpotifyAlarm\obj\Debug\SpotifyAlarm.pdb
