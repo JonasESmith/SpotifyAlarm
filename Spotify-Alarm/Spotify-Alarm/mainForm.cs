@@ -261,10 +261,10 @@ namespace Spotify_Alarm
 
     private void PlayListLabel_Click(object sender, EventArgs e)
     {
+      Label label                    = sender as Label;
       repeatingComboBoxPanel.Visible = true;
-      Label label = sender as Label;
-      comboBoxLabel.Text = label.Text;
-      playListDropDown.Visible = false;
+      comboBoxLabel.Text             = label.Text;
+      playListDropDown.Visible       = false;
 
       //if(playListDropDown.Height > repeatingComboBoxPanel.Height * 3)
       //{
@@ -275,11 +275,11 @@ namespace Spotify_Alarm
     private void PlayListLabel_MouseLeave(object sender, EventArgs e)
     {
       if (sender is Label) {
-        Label button = sender as Label;
+        Label button     = sender as Label;
         button.BackColor = LGray;
       }
       else if (sender is CheckBox) {
-        CheckBox button = sender as CheckBox;
+        CheckBox button  = sender as CheckBox;
         button.BackColor = LGray;
       }
     }
@@ -287,11 +287,11 @@ namespace Spotify_Alarm
     private void PlayListLabel_MouseHover(object sender, EventArgs e)
     {
       if(sender is Label) {
-        Label button = sender as Label;
+        Label button     = sender as Label;
         button.BackColor = Green;
       }
       else if (sender is CheckBox) {
-        CheckBox button = sender as CheckBox;
+        CheckBox button  = sender as CheckBox;
         button.BackColor = Green;
       }
     }
@@ -301,30 +301,27 @@ namespace Spotify_Alarm
 
       if (dayListDropDown == null) {
 
-        dayListDropDown = SpawnDayListDropDown(dayList);
-        dayListDropDown.Visible = true;
-        daysDropDownLabel.Text = "<";
-
+        dayListDropDown           = SpawnDayListDropDown(dayList);
+        dayListDropDown.Visible   = true;
+        daysDropDownLabel.Text    = "<";
         hourComboBoxPanel.Visible = false;
-        MinuteComboBox.Visible = false;
-        addAlarmButton.Visible = false;
+        MinuteComboBox.Visible    = false;
+        addAlarmButton.Visible    = false;
       }
       else if (dayListDropDown.Visible) {
 
-        daysDropDownLabel.Text = ">";
-        dayListDropDown.Visible = false;
-
+        daysDropDownLabel.Text    = ">";
+        dayListDropDown.Visible   = false;
         hourComboBoxPanel.Visible = true;
-        MinuteComboBox.Visible = true;
-        addAlarmButton.Visible = true;
+        MinuteComboBox.Visible    = true;
+        addAlarmButton.Visible    = true;
       }
       else {
-        daysDropDownLabel.Text = "<";
-        dayListDropDown.Visible = true;
-
-        MinuteComboBox.Visible = false;
+        daysDropDownLabel.Text    = "<";
+        dayListDropDown.Visible   = true;
+        MinuteComboBox.Visible    = false;
         hourComboBoxPanel.Visible = false;
-        addAlarmButton.Visible = false;
+        addAlarmButton.Visible    = false;
       }
 
       alarmDataPanel.Controls.Add(dayListDropDown);
@@ -420,35 +417,31 @@ namespace Spotify_Alarm
     {
       Button button = sender as Button;
 
-      hourLabel.Text = button.Text;
-
-      hourDropDownLabel.Text = ">";
+      hourLabel.Text           = button.Text;
+      hourDropDownLabel.Text   = ">";
       hourListDropDown.Visible = false;
     }
 
     private void MinuteDropDown_Click(object sender, EventArgs e)
     {
-      if (minuteListDropDown == null)
-      {
+      if (minuteListDropDown == null) {
 
-        minuteListDropDown = SpawnMinuteListDropDown();
+        minuteListDropDown         = SpawnMinuteListDropDown();
         minuteListDropDown.Visible = true;
-        minuteDropDown.Text = "<";
-        addAlarmButton.Visible = false;
+        minuteDropDown.Text        = "<";
+        addAlarmButton.Visible     = false;
       }
-      else if (minuteListDropDown.Visible)
-      {
+      else if (minuteListDropDown.Visible) {
 
-        minuteDropDown.Text = ">";
+        minuteDropDown.Text        = ">";
         minuteListDropDown.Visible = false;
-        addAlarmButton.Visible = true;
+        addAlarmButton.Visible     = true;
       }
-      else
-      {
+      else {
 
-        minuteDropDown.Text = "<";
+        minuteDropDown.Text        = "<";
         minuteListDropDown.Visible = true;
-        addAlarmButton.Visible = false;
+        addAlarmButton.Visible     = false;
       }
 
       alarmDataPanel.Controls.Add(minuteListDropDown);
@@ -460,8 +453,8 @@ namespace Spotify_Alarm
     {
       int numMinutes = 60; // dug
 
-      Panel parentPanel = new Panel();
-      parentPanel.Width = MinuteComboBox.Width;
+      Panel parentPanel       = new Panel();
+      parentPanel.Width       = MinuteComboBox.Width;
       parentPanel.MouseLeave += ParentPanel_MouseLeave;
 
       if (dayList.Count > 0)
@@ -476,23 +469,23 @@ namespace Spotify_Alarm
           );
 
       parentPanel.AutoScroll = true;
-      for (int i = numMinutes; i > 0; i--)
-      {
-        Panel songPanel = new Panel();
-        songPanel.Dock = DockStyle.Top;
-        songPanel.Width = MinuteComboBox.Width;
+      for (int i = numMinutes; i > 0; i--) {
+
+        Panel songPanel  = new Panel();
+        songPanel.Dock   = DockStyle.Top;
+        songPanel.Width  = MinuteComboBox.Width;
         songPanel.Height = MinuteComboBox.Height;
 
-        Button button = new Button();
-        button.FlatStyle = FlatStyle.Flat;
+        Button button                    = new Button();
+        button.FlatStyle                 = FlatStyle.Flat;
         button.FlatAppearance.BorderSize = 0;
-        button.Dock = DockStyle.Fill;
-        button.TextAlign = ContentAlignment.MiddleLeft;
-        button.AutoSize = true;
-        button.ForeColor = SystemColors.ControlLight;
-        button.Text = string.Format("{0,3}", i.ToString("D2"));
-        button.Font = new Font("Microsoft Sans Serif", 10, FontStyle.Bold);
-        button.Click += HourButton_Click; ;
+        button.Dock                      = DockStyle.Fill;
+        button.TextAlign                 = ContentAlignment.MiddleLeft;
+        button.AutoSize                  = true;
+        button.ForeColor                 = SystemColors.ControlLight;
+        button.Text                      = string.Format("{0,3}", i.ToString("D2"));
+        button.Font                      = new Font("Microsoft Sans Serif", 10, FontStyle.Bold);
+        button.Click                    += HourButton_Click; ;
 
         songPanel.Controls.Add(button);
         parentPanel.Controls.Add(songPanel);
@@ -506,20 +499,20 @@ namespace Spotify_Alarm
       AlarmPanel.Controls.Clear();
 
       for(int i = 0; i < alarmList.Count; i++) {
-        Panel panel = new Panel();
-        panel.Width = AlarmPanel.Width;
-        panel.Height = 20;
-        panel.Dock = DockStyle.Top;
 
-        Label alarmName = new Label();
-        alarmName.Text = alarmList[i].AlarmName;
+        Panel panel         = new Panel();
+        panel.Width         = AlarmPanel.Width;
+        panel.Height        = 20;
+        panel.Dock          = DockStyle.Top;
+
+        Label alarmName     = new Label();
+        alarmName.Text      = alarmList[i].AlarmName;
         alarmName.ForeColor = SystemColors.ControlLight;
-        alarmName.Dock = DockStyle.Left;
-        alarmName.AutoSize = false;
+        alarmName.Dock      = DockStyle.Left;
+        alarmName.AutoSize  = false;
         alarmName.TextAlign = ContentAlignment.MiddleLeft;
 
         panel.Controls.Add(alarmName);
-
         AlarmPanel.Controls.Add(panel);
       }
     }
