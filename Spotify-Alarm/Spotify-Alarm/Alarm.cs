@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace Spotify_Alarm
 {
@@ -12,6 +13,7 @@ namespace Spotify_Alarm
     public string   day       { get; set; }
     public int      hour      { get; set; }
     public int      minute    { get; set; }
+    public int      interval  { get; set; }
     public bool     isEnabled { get; set; }
     public DateTime date      { get; set; }
     public string   appTime   { get; set; }

@@ -35,6 +35,8 @@
       this.LargeTitleLabel = new System.Windows.Forms.Label();
       this.AlarmPanel = new System.Windows.Forms.Panel();
       this.alarmDataPanel = new System.Windows.Forms.Panel();
+      this.enabledCheckbox = new System.Windows.Forms.CheckBox();
+      this.addAlarmButton = new System.Windows.Forms.Button();
       this.MinuteComboBox = new System.Windows.Forms.Panel();
       this.minuteDisplayLabel = new System.Windows.Forms.Label();
       this.panel5 = new System.Windows.Forms.Panel();
@@ -59,8 +61,7 @@
       this.playListLabel = new System.Windows.Forms.Label();
       this.alarmNameTextBox = new System.Windows.Forms.TextBox();
       this.alarmNameLabel = new System.Windows.Forms.Label();
-      this.addAlarmButton = new System.Windows.Forms.Button();
-      this.enabledCheckbox = new System.Windows.Forms.CheckBox();
+      this.deleteButton = new System.Windows.Forms.Button();
       this.titleBarPanel.SuspendLayout();
       this.largeTitleBarPanel.SuspendLayout();
       this.alarmDataPanel.SuspendLayout();
@@ -147,6 +148,7 @@
       // alarmDataPanel
       // 
       this.alarmDataPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+      this.alarmDataPanel.Controls.Add(this.deleteButton);
       this.alarmDataPanel.Controls.Add(this.enabledCheckbox);
       this.alarmDataPanel.Controls.Add(this.addAlarmButton);
       this.alarmDataPanel.Controls.Add(this.MinuteComboBox);
@@ -162,6 +164,30 @@
       this.alarmDataPanel.Name = "alarmDataPanel";
       this.alarmDataPanel.Size = new System.Drawing.Size(839, 513);
       this.alarmDataPanel.TabIndex = 3;
+      // 
+      // enabledCheckbox
+      // 
+      this.enabledCheckbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.enabledCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
+      this.enabledCheckbox.Location = new System.Drawing.Point(370, 335);
+      this.enabledCheckbox.Name = "enabledCheckbox";
+      this.enabledCheckbox.Size = new System.Drawing.Size(147, 29);
+      this.enabledCheckbox.TabIndex = 9;
+      this.enabledCheckbox.Text = "enabled";
+      this.enabledCheckbox.UseVisualStyleBackColor = true;
+      // 
+      // addAlarmButton
+      // 
+      this.addAlarmButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(215)))), ((int)(((byte)(96)))));
+      this.addAlarmButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.addAlarmButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+      this.addAlarmButton.Location = new System.Drawing.Point(535, 334);
+      this.addAlarmButton.Name = "addAlarmButton";
+      this.addAlarmButton.Size = new System.Drawing.Size(140, 29);
+      this.addAlarmButton.TabIndex = 8;
+      this.addAlarmButton.Text = "Add Alarm";
+      this.addAlarmButton.UseVisualStyleBackColor = false;
+      this.addAlarmButton.Click += new System.EventHandler(this.AddAlarmButton_Click);
       // 
       // MinuteComboBox
       // 
@@ -428,29 +454,18 @@
       this.alarmNameLabel.TabIndex = 0;
       this.alarmNameLabel.Text = "Alarm Name";
       // 
-      // addAlarmButton
+      // deleteButton
       // 
-      this.addAlarmButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(215)))), ((int)(((byte)(96)))));
-      this.addAlarmButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.addAlarmButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-      this.addAlarmButton.Location = new System.Drawing.Point(535, 334);
-      this.addAlarmButton.Name = "addAlarmButton";
-      this.addAlarmButton.Size = new System.Drawing.Size(140, 29);
-      this.addAlarmButton.TabIndex = 8;
-      this.addAlarmButton.Text = "Add Alarm";
-      this.addAlarmButton.UseVisualStyleBackColor = false;
-      this.addAlarmButton.Click += new System.EventHandler(this.AddAlarmButton_Click);
-      // 
-      // enabledCheckbox
-      // 
-      this.enabledCheckbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.enabledCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight;
-      this.enabledCheckbox.Location = new System.Drawing.Point(370, 335);
-      this.enabledCheckbox.Name = "enabledCheckbox";
-      this.enabledCheckbox.Size = new System.Drawing.Size(147, 29);
-      this.enabledCheckbox.TabIndex = 9;
-      this.enabledCheckbox.Text = "enabled";
-      this.enabledCheckbox.UseVisualStyleBackColor = true;
+      this.deleteButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+      this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.deleteButton.ForeColor = System.Drawing.SystemColors.Control;
+      this.deleteButton.Location = new System.Drawing.Point(173, 334);
+      this.deleteButton.Name = "deleteButton";
+      this.deleteButton.Size = new System.Drawing.Size(140, 29);
+      this.deleteButton.TabIndex = 10;
+      this.deleteButton.Text = "delete Alarm";
+      this.deleteButton.UseVisualStyleBackColor = false;
+      this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
       // 
       // mainForm
       // 
@@ -516,6 +531,7 @@
     private System.Windows.Forms.Label minuteDropDown;
     private System.Windows.Forms.Button addAlarmButton;
     private System.Windows.Forms.CheckBox enabledCheckbox;
+    private System.Windows.Forms.Button deleteButton;
   }
 }
 
