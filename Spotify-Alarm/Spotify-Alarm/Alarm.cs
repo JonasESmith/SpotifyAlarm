@@ -25,8 +25,30 @@ namespace Spotify_Alarm
 
       for(int i = 0; i < dayList.Count; i++)
       {
-        if(now.DayOfWeek.ToString() == dayList[i]._name)
+        if(now.DayOfWeek.ToString() == dayList[i]._name && dayList[i]._selected )
         {
+
+          date = DateTime.Now.StartOfWeek(now.DayOfWeek).AddHours(hour).AddMinutes(minute);
+
+          if(now > date)
+          {
+            int addedDays = 1;
+            for(int j = i + 1; j < dayList.Count; j++){
+
+              if (dayList[j]._selected) {
+
+                date = DateTime.Now.StartOfWeek(now.DayOfWeek).AddHours(hour).AddMinutes(minute);
+
+                return (int)Math.Ceiling(date.AddDays(addedDays).Subtract(DateTime.Now).TotalSeconds);
+              }
+              addedDays++;
+            }
+
+          }
+          else
+          {
+            return (int)Math.Ceiling(date.Subtract(DateTime.Now).TotalSeconds);
+          }
           // if current time isn't pass the alarm
           //    next alarm occurs when that time is
           // else 
