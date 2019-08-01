@@ -63,6 +63,10 @@
       this.alarmNameTextBox = new System.Windows.Forms.TextBox();
       this.alarmNameLabel = new System.Windows.Forms.Label();
       this.spotifyExeDialog = new System.Windows.Forms.OpenFileDialog();
+      this.DigitalAlarmPanel = new System.Windows.Forms.Panel();
+      this.panel1 = new System.Windows.Forms.Panel();
+      this.panel7 = new System.Windows.Forms.Panel();
+      this.timeLabel = new System.Windows.Forms.Label();
       this.titleBarPanel.SuspendLayout();
       this.largeTitleBarPanel.SuspendLayout();
       this.alarmDataPanel.SuspendLayout();
@@ -74,6 +78,7 @@
       this.panel3.SuspendLayout();
       this.comboBoxPanel.SuspendLayout();
       this.downButtonPanel.SuspendLayout();
+      this.DigitalAlarmPanel.SuspendLayout();
       this.SuspendLayout();
       // 
       // titleBarPanel
@@ -149,6 +154,7 @@
       // alarmDataPanel
       // 
       this.alarmDataPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(47)))), ((int)(((byte)(51)))));
+      this.alarmDataPanel.Controls.Add(this.DigitalAlarmPanel);
       this.alarmDataPanel.Controls.Add(this.deleteButton);
       this.alarmDataPanel.Controls.Add(this.enabledCheckbox);
       this.alarmDataPanel.Controls.Add(this.addAlarmButton);
@@ -472,6 +478,45 @@
       // 
       this.spotifyExeDialog.FileName = "openFileDialog1";
       // 
+      // DigitalAlarmPanel
+      // 
+      this.DigitalAlarmPanel.Controls.Add(this.timeLabel);
+      this.DigitalAlarmPanel.Controls.Add(this.panel7);
+      this.DigitalAlarmPanel.Controls.Add(this.panel1);
+      this.DigitalAlarmPanel.Dock = System.Windows.Forms.DockStyle.Top;
+      this.DigitalAlarmPanel.Location = new System.Drawing.Point(0, 0);
+      this.DigitalAlarmPanel.Name = "DigitalAlarmPanel";
+      this.DigitalAlarmPanel.Size = new System.Drawing.Size(839, 465);
+      this.DigitalAlarmPanel.TabIndex = 11;
+      // 
+      // panel1
+      // 
+      this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+      this.panel1.Location = new System.Drawing.Point(0, 0);
+      this.panel1.Name = "panel1";
+      this.panel1.Size = new System.Drawing.Size(100, 465);
+      this.panel1.TabIndex = 0;
+      // 
+      // panel7
+      // 
+      this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
+      this.panel7.Location = new System.Drawing.Point(739, 0);
+      this.panel7.Name = "panel7";
+      this.panel7.Size = new System.Drawing.Size(100, 465);
+      this.panel7.TabIndex = 1;
+      // 
+      // timeLabel
+      // 
+      this.timeLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.timeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.timeLabel.ForeColor = System.Drawing.SystemColors.ControlLight;
+      this.timeLabel.Location = new System.Drawing.Point(100, 0);
+      this.timeLabel.Name = "timeLabel";
+      this.timeLabel.Size = new System.Drawing.Size(639, 465);
+      this.timeLabel.TabIndex = 2;
+      this.timeLabel.Text = "00:00:00";
+      this.timeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+      // 
       // mainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -497,6 +542,7 @@
       this.panel3.ResumeLayout(false);
       this.comboBoxPanel.ResumeLayout(false);
       this.downButtonPanel.ResumeLayout(false);
+      this.DigitalAlarmPanel.ResumeLayout(false);
       this.ResumeLayout(false);
 
     }
@@ -538,6 +584,10 @@
     private System.Windows.Forms.CheckBox enabledCheckbox;
     private System.Windows.Forms.Button deleteButton;
     private System.Windows.Forms.OpenFileDialog spotifyExeDialog;
+    private System.Windows.Forms.Panel DigitalAlarmPanel;
+    private System.Windows.Forms.Label timeLabel;
+    private System.Windows.Forms.Panel panel7;
+    private System.Windows.Forms.Panel panel1;
   }
 }
 

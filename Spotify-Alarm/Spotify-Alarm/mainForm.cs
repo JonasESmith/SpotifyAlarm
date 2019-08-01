@@ -101,6 +101,8 @@ namespace Spotify_Alarm
 
     private void Timer_Tick(object sender, EventArgs e)
     {
+      timeLabel.Text = DateTime.Now.ToString("hh:mm:ss");
+
       for(int i = 0; i < alarmPanelList.Count; i++)
       {
         if(alarmList[i].isEnabled)
@@ -192,9 +194,16 @@ namespace Spotify_Alarm
     {
       if (e.Button == MouseButtons.Left)
       {
+        SpawnTimer();
         ReleaseCapture();
         SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
       }
+    }
+
+    public void SpawnTimer()
+    {
+      DigitalAlarmPanel.Visible = true;
+      DigitalAlarmPanel.Height = alarmDataPanel.Height;
     }
 
     public Panel MakeAlarmPanel()
@@ -654,12 +663,13 @@ namespace Spotify_Alarm
 
         if(alarmPanelList[i]._isInit == false) {
 
-          alarmPanelList[i].InitRow(AlarmPanel.Width, 40, i, alarmList[i].AlarmName, LGray, DGray);
+          alarmPanelList[i].InitRow(AlarmPanel.Width, 50, i, alarmList[i].AlarmName, LGray, DGray);
           alarmPanelList[i]._topPanel.Click  += TopPanel_Click;
           alarmPanelList[i]._nameLabel.Click += TopPanel_Click;
           alarmPanelList[i]._timeLabel.Click += TopPanel_Click;
+
           if(alarmList[i].isEnabled)
-            alarmPanelList[i]._interval         = TimeSpan.FromSeconds( alarmList[i].getSeconds());
+            alarmPanelList[i]._interval = TimeSpan.FromSeconds( alarmList[i].getSeconds());
 
           AlarmPanel.Controls.Add(alarmPanelList[i]._parent);
         }
@@ -682,16 +692,19 @@ namespace Spotify_Alarm
 
     private void AddNewAlarmButton()
     {
+      DigitalAlarmPanel.Visible = false;
+
       Button button = new Button();
       button.Text = "Add Alarm";
       button.Dock = DockStyle.Bottom;
       button.Width = AlarmPanel.Width;
-      button.Height = 30;
+      button.Height = 45;
       button.FlatStyle = FlatStyle.Flat;
       button.ForeColor = White;
       button.BackColor = DGray;
       button.FlatAppearance.BorderSize = 0;
       button.Click += Button_Click;
+      button.Font = new Font("Microsoft Sans Serif", 12);
 
       AlarmPanel.Controls.Add(button);
     }
@@ -705,6 +718,7 @@ namespace Spotify_Alarm
 
     private void TopPanel_Click(object sender, EventArgs e)
     {
+      DigitalAlarmPanel.Visible = false;
       int index;
 
       if(sender is Panel) {

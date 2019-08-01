@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace Spotify_Alarm
 {
@@ -75,20 +71,16 @@ namespace Spotify_Alarm
         if(difference[i] > 0 && difference[i] < nextPosOccurance ) {
           nextPosOccurance = difference[i];
         }
-        if(difference[i] < 0 && difference[i] < nextNegOccurance)
-        {
+        if(difference[i] < 0 && difference[i] < nextNegOccurance) {
           nextNegOccurance = difference[i];
         }
       }
 
-      if( nextPosOccurance == 604800 )
-      {
+      if( nextPosOccurance == 604800 ) {
         int returnValue = 604800 + nextNegOccurance;
-
         return returnValue;
       }
-      else
-      {
+      else {
         return nextPosOccurance;
       }
     }

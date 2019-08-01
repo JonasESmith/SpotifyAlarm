@@ -66,6 +66,7 @@ namespace Spotify_Alarm
       alarmName.AutoSize = false;
       alarmName.TextAlign = ContentAlignment.MiddleLeft;
       alarmName.Name = index.ToString();
+      alarmName.Font = new Font("Microsoft Sans Serif", 12);
 
 
       Label timeLabel = new Label();
@@ -74,6 +75,7 @@ namespace Spotify_Alarm
       timeLabel.AutoSize = false;
       timeLabel.TextAlign = ContentAlignment.MiddleRight;
       timeLabel.Name = index.ToString();
+      timeLabel.Font = new Font("Microsoft Sans Serif", 12);
 
       topPanel.Controls.Add(timeLabel);
       topPanel.Controls.Add(alarmName);
