@@ -9,17 +9,32 @@ namespace Spotify_Alarm
 {
   class Alarm
   {
-    public string   AlarmName { get; set; }
-    public string   day       { get; set; }
-    public int      hour      { get; set; }
-    public int      minute    { get; set; }
-    public int      interval  { get; set; }
-    public bool     isEnabled { get; set; }
-    public DateTime date      { get; set; }
-    public string   appTime   { get; set; }
+    public string    AlarmName { get; set; }
+    public string    day       { get; set; }
+    public int       hour      { get; set; }
+    public int       minute    { get; set; }
+    public int       interval  { get; set; }
+    public bool      isEnabled { get; set; }
+    public DateTime  date      { get; set; }
+    public string    appTime   { get; set; }
+    public List<Day> dayList   { get; set; }
 
     public int getSeconds()
     {
+      DateTime now = DateTime.Now;
+
+      for(int i = 0; i < dayList.Count; i++)
+      {
+        if(now.DayOfWeek.ToString() == dayList[i]._name)
+        {
+          // if current time isn't pass the alarm
+          //    next alarm occurs when that time is
+          // else 
+          //    when is the next occurance of the alarm
+          //      then the time is then.
+        }
+      }
+
       switch (day) {
 
         case "Monday":    date = DateTime.Now.StartOfWeek(DayOfWeek.Monday).AddHours(hour);              break;

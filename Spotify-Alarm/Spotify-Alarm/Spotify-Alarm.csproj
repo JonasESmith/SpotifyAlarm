@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Alarm.cs" />
     <Compile Include="AlarmRow.cs" />
+    <Compile Include="Day.cs" />
     <Compile Include="mainForm.cs">
       <SubType>Form</SubType>
     </Compile>

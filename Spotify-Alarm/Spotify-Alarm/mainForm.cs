@@ -36,6 +36,8 @@ namespace Spotify_Alarm
     int selectedAlarm;
     public mainForm()
     {
+      string value = Properties.Settings.Default.alarms;
+
       //Properties.Settings.Default.alarms = "";
       //Properties.Settings.Default.Save();
 
@@ -45,7 +47,7 @@ namespace Spotify_Alarm
       InitCheckBoxList();
       LoadFormStyles();
       LoadFromJson();
-      UpdateAlarmButtons();
+      UpdateAlarmButtons(false);
       StartTimers();
     }
 
@@ -259,12 +261,12 @@ namespace Spotify_Alarm
           repeatingComboBoxPanel.Location.Y + comboBoxPanel.Height
           );
 
-      for (int i = 0; i < dayList.Count; i++)
-      {
-        Panel songPanel  = new Panel();
-        songPanel.Dock   = DockStyle.Top;
-        songPanel.Width  = comboBoxPanel.Width;
-        songPanel.Height = comboBoxPanel.Height;
+      for (int i = 0; i < dayList.Count; i++) {
+
+        Panel songPanel      = new Panel();
+        songPanel.Dock       = DockStyle.Top;
+        songPanel.Width      = comboBoxPanel.Width;
+        songPanel.Height     = comboBoxPanel.Height;
 
         CheckBox checkbox    = new CheckBox();
         checkbox.Dock        = DockStyle.Fill;
@@ -306,11 +308,6 @@ namespace Spotify_Alarm
       repeatingComboBoxPanel.Visible = true;
       comboBoxLabel.Text             = label.Text;
       playListDropDown.Visible       = false;
-
-      //if(playListDropDown.Height > repeatingComboBoxPanel.Height * 3)
-      //{
-      //  hourComboBoxPanel.Visible = false;
-      //}
     }
 
     private void PlayListLabel_MouseLeave(object sender, EventArgs e)
@@ -343,8 +340,9 @@ namespace Spotify_Alarm
       if (dayListDropDown == null) {
 
         dayListDropDown           = SpawnDayListDropDown(dayList);
-        dayListDropDown.Visible   = true;
         daysDropDownLabel.Text    = "<";
+
+        dayListDropDown.Visible   = true;
         hourComboBoxPanel.Visible = false;
         MinuteComboBox.Visible    = false;
         addAlarmButton.Visible    = false;
@@ -354,6 +352,7 @@ namespace Spotify_Alarm
       else if (dayListDropDown.Visible) {
 
         daysDropDownLabel.Text    = ">";
+
         dayListDropDown.Visible   = false;
         hourComboBoxPanel.Visible = true;
         MinuteComboBox.Visible    = true;
@@ -361,7 +360,9 @@ namespace Spotify_Alarm
         enabledCheckbox.Visible   = true;
       }
       else {
+
         daysDropDownLabel.Text    = "<";
+
         dayListDropDown.Visible   = true;
         MinuteComboBox.Visible    = false;
         hourComboBoxPanel.Visible = false;
@@ -401,7 +402,10 @@ namespace Spotify_Alarm
 
         hourDropDownLabel.Text   = ">";
         hourListDropDown.Visible = false;
-        enabledCheckbox.Visible  = true;
+        if(!_isNew)
+        {
+          enabledCheckbox.Visible  = true;
+        }
       }
       else
       {
@@ -542,11 +546,18 @@ namespace Spotify_Alarm
       return parentPanel;
     }
 
-    private void UpdateAlarmButtons()
+    private void UpdateAlarmButtons(bool delete)
     {
+      if (delete) {
+        AlarmPanel.Controls.Remove(alarmPanelList[selectedAlarm]._parent);
+        alarmList.RemoveAt(selectedAlarm);
+        alarmPanelList.RemoveAt(selectedAlarm);
+      }
+
       for(int i = 0; i < alarmList.Count; i++) {
-        if(alarmPanelList[i]._isInit == false)
-        {
+
+        if(alarmPanelList[i]._isInit == false) {
+
           alarmPanelList[i].InitRow(AlarmPanel.Width, 40, i, alarmList[i].AlarmName, LGray, DGray);
           alarmPanelList[i]._topPanel.Click  += TopPanel_Click;
           alarmPanelList[i]._nameLabel.Click += TopPanel_Click;
@@ -556,9 +567,16 @@ namespace Spotify_Alarm
 
           AlarmPanel.Controls.Add(alarmPanelList[i]._parent);
         }
-        else
-        {
+        else {
+
           alarmPanelList[i]._nameLabel.Text = alarmList[i].AlarmName;
+          if(delete) {
+
+            alarmPanelList[i]._topPanel.Name  = i.ToString();
+            alarmPanelList[i]._nameLabel.Name = i.ToString();
+            alarmPanelList[i]._timeLabel.Name = i.ToString();
+          }
+
         }
       }
     }
@@ -590,6 +608,15 @@ namespace Spotify_Alarm
       addAlarmButton.Text = "Update Alarm";
       enabledCheckbox.Visible = true;
 
+      if(alarmList[index].dayList != null)
+        for(int i = 0; i < alarmList[index].dayList.Count; i++) {
+          checkboxList[i].Checked = alarmList[index].dayList[i]._selected;
+          if(checkboxList[i].Checked)
+            checkboxList[i].BackColor = Green;
+          else
+            checkboxList[i].BackColor = DarkGray;
+        }
+
     }
 
     private void HourButton_Click(object sender, EventArgs e)
@@ -613,9 +640,9 @@ namespace Spotify_Alarm
         newAlarm.isEnabled = true;
         newAlarm.minute    = Convert.ToInt32( minuteDisplayLabel.Text );
         newAlarm.hour      = Convert.ToInt32(hourLabel.Text);
-        newAlarm.day       = dayComboBoxLabel.Text;
 
 
+        newAlarm.dayList = UpdateDayList();
         alarmPanelList.Add(new AlarmRow());
         alarmList.Add(newAlarm);
       }
@@ -627,11 +654,23 @@ namespace Spotify_Alarm
         updatedAlarm.minute    = Convert.ToInt32(minuteDisplayLabel.Text);
         updatedAlarm.hour      = Convert.ToInt32(hourLabel.Text);
         updatedAlarm.day       = dayComboBoxLabel.Text;
+        updatedAlarm.dayList   = UpdateDayList();
 
         alarmList[selectedAlarm] = updatedAlarm;
       }
-      UpdateAlarmButtons();
+      NewAlarm();
+      UpdateAlarmButtons(false);
       SaveToJson();
+    }
+
+    private List<Day> UpdateDayList()
+    {
+      List<Day> days = new List<Day>();
+
+      for (int i = 0; i < checkboxList.Count; i++)
+        days.Add( new Day(checkboxList[i].Text, checkboxList[i].Checked ));
+
+      return days;
     }
 
     private void SaveToJson() {
@@ -644,10 +683,10 @@ namespace Spotify_Alarm
 
       if(alarmList == null)
         alarmList = new List<Alarm>();
-      else
-      {
-        for(int i = 0; i < alarmList.Count; i++)
-        {
+      else {
+
+        for(int i = 0; i < alarmList.Count; i++) {
+
           alarmPanelList.Add(new AlarmRow());
         }
       }
@@ -655,10 +694,31 @@ namespace Spotify_Alarm
 
     private void DeleteButton_Click(object sender, EventArgs e)
     {
-      alarmList.RemoveAt(selectedAlarm);
-      alarmPanelList.RemoveAt(selectedAlarm);
+      UpdateAlarmButtons(true);
       SaveToJson();
-      UpdateAlarmButtons();
+      NewAlarm();
+    }
+
+    private void NewAlarm()
+    {
+      selectedAlarm = -1;
+      _isNew = true;
+
+      alarmNameTextBox.Text     = "";
+      dayComboBoxLabel.Text     = "select day(s)";
+      minuteDisplayLabel.Text   = "minutes";
+      hourLabel.Text            = "hour";
+      enabledCheckbox.Checked   = true;
+      enabledCheckbox.Visible   = false;
+      addAlarmButton.Text       = "Update Alarm";
+      deleteButton.Visible      = false;
+      addAlarmButton.Text       = "Add alarm";
+
+
+      for(int i = 0; i < checkboxList.Count; i++)
+      {
+        checkboxList[i].Checked = false;
+      }
     }
   }
 }
