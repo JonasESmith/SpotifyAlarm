@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.IO;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace Spotify_Alarm
 {
@@ -19,6 +20,8 @@ namespace Spotify_Alarm
     public List<CheckBox> checkboxList = new List<CheckBox>();
     public List<string>   playList     = new List<string>(new string[] {"none", "so this doesn't work yet :)" });
     public List<string>   dayList      = new List<string>(new string[] {"Everyday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" ,"Saturday", "Sunday" });
+
+    public string Spotify_path;
 
     public List<AlarmRow> alarmPanelList = new List<AlarmRow>();
 
@@ -38,6 +41,7 @@ namespace Spotify_Alarm
     {
       string value = Properties.Settings.Default.alarms;
 
+      Spotify_path = LoadSpotifyPath(Properties.Settings.Default.spotify_Path);
       //Properties.Settings.Default.alarms = "";
       //Properties.Settings.Default.Save();
 
@@ -51,6 +55,39 @@ namespace Spotify_Alarm
       UpdateAlarmButtons(false);
       AddNewAlarmButton();
       StartTimers();
+    }
+
+    public string LoadSpotifyPath(string _savedPath)
+    {
+      string path = "";
+
+      if (string.IsNullOrEmpty(_savedPath))
+      {
+
+        using (OpenFileDialog openFileDialog = new OpenFileDialog())
+        {
+          // this is the generall location for installs
+          // I am sure 90% of the population of users for spotify will use the default location.
+          openFileDialog.InitialDirectory = string.Format("c:\\Users\\{0}\\AppdData\\Roaming\\Spotify\\", System.Security.Principal.WindowsIdentity.GetCurrent().Name);
+          openFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+          openFileDialog.FilterIndex = 2;
+          openFileDialog.RestoreDirectory = true;
+
+          if (openFileDialog.ShowDialog() == DialogResult.OK)
+          {
+            _savedPath = openFileDialog.FileName;
+            Properties.Settings.Default.spotify_Path = _savedPath;
+            Properties.Settings.Default.Save();
+            path = _savedPath;
+          }
+        }
+      }
+      else
+      {
+        path = _savedPath;
+      }
+
+      return path;
     }
 
     public void StartTimers()
@@ -73,7 +110,7 @@ namespace Spotify_Alarm
 
           if (alarmPanelList[i]._interval == zero)
           {
-
+            StartSpotify();
             bool whatUpPimp = true;
             // start spotify stuffS
             alarmPanelList[i]._interval = TimeSpan.FromSeconds(alarmList[i].getSeconds());
@@ -84,6 +121,23 @@ namespace Spotify_Alarm
           alarmPanelList[i]._timeLabel.Text = "paused";
         }
       }
+    }
+
+    public bool StartSpotify()
+    {
+      bool value;
+
+      try
+      {
+        Process.Start(Spotify_path);
+        value = true;
+      }
+      catch (Exception)
+      {
+        value = false;
+      }
+
+      return value;
     }
 
     public void LoadFormStyles()
@@ -360,8 +414,7 @@ namespace Spotify_Alarm
         MinuteComboBox.Visible    = false;
         addAlarmButton.Visible    = false;
         enabledCheckbox.Visible   = false;
-        if(!_isNew)
-        {
+        if(!_isNew) {
           LoadCheckBoxChecks();
         }
       }

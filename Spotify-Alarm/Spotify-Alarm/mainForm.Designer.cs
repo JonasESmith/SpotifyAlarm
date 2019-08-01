@@ -35,6 +35,7 @@
       this.LargeTitleLabel = new System.Windows.Forms.Label();
       this.AlarmPanel = new System.Windows.Forms.Panel();
       this.alarmDataPanel = new System.Windows.Forms.Panel();
+      this.deleteButton = new System.Windows.Forms.Button();
       this.enabledCheckbox = new System.Windows.Forms.CheckBox();
       this.addAlarmButton = new System.Windows.Forms.Button();
       this.MinuteComboBox = new System.Windows.Forms.Panel();
@@ -61,7 +62,7 @@
       this.playListLabel = new System.Windows.Forms.Label();
       this.alarmNameTextBox = new System.Windows.Forms.TextBox();
       this.alarmNameLabel = new System.Windows.Forms.Label();
-      this.deleteButton = new System.Windows.Forms.Button();
+      this.spotifyExeDialog = new System.Windows.Forms.OpenFileDialog();
       this.titleBarPanel.SuspendLayout();
       this.largeTitleBarPanel.SuspendLayout();
       this.alarmDataPanel.SuspendLayout();
@@ -164,6 +165,19 @@
       this.alarmDataPanel.Name = "alarmDataPanel";
       this.alarmDataPanel.Size = new System.Drawing.Size(839, 513);
       this.alarmDataPanel.TabIndex = 3;
+      // 
+      // deleteButton
+      // 
+      this.deleteButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+      this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.deleteButton.ForeColor = System.Drawing.SystemColors.Control;
+      this.deleteButton.Location = new System.Drawing.Point(173, 334);
+      this.deleteButton.Name = "deleteButton";
+      this.deleteButton.Size = new System.Drawing.Size(140, 29);
+      this.deleteButton.TabIndex = 10;
+      this.deleteButton.Text = "delete Alarm";
+      this.deleteButton.UseVisualStyleBackColor = false;
+      this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
       // 
       // enabledCheckbox
       // 
@@ -454,18 +468,9 @@
       this.alarmNameLabel.TabIndex = 0;
       this.alarmNameLabel.Text = "Alarm Name";
       // 
-      // deleteButton
+      // spotifyExeDialog
       // 
-      this.deleteButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-      this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.deleteButton.ForeColor = System.Drawing.SystemColors.Control;
-      this.deleteButton.Location = new System.Drawing.Point(173, 334);
-      this.deleteButton.Name = "deleteButton";
-      this.deleteButton.Size = new System.Drawing.Size(140, 29);
-      this.deleteButton.TabIndex = 10;
-      this.deleteButton.Text = "delete Alarm";
-      this.deleteButton.UseVisualStyleBackColor = false;
-      this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+      this.spotifyExeDialog.FileName = "openFileDialog1";
       // 
       // mainForm
       // 
@@ -532,6 +537,7 @@
     private System.Windows.Forms.Button addAlarmButton;
     private System.Windows.Forms.CheckBox enabledCheckbox;
     private System.Windows.Forms.Button deleteButton;
+    private System.Windows.Forms.OpenFileDialog spotifyExeDialog;
   }
 }
 

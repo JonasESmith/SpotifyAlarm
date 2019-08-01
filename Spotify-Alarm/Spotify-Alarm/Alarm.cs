@@ -21,64 +21,93 @@ namespace Spotify_Alarm
 
     public int getSeconds()
     {
-      DateTime now = DateTime.Now;
+      DateTime today = DateTime.Now;
 
-      for(int i = 0; i < dayList.Count; i++)
-      {
-        if(now.DayOfWeek.ToString() == dayList[i]._name && dayList[i]._selected )
-        {
+      List<Day> days = ReverseList();
 
-          date = DateTime.Now.StartOfWeek(now.DayOfWeek).AddHours(hour).AddMinutes(minute);
+      List<DateTime> occurances = new List<DateTime>();
 
-          if(now > date)
-          {
-            int addedDays = 1;
-            for(int j = i + 1; j < dayList.Count; j++){
+      DateTime dayToAdd = new DateTime();
 
-              if (dayList[j]._selected) {
-
-                date = DateTime.Now.StartOfWeek(now.DayOfWeek).AddHours(hour).AddMinutes(minute);
-
-                return (int)Math.Ceiling(date.AddDays(addedDays).Subtract(DateTime.Now).TotalSeconds);
-              }
-              addedDays++;
-            }
-
+      for(int i = 0; i< days.Count; i++) {
+        if(days[i]._selected) {
+          switch (days[i]._name) {
+            case "Monday":
+              dayToAdd = DateTime.Now.StartOfWeek(DayOfWeek.Monday).AddHours(hour).AddMinutes(minute);
+              break;
+            case "Tuesday":
+              dayToAdd = DateTime.Now.StartOfWeek(DayOfWeek.Tuesday).AddHours(hour).AddMinutes(minute);
+              break;
+            case "Wednesday":
+              dayToAdd = DateTime.Now.StartOfWeek(DayOfWeek.Wednesday).AddHours(hour).AddMinutes(minute);
+              break;
+            case "Thursday":
+              dayToAdd = DateTime.Now.StartOfWeek(DayOfWeek.Thursday).AddHours(hour).AddMinutes(minute);
+              break;
+            case "Friday":
+              dayToAdd = DateTime.Now.StartOfWeek(DayOfWeek.Friday).AddHours(hour).AddMinutes(minute);
+              break;
+            case "Saturday":
+              dayToAdd = DateTime.Now.StartOfWeek(DayOfWeek.Saturday).AddHours(hour).AddMinutes(minute);
+              break;
+            case "Sunday":
+              dayToAdd = DateTime.Now.StartOfWeek(DayOfWeek.Sunday).AddHours(hour).AddMinutes(minute);
+              break;
           }
-          else
-          {
-            return (int)Math.Ceiling(date.Subtract(DateTime.Now).TotalSeconds);
-          }
-          // if current time isn't pass the alarm
-          //    next alarm occurs when that time is
-          // else 
-          //    when is the next occurance of the alarm
-          //      then the time is then.
+
+          occurances.Add(dayToAdd);
         }
       }
 
-      switch (day) {
+      List<int> difference = new List<int>();
 
-        case "Monday":    date = DateTime.Now.StartOfWeek(DayOfWeek.Monday).AddHours(hour);              break;
-        case "Tuesday":   date = DateTime.Now.StartOfWeek(DayOfWeek.Tuesday).AddHours(hour);             break;
-        case "Wednesday": date = DateTime.Now.StartOfWeek(DayOfWeek.Wednesday).AddHours(hour);           break;
-        case "Thursday":  date = DateTime.Now.StartOfWeek(DayOfWeek.Thursday).AddHours(hour);            break;
-        case "Friday":    date = DateTime.Now.StartOfWeek(DayOfWeek.Friday).AddHours(hour);              break;
-        case "Saturday":  date = DateTime.Now.StartOfWeek(DayOfWeek.Saturday).AddHours(hour);            break;
-        case "Sunday":    date = DateTime.Now.StartOfWeek(DayOfWeek.Sunday).AddHours(hour);              break;
-        default:          date = DateTime.Now.StartOfWeek((DayOfWeek)DateTime.Today.Day).AddHours(hour); break;
+      for(int i = 0; i < occurances.Count; i++) {
+        TimeSpan diff = occurances[i] - today;
+
+        difference.Add(Convert.ToInt32(diff.TotalSeconds));
       }
 
-      TimeSpan nextDay = date.Subtract(DateTime.Now);
+      int nextPosOccurance = 604800;
+      int nextNegOccurance = 0;
 
-      if (nextDay.ToString().Contains("-") && day != "Everyday")
-        date = date.AddDays(7);
-      else if (nextDay.ToString().Contains("-") && day == "Everyday")
-        date = date.AddDays(1);
+      for(int i = 0; i < difference.Count; i++) {
 
-      return (int)Math.Ceiling(date.Subtract(DateTime.Now).TotalSeconds);
+        if(difference[i] > 0 && difference[i] < nextPosOccurance ) {
+          nextPosOccurance = difference[i];
+        }
+        if(difference[i] < 0 && difference[i] < nextNegOccurance)
+        {
+          nextNegOccurance = difference[i];
+        }
+      }
+
+      if( nextPosOccurance == 604800 )
+      {
+        int returnValue = 604800 + nextNegOccurance;
+
+        return returnValue;
+      }
+      else
+      {
+        return nextPosOccurance;
+      }
     }
-    
+
+
+    public List<Day> ReverseList()
+    {
+      List<Day> days = new List<Day>();
+
+      for(int i = dayList.Count - 1; i >= 0; i--)
+      {
+        days.Add(dayList[i]);
+      }
+
+      days.RemoveAt(0);
+
+      return days;
+    }
+
   }
 
   /// extension method to get the current day of the week

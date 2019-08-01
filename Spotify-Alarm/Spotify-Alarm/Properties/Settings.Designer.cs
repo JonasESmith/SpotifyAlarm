@@ -34,5 +34,17 @@ namespace Spotify_Alarm.Properties {
                 this["alarms"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string spotify_Path {
+            get {
+                return ((string)(this["spotify_Path"]));
+            }
+            set {
+                this["spotify_Path"] = value;
+            }
+        }
     }
 }
